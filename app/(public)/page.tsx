@@ -10,12 +10,12 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative h-[700px] md:h-[800px] flex items-center">
         {/* Background Image */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
             src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1920&q=80"
             alt="Luxury apartment interior"
             fill
-            className="object-cover"
+            className="object-cover scale-107"
             priority
             sizes="100vw"
           />
