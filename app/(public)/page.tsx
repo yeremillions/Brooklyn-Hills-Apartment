@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[557px] md:h-[636px] flex items-center">
+      <section className="relative h-[546px] md:h-[623px] flex items-center">
         {/* Background Image */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
