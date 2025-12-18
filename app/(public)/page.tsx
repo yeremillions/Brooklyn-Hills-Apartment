@@ -97,7 +97,7 @@ export default function HomePage() {
 
           {/* Testimonials Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {MOCK_TESTIMONIALS.slice(0, 6).map((testimonial) => (
+            {MOCK_TESTIMONIALS.slice(0, 3).map((testimonial) => (
               <TestimonialCard key={testimonial.id} testimonial={testimonial} />
             ))}
           </div>
