@@ -3,7 +3,8 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { HeroSearchForm } from '@/components/public/hero-search-form'
 import { FeaturedPropertyCard } from '@/components/public/featured-property-card'
-import { MOCK_PROPERTIES } from '@/lib/constants/mock-data'
+import { TestimonialCard } from '@/components/public/testimonial-card'
+import { MOCK_PROPERTIES, MOCK_TESTIMONIALS } from '@/lib/constants/mock-data'
 import { Building2, Calendar, Shield, Wifi } from 'lucide-react'
 
 export default function HomePage() {
@@ -81,8 +82,30 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className="py-16 px-4 md:px-8 bg-white">
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              What Our Guests Say
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Don't just take our word for it. Here's what our guests have to say about their
+              experiences at Brooklyn Hills Apartments.
+            </p>
+          </div>
+
+          {/* Testimonials Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {MOCK_TESTIMONIALS.slice(0, 6).map((testimonial) => (
+              <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
-      <section id="features" className="py-16 px-4 md:px-8 bg-white">
+      <section id="features" className="py-16 px-4 md:px-8 bg-gray-50">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             Why Choose Brooklyn Hills?

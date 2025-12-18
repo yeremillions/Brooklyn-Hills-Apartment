@@ -1,4 +1,5 @@
 import { Property, Amenity } from '@/types'
+import { Testimonial } from '@/components/public/testimonial-card'
 
 export const MOCK_PROPERTIES: Property[] = [
   {
@@ -169,3 +170,66 @@ export const AMENITY_LABELS: Record<Amenity, string> = {
   washing_machine: 'Washing Machine',
   balcony: 'Balcony',
 }
+
+export const MOCK_TESTIMONIALS: Testimonial[] = [
+  {
+    id: '1',
+    guestName: 'Chioma Adeyemi',
+    guestPhoto: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80',
+    location: 'Lagos, Nigeria',
+    rating: 5,
+    reviewText: 'Absolutely stunning apartment! The attention to detail was impeccable. The bar access was a fantastic touch, and the staff were incredibly welcoming. Will definitely be returning!',
+    date: 'November 2024',
+    propertyStayed: 'Luxury 3-Bedroom Penthouse',
+  },
+  {
+    id: '2',
+    guestName: 'David Okonkwo',
+    guestPhoto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
+    location: 'Abuja, Nigeria',
+    rating: 5,
+    reviewText: 'Perfect for my business trip to Uyo! The apartment was spotless, WiFi was excellent, and the location couldn\'t be better. Brooklyn Hills exceeded all my expectations.',
+    date: 'October 2024',
+    propertyStayed: 'Modern Studio Loft',
+  },
+  {
+    id: '3',
+    guestName: 'Sarah Eze',
+    guestPhoto: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80',
+    location: 'Port Harcourt, Nigeria',
+    rating: 5,
+    reviewText: 'My family and I had an amazing week here! The kids loved the pool, and we appreciated how well-equipped the kitchen was. True luxury at a reasonable price.',
+    date: 'December 2024',
+    propertyStayed: 'Executive 4-Bedroom Villa',
+  },
+  {
+    id: '4',
+    guestName: 'Emeka Johnson',
+    guestPhoto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80',
+    location: 'Enugu, Nigeria',
+    rating: 5,
+    reviewText: 'Outstanding service from booking to checkout. The apartment was even better than the photos! The security made me feel very safe, and the generator ensured we never lost power.',
+    date: 'September 2024',
+    propertyStayed: 'Cozy 2-Bedroom Apartment',
+  },
+  {
+    id: '5',
+    guestName: 'Fatima Bello',
+    guestPhoto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80',
+    location: 'Kano, Nigeria',
+    rating: 5,
+    reviewText: 'I travel frequently for work and this is hands down the best shortlet I\'ve stayed in. Clean, modern, and the customer service is exceptional. Highly recommended!',
+    date: 'November 2024',
+    propertyStayed: 'Luxury 3-Bedroom Penthouse',
+  },
+  {
+    id: '6',
+    guestName: 'Tunde Afolabi',
+    guestPhoto: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80',
+    location: 'Ibadan, Nigeria',
+    rating: 5,
+    reviewText: 'What a gem! The apartment was beautifully furnished and had everything we needed. The booking process was seamless, and the team was responsive to all our questions.',
+    date: 'October 2024',
+    propertyStayed: 'Cozy 2-Bedroom Apartment',
+  },
+]
