@@ -39,19 +39,6 @@ export default function HomePage() {
             <div className="mb-8">
               <HeroSearchForm />
             </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/properties">
-                <Button size="lg" variant="outline" className="text-base px-8 bg-white/10 border-white text-white hover:bg-white/20">
-                  Browse All Properties
-                </Button>
-              </Link>
-              <Link href="#features">
-                <Button size="lg" variant="outline" className="text-base px-8 bg-white/10 border-white text-white hover:bg-white/20">
-                  Learn More
-                </Button>
-              </Link>
-            </div>
           </div>
         </div>
       </section>
