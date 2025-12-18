@@ -73,6 +73,8 @@ export default function PropertyDetailPage() {
                   alt={property.name}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -95,6 +97,7 @@ export default function PropertyDetailPage() {
                       alt={`${property.name} - Image ${index + 1}`}
                       fill
                       className="object-cover"
+                      sizes="(max-width: 768px) 50vw, 25vw"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
