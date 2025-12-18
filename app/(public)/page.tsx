@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Building2, Calendar, Shield, Wifi } from 'lucide-react'
 
@@ -6,14 +7,29 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-orange-50 to-orange-100 py-20 px-4 md:px-8">
-        <div className="container mx-auto max-w-6xl">
+      <section className="relative h-[600px] md:h-[700px] flex items-center">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1920&q=80"
+            alt="Luxury apartment interior"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-black/50"></div>
+        </div>
+
+        {/* Content */}
+        <div className="container mx-auto max-w-6xl px-4 md:px-8 relative z-10">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Premium Shortlet Apartments
-              <span className="block text-primary mt-2">in Nigeria</span>
+              <span className="block text-orange-400 mt-2">in the heart of Uyo</span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-100 mb-8 max-w-2xl mx-auto">
               Experience comfort and luxury with our fully furnished apartments.
               Perfect for business trips, vacations, and extended stays.
             </p>
@@ -24,7 +40,7 @@ export default function HomePage() {
                 </Button>
               </Link>
               <Link href="#features">
-                <Button size="lg" variant="outline" className="text-base px-8">
+                <Button size="lg" variant="outline" className="text-base px-8 bg-white/10 border-white text-white hover:bg-white/20">
                   Learn More
                 </Button>
               </Link>
