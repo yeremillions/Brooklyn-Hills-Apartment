@@ -38,8 +38,13 @@ export default function HomePage() {
             </p>
 
             {/* Search Form */}
-            <div className="mb-8">
+            <div className="mb-4">
               <HeroSearchForm />
+            </div>
+
+            {/* Rating Summary */}
+            <div className="text-white/90 text-sm md:text-base">
+              <span className="font-semibold">4.8/5 ⭐⭐⭐⭐⭐</span> from 150+ guests
             </div>
           </div>
         </div>
