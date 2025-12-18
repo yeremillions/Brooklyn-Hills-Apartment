@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import { HeroSearchForm } from '@/components/public/hero-search-form'
 import { Building2, Calendar, Shield, Wifi } from 'lucide-react'
 
 export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[600px] md:h-[700px] flex items-center">
+      <section className="relative h-[700px] md:h-[800px] flex items-center">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -29,14 +30,20 @@ export default function HomePage() {
               Premium Shortlet Apartments
               <span className="block text-orange-400 mt-2">in the heart of Uyo</span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-100 mb-10 max-w-2xl mx-auto">
               Experience comfort and luxury with our fully furnished apartments.
               Perfect for business trips, vacations, and extended stays.
             </p>
+
+            {/* Search Form */}
+            <div className="mb-8">
+              <HeroSearchForm />
+            </div>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/properties">
-                <Button size="lg" className="text-base px-8">
-                  Browse Properties
+                <Button size="lg" variant="outline" className="text-base px-8 bg-white/10 border-white text-white hover:bg-white/20">
+                  Browse All Properties
                 </Button>
               </Link>
               <Link href="#features">
