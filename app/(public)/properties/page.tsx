@@ -1,14 +1,16 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { addDays } from 'date-fns'
 import { PropertyCard } from '@/components/public/property-card'
+import { AvailabilityCalendar } from '@/components/public/availability-calendar'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { MOCK_PROPERTIES, AMENITY_LABELS } from '@/lib/constants/mock-data'
 import { Amenity } from '@/types'
-import { Search, SlidersHorizontal, X } from 'lucide-react'
+import { Search, SlidersHorizontal, X, Calendar } from 'lucide-react'
 
 export default function PropertiesPage() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -18,6 +20,21 @@ export default function PropertiesPage() {
   const [minGuests, setMinGuests] = useState<string>('')
   const [selectedAmenities, setSelectedAmenities] = useState<Amenity[]>([])
   const [showFilters, setShowFilters] = useState(false)
+  const [showCalendar, setShowCalendar] = useState(false)
+
+  // Mock booked dates for demonstration
+  const today = new Date()
+  const bookedDates = [
+    addDays(today, 3),
+    addDays(today, 4),
+    addDays(today, 5),
+    addDays(today, 10),
+    addDays(today, 11),
+    addDays(today, 18),
+    addDays(today, 19),
+    addDays(today, 20),
+    addDays(today, 25),
+  ]
 
   // Extract unique locations
   const locations = useMemo(() => {
@@ -145,6 +162,33 @@ export default function PropertiesPage() {
                 </Badge>
               )}
             </Button>
+          </div>
+
+          {/* Calendar Toggle Link */}
+          <div className="mt-4 text-center">
+            <button
+              onClick={() => setShowCalendar(!showCalendar)}
+              className="text-sm text-orange-600 hover:text-orange-700 underline flex items-center gap-2 mx-auto"
+            >
+              <Calendar className="h-4 w-4" />
+              Or try our availability calendar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Availability Calendar - Slides down */}
+      <div
+        className={`overflow-hidden transition-all duration-500 ease-in-out ${
+          showCalendar ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="bg-white py-8 px-4 md:px-8 border-b border-gray-200">
+          <div className="container mx-auto max-w-4xl">
+            <AvailabilityCalendar
+              bookedDates={bookedDates}
+              onClose={() => setShowCalendar(false)}
+            />
           </div>
         </div>
       </div>

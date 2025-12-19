@@ -1,29 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { addDays } from 'date-fns'
 import { Button } from '@/components/ui/button'
 import { HeroSearchForm } from '@/components/public/hero-search-form'
 import { FeaturedPropertyCard } from '@/components/public/featured-property-card'
 import { TestimonialCard } from '@/components/public/testimonial-card'
-import { AvailabilityCalendar } from '@/components/public/availability-calendar'
 import { MOCK_PROPERTIES, MOCK_TESTIMONIALS } from '@/lib/constants/mock-data'
 import { Building2, Calendar, Shield, Wifi, RefreshCw, Zap, BadgePercent, Search, Lock, Key } from 'lucide-react'
 
 export default function HomePage() {
-  // Mock booked dates for demonstration (next 30 days with some random bookings)
-  const today = new Date()
-  const bookedDates = [
-    addDays(today, 3),
-    addDays(today, 4),
-    addDays(today, 5),
-    addDays(today, 10),
-    addDays(today, 11),
-    addDays(today, 18),
-    addDays(today, 19),
-    addDays(today, 20),
-    addDays(today, 25),
-  ]
-
   return (
     <>
       {/* Hero Section */}
@@ -269,22 +253,6 @@ export default function HomePage() {
               description="24/7 security, verified properties, and trusted host"
             />
           </div>
-        </div>
-      </section>
-
-      {/* Availability Calendar Section */}
-      <section className="py-16 px-4 md:px-8 bg-gray-50">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Check Availability
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              View our real-time availability calendar and book your preferred dates. Green dates are available, red dates are already booked.
-            </p>
-          </div>
-
-          <AvailabilityCalendar bookedDates={bookedDates} />
         </div>
       </section>
 

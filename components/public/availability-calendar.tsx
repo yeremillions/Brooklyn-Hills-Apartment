@@ -5,13 +5,14 @@ import { addDays, format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMon
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 
 interface AvailabilityCalendarProps {
   bookedDates?: Date[]
+  onClose?: () => void
 }
 
-export function AvailabilityCalendar({ bookedDates = [] }: AvailabilityCalendarProps) {
+export function AvailabilityCalendar({ bookedDates = [], onClose }: AvailabilityCalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(new Date())
 
   const monthStart = startOfMonth(currentMonth)
@@ -45,7 +46,19 @@ export function AvailabilityCalendar({ bookedDates = [] }: AvailabilityCalendarP
   }
 
   return (
-    <Card className="p-6">
+    <Card className="p-6 relative">
+      {/* Close Button */}
+      {onClose && (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onClose}
+          className="absolute top-4 right-4 h-8 w-8 p-0"
+        >
+          <X className="h-4 w-4" />
+        </Button>
+      )}
+
       {/* Calendar Header */}
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-xl font-bold text-gray-900">
