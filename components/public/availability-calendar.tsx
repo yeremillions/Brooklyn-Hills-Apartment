@@ -46,55 +46,55 @@ export function AvailabilityCalendar({ bookedDates = [], onClose }: Availability
   }
 
   return (
-    <Card className="p-6 relative">
+    <Card className="p-4 relative max-w-md mx-auto">
       {/* Close Button */}
       {onClose && (
         <Button
           variant="ghost"
           size="sm"
           onClick={onClose}
-          className="absolute top-4 right-4 h-8 w-8 p-0"
+          className="absolute top-2 right-2 h-6 w-6 p-0 hover:bg-gray-100"
         >
-          <X className="h-4 w-4" />
+          <X className="h-3 w-3" />
         </Button>
       )}
 
       {/* Calendar Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl font-bold text-gray-900">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-base font-bold text-gray-900">
           {format(currentMonth, 'MMMM yyyy')}
         </h3>
-        <div className="flex gap-2">
+        <div className="flex gap-1">
           <Button
             variant="outline"
             size="sm"
             onClick={goToPreviousMonth}
-            className="h-8 w-8 p-0"
+            className="h-7 w-7 p-0"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-3 w-3" />
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={goToNextMonth}
-            className="h-8 w-8 p-0"
+            className="h-7 w-7 p-0"
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-3 w-3" />
           </Button>
         </div>
       </div>
 
       {/* Day names */}
-      <div className="grid grid-cols-7 gap-1 mb-2">
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-          <div key={day} className="text-center text-xs font-semibold text-gray-500 py-2">
+      <div className="grid grid-cols-7 gap-0.5 mb-1">
+        {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
+          <div key={`${day}-${index}`} className="text-center text-[10px] font-semibold text-gray-500 py-1">
             {day}
           </div>
         ))}
       </div>
 
       {/* Calendar Grid */}
-      <div className="grid grid-cols-7 gap-1">
+      <div className="grid grid-cols-7 gap-0.5">
         {/* Padding days */}
         {paddingDays.map((_, index) => (
           <div key={`padding-${index}`} className="aspect-square" />
@@ -111,8 +111,8 @@ export function AvailabilityCalendar({ bookedDates = [], onClose }: Availability
             <div
               key={day.toISOString()}
               className={`
-                aspect-square flex items-center justify-center rounded-lg text-sm font-medium transition-colors
-                ${today ? 'ring-2 ring-orange-500' : ''}
+                aspect-square flex items-center justify-center rounded text-xs font-medium transition-colors
+                ${today ? 'ring-1 ring-orange-500' : ''}
                 ${available ? 'bg-green-100 text-green-700 hover:bg-green-200 cursor-pointer' : ''}
                 ${booked ? 'bg-red-100 text-red-700' : ''}
                 ${past ? 'bg-gray-100 text-gray-400' : ''}
@@ -125,25 +125,25 @@ export function AvailabilityCalendar({ bookedDates = [], onClose }: Availability
       </div>
 
       {/* Legend */}
-      <div className="mt-6 flex items-center justify-center gap-6 text-sm">
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded bg-green-100 border border-green-200"></div>
+      <div className="mt-3 flex items-center justify-center gap-3 text-[10px]">
+        <div className="flex items-center gap-1">
+          <div className="w-2.5 h-2.5 rounded bg-green-100 border border-green-200"></div>
           <span className="text-gray-600">Available</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded bg-red-100 border border-red-200"></div>
+        <div className="flex items-center gap-1">
+          <div className="w-2.5 h-2.5 rounded bg-red-100 border border-red-200"></div>
           <span className="text-gray-600">Booked</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded bg-gray-100 border border-gray-200"></div>
+        <div className="flex items-center gap-1">
+          <div className="w-2.5 h-2.5 rounded bg-gray-100 border border-gray-200"></div>
           <span className="text-gray-600">Past</span>
         </div>
       </div>
 
       {/* CTA */}
-      <div className="mt-6 text-center">
+      <div className="mt-4 text-center">
         <Link href="/properties">
-          <Button size="lg" className="w-full md:w-auto px-8">
+          <Button className="w-full px-4 h-9 text-sm">
             Book Your Dates
           </Button>
         </Link>

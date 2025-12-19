@@ -180,11 +180,11 @@ export default function PropertiesPage() {
       {/* Availability Calendar - Slides down */}
       <div
         className={`overflow-hidden transition-all duration-500 ease-in-out ${
-          showCalendar ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
+          showCalendar ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="bg-white py-8 px-4 md:px-8 border-b border-gray-200">
-          <div className="container mx-auto max-w-4xl">
+        <div className="bg-white py-6 px-4 md:px-8 border-b border-gray-200">
+          <div className="container mx-auto max-w-2xl">
             <AvailabilityCalendar
               bookedDates={bookedDates}
               onClose={() => setShowCalendar(false)}
