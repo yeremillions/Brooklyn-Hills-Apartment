@@ -53,14 +53,14 @@ export function AvailabilityCalendar({ bookedDates = [], onClose }: Availability
           variant="ghost"
           size="sm"
           onClick={onClose}
-          className="absolute top-2 right-2 h-6 w-6 p-0 hover:bg-gray-100"
+          className="absolute top-2 left-2 h-7 w-7 p-0 hover:bg-red-50 hover:text-red-600 transition-colors z-10"
         >
-          <X className="h-3 w-3" />
+          <X className="h-3.5 w-3.5" />
         </Button>
       )}
 
       {/* Calendar Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 pl-9">
         <h3 className="text-base font-bold text-gray-900">
           {format(currentMonth, 'MMMM yyyy')}
         </h3>
