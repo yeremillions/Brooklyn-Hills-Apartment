@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { addDays } from 'date-fns'
-import { PropertyCard } from '@/components/public/property-card'
+import { FeaturedPropertyCard } from '@/components/public/featured-property-card'
 import { AvailabilityCalendar } from '@/components/public/availability-calendar'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -325,9 +325,9 @@ export default function PropertiesPage() {
                 </Button>
               </Card>
             ) : (
-              <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredProperties.map((property) => (
-                  <PropertyCard key={property.id} property={property} />
+                  <FeaturedPropertyCard key={property.id} property={property} />
                 ))}
               </div>
             )}
