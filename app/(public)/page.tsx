@@ -5,7 +5,7 @@ import { HeroSearchForm } from '@/components/public/hero-search-form'
 import { FeaturedPropertyCard } from '@/components/public/featured-property-card'
 import { TestimonialCard } from '@/components/public/testimonial-card'
 import { MOCK_PROPERTIES, MOCK_TESTIMONIALS } from '@/lib/constants/mock-data'
-import { Building2, Calendar, Shield, Wifi } from 'lucide-react'
+import { Building2, Calendar, Shield, Wifi, Users, Headphones, Home } from 'lucide-react'
 
 export default function HomePage() {
   return (
@@ -46,6 +46,46 @@ export default function HomePage() {
             {/* Rating Summary */}
             <div className="text-white/90 text-sm md:text-base">
               <span className="font-semibold">4.8/5 ⭐⭐⭐⭐⭐</span> from 150+ guests
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Stats Bar */}
+      <section className="py-8 px-4 md:px-8 bg-white border-y border-gray-200">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:divide-x divide-gray-200">
+            {/* Stat 1 */}
+            <div className="flex items-center justify-center gap-4">
+              <div className="bg-orange-100 rounded-full p-3">
+                <Home className="h-6 w-6 text-orange-600" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-gray-900">4 Premium Properties</div>
+                <div className="text-sm text-gray-500">Luxury apartments</div>
+              </div>
+            </div>
+
+            {/* Stat 2 */}
+            <div className="flex items-center justify-center gap-4">
+              <div className="bg-orange-100 rounded-full p-3">
+                <Users className="h-6 w-6 text-orange-600" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-gray-900">150+ Happy Guests</div>
+                <div className="text-sm text-gray-500">5-star reviews</div>
+              </div>
+            </div>
+
+            {/* Stat 3 */}
+            <div className="flex items-center justify-center gap-4">
+              <div className="bg-orange-100 rounded-full p-3">
+                <Headphones className="h-6 w-6 text-orange-600" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-gray-900">24/7 Support</div>
+                <div className="text-sm text-gray-500">Always available</div>
+              </div>
             </div>
           </div>
         </div>
