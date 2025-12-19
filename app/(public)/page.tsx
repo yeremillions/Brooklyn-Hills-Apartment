@@ -5,7 +5,7 @@ import { HeroSearchForm } from '@/components/public/hero-search-form'
 import { FeaturedPropertyCard } from '@/components/public/featured-property-card'
 import { TestimonialCard } from '@/components/public/testimonial-card'
 import { MOCK_PROPERTIES, MOCK_TESTIMONIALS } from '@/lib/constants/mock-data'
-import { Building2, Calendar, Shield, Wifi, RefreshCw, Zap, BadgePercent } from 'lucide-react'
+import { Building2, Calendar, Shield, Wifi, RefreshCw, Zap, BadgePercent, Search, Lock, Key } from 'lucide-react'
 
 export default function HomePage() {
   return (
@@ -91,8 +91,89 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Apartments Section */}
+      {/* How It Works Section */}
       <section className="py-16 px-4 md:px-8 bg-gray-50">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              How It Works
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Booking your perfect apartment is quick and easy. Follow these simple steps.
+            </p>
+          </div>
+
+          {/* Steps Grid */}
+          <div className="grid md:grid-cols-3 gap-12 mb-8">
+            {/* Step 1 */}
+            <div className="text-center">
+              <div className="flex justify-center mb-6">
+                <div className="relative">
+                  <div className="bg-orange-500 rounded-full p-6">
+                    <Search className="h-10 w-10 text-white" />
+                  </div>
+                  <div className="absolute -top-2 -right-2 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
+                    1
+                  </div>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Search & Compare</h3>
+              <p className="text-gray-600">
+                Browse our premium properties, compare amenities, and find the perfect apartment that meets your needs and budget.
+              </p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="text-center">
+              <div className="flex justify-center mb-6">
+                <div className="relative">
+                  <div className="bg-orange-500 rounded-full p-6">
+                    <Lock className="h-10 w-10 text-white" />
+                  </div>
+                  <div className="absolute -top-2 -right-2 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
+                    2
+                  </div>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Book Securely</h3>
+              <p className="text-gray-600">
+                Select your dates, enter guest details, and complete your booking with our secure payment system via Paystack.
+              </p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="text-center">
+              <div className="flex justify-center mb-6">
+                <div className="relative">
+                  <div className="bg-orange-500 rounded-full p-6">
+                    <Key className="h-10 w-10 text-white" />
+                  </div>
+                  <div className="absolute -top-2 -right-2 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
+                    3
+                  </div>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Check-in & Enjoy</h3>
+              <p className="text-gray-600">
+                Receive your confirmation, check-in at your scheduled time, and enjoy a comfortable, luxurious stay at Brooklyn Hills.
+              </p>
+            </div>
+          </div>
+
+          {/* CTA Message */}
+          <div className="text-center">
+            <p className="text-2xl font-semibold text-gray-900 mb-4">It's that simple!</p>
+            <Link href="/properties">
+              <Button size="lg" className="px-8">
+                Start Your Search
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Apartments Section */}
+      <section className="py-16 px-4 md:px-8 bg-white">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -123,7 +204,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 px-4 md:px-8 bg-white">
+      <section className="py-16 px-4 md:px-8 bg-gray-50">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -145,7 +226,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-16 px-4 md:px-8 bg-gray-50">
+      <section id="features" className="py-16 px-4 md:px-8 bg-white">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             Why Choose Brooklyn Hills?
