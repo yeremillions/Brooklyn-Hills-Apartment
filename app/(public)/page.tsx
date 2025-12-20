@@ -156,97 +156,150 @@ export default function HomePage() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+      <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-gray-50 via-white to-gray-50 overflow-hidden">
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold">
+                Simple Process
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               How It Works
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Booking your perfect apartment is quick and easy. Follow these simple steps.
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Book your dream apartment in three simple steps
             </p>
           </div>
 
           {/* Steps Grid */}
-          <div className="grid md:grid-cols-3 gap-12 mb-8 relative">
-            {/* Connecting Lines (Desktop only) */}
-            <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-orange-200 to-transparent" style={{ top: '3rem' }}></div>
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12 relative">
+            {/* Connecting Dashed Line (Desktop only) */}
+            <div className="hidden md:block absolute top-24 left-0 right-0 h-1" style={{ top: '6rem' }}>
+              <div className="flex items-center justify-center h-full">
+                <div className="w-full border-t-4 border-dashed border-orange-200 mx-32"></div>
+              </div>
+            </div>
 
             {/* Step 1 */}
-            <div className="text-center relative">
-              <div className="flex justify-center mb-6">
-                <div className="relative">
-                  <div className="bg-orange-500 rounded-full p-6 shadow-lg">
-                    <Search className="h-10 w-10 text-white" />
-                  </div>
-                  <div className="absolute -top-2 -right-2 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md">
-                    1
+            <div className="relative group">
+              <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-orange-200 relative overflow-hidden">
+                {/* Decorative circles */}
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-orange-200 rounded-full opacity-20"></div>
+                <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-orange-300 rounded-full opacity-20"></div>
+
+                {/* Number Badge */}
+                <div className="flex justify-center mb-6 relative z-10">
+                  <div className="relative">
+                    <div className="w-24 h-24 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-xl transform group-hover:rotate-6 transition-transform duration-300">
+                      <Search className="h-12 w-12 text-white" />
+                    </div>
+                    <div className="absolute -top-3 -right-3 w-10 h-10 bg-gray-900 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
+                      1
+                    </div>
                   </div>
                 </div>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Search & Compare</h3>
-              <p className="text-gray-600">
-                Browse our premium properties, compare amenities, and find the perfect apartment that meets your needs and budget.
-              </p>
-              {/* Arrow (Mobile only) */}
-              <div className="md:hidden flex justify-center mt-6">
-                <svg className="h-8 w-8 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
+
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 relative z-10">Search & Compare</h3>
+                <p className="text-gray-600 leading-relaxed relative z-10">
+                  Browse our curated collection of premium properties. Use advanced filters to compare amenities, prices, and locations to find your perfect match.
+                </p>
+
+                {/* Mobile Arrow */}
+                <div className="md:hidden flex justify-center mt-8">
+                  <div className="w-12 h-12 bg-orange-200 rounded-full flex items-center justify-center">
+                    <svg className="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Step 2 */}
-            <div className="text-center relative">
-              <div className="flex justify-center mb-6">
-                <div className="relative">
-                  <div className="bg-orange-500 rounded-full p-6 shadow-lg">
-                    <Lock className="h-10 w-10 text-white" />
-                  </div>
-                  <div className="absolute -top-2 -right-2 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md">
-                    2
+            <div className="relative group">
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-blue-200 relative overflow-hidden">
+                {/* Decorative circles */}
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-200 rounded-full opacity-20"></div>
+                <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-blue-300 rounded-full opacity-20"></div>
+
+                {/* Number Badge */}
+                <div className="flex justify-center mb-6 relative z-10">
+                  <div className="relative">
+                    <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-xl transform group-hover:rotate-6 transition-transform duration-300">
+                      <Lock className="h-12 w-12 text-white" />
+                    </div>
+                    <div className="absolute -top-3 -right-3 w-10 h-10 bg-gray-900 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
+                      2
+                    </div>
                   </div>
                 </div>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Book Securely</h3>
-              <p className="text-gray-600">
-                Select your dates, enter guest details, and complete your booking with our secure payment system via Paystack.
-              </p>
-              {/* Arrow (Mobile only) */}
-              <div className="md:hidden flex justify-center mt-6">
-                <svg className="h-8 w-8 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
+
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 relative z-10">Book Securely</h3>
+                <p className="text-gray-600 leading-relaxed relative z-10">
+                  Select your dates and guest details. Complete your booking with confidence using our encrypted payment system powered by Paystack.
+                </p>
+
+                {/* Mobile Arrow */}
+                <div className="md:hidden flex justify-center mt-8">
+                  <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center">
+                    <svg className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Step 3 */}
-            <div className="text-center relative">
-              <div className="flex justify-center mb-6">
-                <div className="relative">
-                  <div className="bg-orange-500 rounded-full p-6 shadow-lg">
-                    <Key className="h-10 w-10 text-white" />
+            <div className="relative group">
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-green-200 relative overflow-hidden">
+                {/* Decorative circles */}
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-200 rounded-full opacity-20"></div>
+                <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-green-300 rounded-full opacity-20"></div>
+
+                {/* Number Badge */}
+                <div className="flex justify-center mb-6 relative z-10">
+                  <div className="relative">
+                    <div className="w-24 h-24 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-xl transform group-hover:rotate-6 transition-transform duration-300">
+                      <Key className="h-12 w-12 text-white" />
+                    </div>
+                    <div className="absolute -top-3 -right-3 w-10 h-10 bg-gray-900 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
+                      3
+                    </div>
                   </div>
-                  <div className="absolute -top-2 -right-2 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md">
-                    3
+                </div>
+
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 relative z-10">Check-in & Enjoy</h3>
+                <p className="text-gray-600 leading-relaxed relative z-10">
+                  Receive instant confirmation and check-in details. Arrive at your scheduled time and experience the comfort of your Brooklyn Hills apartment.
+                </p>
+
+                {/* Success Checkmark (decorative) */}
+                <div className="hidden md:flex justify-center mt-6">
+                  <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
                   </div>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Check-in & Enjoy</h3>
-              <p className="text-gray-600">
-                Receive your confirmation, check-in at your scheduled time, and enjoy a comfortable, luxurious stay at Brooklyn Hills.
-              </p>
             </div>
           </div>
 
           {/* CTA Message */}
-          <div className="text-center">
-            <p className="text-2xl font-semibold text-gray-900 mb-4">It's that simple!</p>
-            <Link href="/properties">
-              <Button size="lg" className="px-8 shadow-lg hover:shadow-xl transition-shadow">
-                Start Your Search
-              </Button>
-            </Link>
+          <div className="text-center mt-16">
+            <div className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-full mb-6 shadow-lg">
+              <p className="text-xl font-bold">✨ It's that simple!</p>
+            </div>
+            <div>
+              <Link href="/properties">
+                <Button size="lg" className="px-10 py-6 text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-105">
+                  Start Your Search Now
+                </Button>
+              </Link>
+            </div>
+            <p className="text-gray-500 text-sm mt-4">Average booking time: Less than 5 minutes</p>
           </div>
         </div>
       </section>
