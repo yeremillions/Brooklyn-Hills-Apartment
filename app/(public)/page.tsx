@@ -14,7 +14,7 @@ export default function HomePage() {
     <>
       <StickyCTABar />
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] md:min-h-[85vh] flex items-center">
+      <section className="relative min-h-[80vh] md:min-h-[85vh] py-[8vh] md:py-[8.5vh] flex items-center">
         {/* Background Image */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
