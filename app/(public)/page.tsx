@@ -253,29 +253,34 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-16 px-4 md:px-8 bg-gradient-to-b from-white to-gray-50">
+      <section id="features" className="py-20 px-4 md:px-8 bg-gradient-to-b from-gray-50 via-blue-50/50 to-gray-100">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Why Choose Brooklyn Hills?
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+              Why Choose Brooklyn Hills?
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Experience premium living with our carefully curated apartments and exceptional service
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <FeatureCard
-              icon={<Building2 className="h-10 w-10 text-primary" />}
+              icon={<Building2 className="h-10 w-10 text-orange-600" />}
               title="Premium Locations"
               description="Strategically located properties in prime areas across Nigeria"
             />
             <FeatureCard
-              icon={<Wifi className="h-10 w-10 text-primary" />}
+              icon={<Wifi className="h-10 w-10 text-blue-600" />}
               title="Modern Amenities"
               description="High-speed WiFi, AC, fully equipped kitchens, and more"
             />
             <FeatureCard
-              icon={<Calendar className="h-10 w-10 text-primary" />}
+              icon={<Calendar className="h-10 w-10 text-green-600" />}
               title="Flexible Booking"
               description="Book for a night, week, or month with competitive rates"
             />
             <FeatureCard
-              icon={<Shield className="h-10 w-10 text-primary" />}
+              icon={<Shield className="h-10 w-10 text-purple-600" />}
               title="Secure & Safe"
               description="24/7 security, verified properties, and trusted host"
             />
@@ -319,10 +324,14 @@ function FeatureCard({
   description: string
 }) {
   return (
-    <div className="text-center p-6">
-      <div className="flex justify-center mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+    <div className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-center border border-gray-100">
+      <div className="flex justify-center mb-6">
+        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-50 to-blue-50 flex items-center justify-center">
+          {icon}
+        </div>
+      </div>
+      <h3 className="text-xl font-bold mb-3 text-gray-900">{title}</h3>
+      <p className="text-gray-600 leading-relaxed">{description}</p>
     </div>
   )
 }
