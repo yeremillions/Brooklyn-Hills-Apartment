@@ -24,7 +24,7 @@ export default function HomePage() {
             sizes="100vw"
           />
           {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/50"></div>
         </div>
 
         {/* Content */}
@@ -45,8 +45,10 @@ export default function HomePage() {
             </div>
 
             {/* Rating Summary */}
-            <div className="text-white/90 text-sm md:text-base">
-              <span className="font-semibold">4.8/5 ⭐⭐⭐⭐⭐</span> from 150+ guests
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+              <span className="text-white font-bold text-base md:text-lg">4.8/5</span>
+              <span className="text-yellow-300">⭐⭐⭐⭐⭐</span>
+              <span className="text-white/90 text-sm md:text-base">from 150+ guests</span>
             </div>
           </div>
         </div>
@@ -58,7 +60,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:divide-x divide-gray-200">
             {/* Stat 1 */}
             <div className="flex items-center justify-center gap-4">
-              <div className="bg-orange-100 rounded-full p-3">
+              <div className="bg-gradient-to-br from-orange-100 to-orange-200 rounded-full p-3 shadow-sm">
                 <RefreshCw className="h-6 w-6 text-orange-600" />
               </div>
               <div>
@@ -69,8 +71,8 @@ export default function HomePage() {
 
             {/* Stat 2 */}
             <div className="flex items-center justify-center gap-4">
-              <div className="bg-orange-100 rounded-full p-3">
-                <Zap className="h-6 w-6 text-orange-600" />
+              <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-full p-3 shadow-sm">
+                <Zap className="h-6 w-6 text-blue-600" />
               </div>
               <div>
                 <div className="text-2xl font-bold text-gray-900">Same-Day Booking</div>
@@ -80,8 +82,8 @@ export default function HomePage() {
 
             {/* Stat 3 */}
             <div className="flex items-center justify-center gap-4">
-              <div className="bg-orange-100 rounded-full p-3">
-                <BadgePercent className="h-6 w-6 text-orange-600" />
+              <div className="bg-gradient-to-br from-green-100 to-green-200 rounded-full p-3 shadow-sm">
+                <BadgePercent className="h-6 w-6 text-green-600" />
               </div>
               <div>
                 <div className="text-2xl font-bold text-gray-900">Corporate Discounts</div>
@@ -93,7 +95,7 @@ export default function HomePage() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 px-4 md:px-8 bg-gray-50">
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -165,7 +167,7 @@ export default function HomePage() {
           <div className="text-center">
             <p className="text-2xl font-semibold text-gray-900 mb-4">It's that simple!</p>
             <Link href="/properties">
-              <Button size="lg" className="px-8">
+              <Button size="lg" className="px-8 shadow-lg hover:shadow-xl transition-shadow">
                 Start Your Search
               </Button>
             </Link>
@@ -196,7 +198,7 @@ export default function HomePage() {
           {/* View All Button */}
           <div className="text-center">
             <Link href="/properties">
-              <Button size="lg" className="px-8">
+              <Button size="lg" className="px-8 shadow-lg hover:shadow-xl transition-shadow">
                 View All Properties
               </Button>
             </Link>
@@ -205,7 +207,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 px-4 md:px-8 bg-gray-50">
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-orange-50/30 to-white">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -227,7 +229,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-16 px-4 md:px-8 bg-white">
+      <section id="features" className="py-16 px-4 md:px-8 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             Why Choose Brooklyn Hills?
@@ -261,7 +263,7 @@ export default function HomePage() {
       <FAQSection />
 
       {/* CTA Section */}
-      <section className="py-16 px-4 md:px-8 bg-primary text-white">
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 text-white">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Book Your Stay?
@@ -273,7 +275,7 @@ export default function HomePage() {
             <Button
               size="lg"
               variant="secondary"
-              className="text-base px-8 bg-white text-primary hover:bg-gray-100"
+              className="text-base px-8 bg-white text-primary hover:bg-gray-100 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
             >
               View All Properties
             </Button>
