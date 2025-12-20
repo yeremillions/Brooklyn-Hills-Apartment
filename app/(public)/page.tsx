@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button'
 import { HeroSearchForm } from '@/components/public/hero-search-form'
 import { FeaturedPropertyCard } from '@/components/public/featured-property-card'
 import { TestimonialCard } from '@/components/public/testimonial-card'
+import { FAQSection } from '@/components/public/faq-section'
+import { NewsletterSection } from '@/components/public/newsletter-section'
 import { MOCK_PROPERTIES, MOCK_TESTIMONIALS } from '@/lib/constants/mock-data'
 import { Building2, Calendar, Shield, Wifi, RefreshCw, Zap, BadgePercent, Search, Lock, Key } from 'lucide-react'
 
@@ -255,6 +257,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* FAQs Section */}
+      <FAQSection />
+
+      {/* Newsletter Section */}
+      <NewsletterSection />
 
       {/* CTA Section */}
       <section className="py-16 px-4 md:px-8 bg-primary text-white">
