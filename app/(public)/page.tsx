@@ -5,14 +5,16 @@ import { HeroSearchForm } from '@/components/public/hero-search-form'
 import { FeaturedPropertyCard } from '@/components/public/featured-property-card'
 import { TestimonialCard } from '@/components/public/testimonial-card'
 import { FAQSection } from '@/components/public/faq-section'
+import { StickyCTABar } from '@/components/public/sticky-cta-bar'
 import { MOCK_PROPERTIES, MOCK_TESTIMONIALS } from '@/lib/constants/mock-data'
 import { Building2, Calendar, Shield, Wifi, RefreshCw, Zap, BadgePercent, Search, Lock, Key } from 'lucide-react'
 
 export default function HomePage() {
   return (
     <>
+      <StickyCTABar />
       {/* Hero Section */}
-      <section className="relative h-[546px] md:h-[623px] flex items-center">
+      <section className="relative min-h-[80vh] md:min-h-[85vh] flex items-center">
         {/* Background Image */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
@@ -57,7 +59,7 @@ export default function HomePage() {
       {/* Quick Stats Bar */}
       <section className="py-8 px-4 md:px-8 bg-white border-y border-gray-200">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:divide-x divide-gray-200">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 md:divide-x divide-gray-200">
             {/* Stat 1 */}
             <div className="flex items-center justify-center gap-4">
               <div className="bg-gradient-to-br from-orange-100 to-orange-200 rounded-full p-3 shadow-sm">
@@ -81,7 +83,7 @@ export default function HomePage() {
             </div>
 
             {/* Stat 3 */}
-            <div className="flex items-center justify-center gap-4">
+            <div className="flex items-center justify-center gap-4 col-span-2 md:col-span-1">
               <div className="bg-gradient-to-br from-green-100 to-green-200 rounded-full p-3 shadow-sm">
                 <BadgePercent className="h-6 w-6 text-green-600" />
               </div>
@@ -90,6 +92,65 @@ export default function HomePage() {
                 <div className="text-sm text-gray-500">Special business rates</div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Signals Section */}
+      <section className="py-6 px-4 md:px-8 bg-gradient-to-r from-orange-50 to-blue-50">
+        <div className="container mx-auto max-w-5xl">
+          <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-gray-700">
+            <div className="flex items-center gap-2">
+              <Shield className="h-5 w-5 text-green-600" />
+              <span className="font-semibold">Verified Properties</span>
+            </div>
+            <div className="hidden sm:block h-6 w-px bg-gray-300"></div>
+            <div className="flex items-center gap-2">
+              <Lock className="h-5 w-5 text-blue-600" />
+              <span className="font-semibold">Secure Payments</span>
+            </div>
+            <div className="hidden sm:block h-6 w-px bg-gray-300"></div>
+            <div className="flex items-center gap-2">
+              <svg className="h-5 w-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span className="font-semibold">24/7 Support</span>
+            </div>
+            <div className="hidden sm:block h-6 w-px bg-gray-300"></div>
+            <div className="flex items-center gap-2 text-orange-600">
+              <span className="font-bold">🔥 12 properties booked today</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Apartments Section */}
+      <section className="py-16 px-4 md:px-8 bg-white">
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Featured Apartments in Uyo
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover our handpicked selection of premium apartments, each offering
+              luxury, comfort, and modern amenities for your perfect stay.
+            </p>
+          </div>
+
+          {/* Properties Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            {MOCK_PROPERTIES.slice(0, 3).map((property) => (
+              <FeaturedPropertyCard key={property.id} property={property} />
+            ))}
+          </div>
+
+          {/* View All Button */}
+          <div className="text-center">
+            <Link href="/properties">
+              <Button size="lg" className="px-8 shadow-lg hover:shadow-xl transition-shadow">
+                View All Properties
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -107,15 +168,18 @@ export default function HomePage() {
           </div>
 
           {/* Steps Grid */}
-          <div className="grid md:grid-cols-3 gap-12 mb-8">
+          <div className="grid md:grid-cols-3 gap-12 mb-8 relative">
+            {/* Connecting Lines (Desktop only) */}
+            <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-orange-200 to-transparent" style={{ top: '3rem' }}></div>
+
             {/* Step 1 */}
-            <div className="text-center">
+            <div className="text-center relative">
               <div className="flex justify-center mb-6">
                 <div className="relative">
-                  <div className="bg-orange-500 rounded-full p-6">
+                  <div className="bg-orange-500 rounded-full p-6 shadow-lg">
                     <Search className="h-10 w-10 text-white" />
                   </div>
-                  <div className="absolute -top-2 -right-2 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
+                  <div className="absolute -top-2 -right-2 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md">
                     1
                   </div>
                 </div>
@@ -124,16 +188,22 @@ export default function HomePage() {
               <p className="text-gray-600">
                 Browse our premium properties, compare amenities, and find the perfect apartment that meets your needs and budget.
               </p>
+              {/* Arrow (Mobile only) */}
+              <div className="md:hidden flex justify-center mt-6">
+                <svg className="h-8 w-8 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
             </div>
 
             {/* Step 2 */}
-            <div className="text-center">
+            <div className="text-center relative">
               <div className="flex justify-center mb-6">
                 <div className="relative">
-                  <div className="bg-orange-500 rounded-full p-6">
+                  <div className="bg-orange-500 rounded-full p-6 shadow-lg">
                     <Lock className="h-10 w-10 text-white" />
                   </div>
-                  <div className="absolute -top-2 -right-2 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
+                  <div className="absolute -top-2 -right-2 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md">
                     2
                   </div>
                 </div>
@@ -142,16 +212,22 @@ export default function HomePage() {
               <p className="text-gray-600">
                 Select your dates, enter guest details, and complete your booking with our secure payment system via Paystack.
               </p>
+              {/* Arrow (Mobile only) */}
+              <div className="md:hidden flex justify-center mt-6">
+                <svg className="h-8 w-8 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
             </div>
 
             {/* Step 3 */}
-            <div className="text-center">
+            <div className="text-center relative">
               <div className="flex justify-center mb-6">
                 <div className="relative">
-                  <div className="bg-orange-500 rounded-full p-6">
+                  <div className="bg-orange-500 rounded-full p-6 shadow-lg">
                     <Key className="h-10 w-10 text-white" />
                   </div>
-                  <div className="absolute -top-2 -right-2 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
+                  <div className="absolute -top-2 -right-2 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-md">
                     3
                   </div>
                 </div>
