@@ -230,37 +230,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Apartments Section */}
-      <section className="py-16 px-4 md:px-8 bg-white">
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Featured Apartments in Uyo
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Discover our handpicked selection of premium apartments, each offering
-              luxury, comfort, and modern amenities for your perfect stay.
-            </p>
-          </div>
-
-          {/* Properties Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-            {MOCK_PROPERTIES.slice(0, 3).map((property) => (
-              <FeaturedPropertyCard key={property.id} property={property} />
-            ))}
-          </div>
-
-          {/* View All Button */}
-          <div className="text-center">
-            <Link href="/properties">
-              <Button size="lg" className="px-8 shadow-lg hover:shadow-xl transition-shadow">
-                View All Properties
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Testimonials Section */}
       <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-orange-50/30 to-white">
         <div className="container mx-auto max-w-7xl">
