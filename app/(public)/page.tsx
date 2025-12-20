@@ -287,19 +287,18 @@ export default function HomePage() {
       <FAQSection />
 
       {/* CTA Section */}
-      <section className="py-16 px-4 md:px-8 bg-gradient-to-br from-slate-600 via-slate-700 to-gray-800 text-white">
+      <section className="py-16 px-4 md:px-8 bg-blue-100">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
             Ready to Book Your Stay?
           </h2>
-          <p className="text-lg mb-8 opacity-90">
+          <p className="text-lg mb-8 text-gray-700">
             Explore our available properties and book instantly with secure payment
           </p>
           <Link href="/properties">
             <Button
               size="lg"
-              variant="secondary"
-              className="text-base px-8 bg-white text-primary hover:bg-gray-100 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+              className="text-base px-8 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
             >
               View All Properties
             </Button>
