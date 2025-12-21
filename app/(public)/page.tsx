@@ -97,7 +97,7 @@ export default function HomePage() {
       </section>
 
       {/* Trust Signals Section */}
-      <section className="py-6 px-4 md:px-8 bg-gradient-to-r from-orange-50 to-blue-50">
+      <section className="py-6 px-4 md:px-8 bg-gradient-to-r from-orange-100 to-blue-100">
         <div className="container mx-auto max-w-5xl">
           <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-gray-700">
             <div className="flex items-center gap-2">
@@ -156,7 +156,7 @@ export default function HomePage() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 px-4 md:px-8 bg-gray-50">
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-indigo-50">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -256,7 +256,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-orange-50/30 to-white">
+      <section className="py-16 px-4 md:px-8 bg-white">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -278,7 +278,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-4 md:px-8 bg-gradient-to-b from-gray-50 via-blue-50/50 to-gray-100">
+      <section id="features" className="py-20 px-4 md:px-8 bg-gradient-to-b from-slate-100 via-gray-100 to-slate-200">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
@@ -317,7 +317,7 @@ export default function HomePage() {
       <FAQSection />
 
       {/* CTA Section */}
-      <section className="py-16 px-4 md:px-8 bg-blue-100">
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-br from-sky-100 to-blue-200">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
             Ready to Book Your Stay?
