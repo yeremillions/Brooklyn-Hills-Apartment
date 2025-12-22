@@ -156,8 +156,8 @@ export default function HomePage() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-indigo-50">
-        <div className="container mx-auto max-w-6xl">
+      <section className="py-16 px-4 md:px-8 bg-white">
+        <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               How It Works
@@ -167,88 +167,86 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Steps Flow */}
-          <div className="relative max-w-5xl mx-auto mb-12">
-            {/* Connecting Line (Desktop) */}
-            <div className="hidden md:block absolute top-12 left-0 right-0 h-1 bg-gradient-to-r from-orange-200 via-orange-300 to-orange-400" style={{ top: '2.5rem' }}></div>
+          {/* Steps */}
+          <div className="space-y-8 md:space-y-0 md:grid md:grid-cols-3 md:gap-12 mb-12">
+            {/* Step 1 */}
+            <div className="relative">
+              <div className="flex flex-col items-center text-center">
+                {/* Large Number */}
+                <div className="text-7xl font-bold text-orange-500 mb-6 opacity-90">01</div>
 
-            <div className="grid md:grid-cols-3 gap-8 relative">
-              {/* Step 1 */}
-              <div className="relative">
-                <div className="bg-white rounded-lg p-6 shadow-md border-2 border-orange-200 relative">
-                  {/* Number Badge */}
-                  <div className="absolute -top-5 -left-5 w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg z-10">
-                    <span className="text-white text-xl font-bold">1</span>
-                  </div>
-
-                  <div className="flex flex-col items-center text-center pt-4">
-                    <Search className="h-14 w-14 text-orange-500 mb-4" />
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Search & Compare</h3>
-                    <p className="text-gray-600 text-sm">
-                      Browse our premium apartments to find your perfect match.
-                    </p>
-                  </div>
+                {/* Icon */}
+                <div className="mb-4">
+                  <Search className="h-10 w-10 text-orange-600 mx-auto" />
                 </div>
 
-                {/* Arrow (Desktop) */}
-                <div className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-20">
-                  <svg className="w-8 h-8 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </div>
+                {/* Content */}
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Search & Compare</h3>
+                <p className="text-gray-600">
+                  Browse our premium apartments to find your perfect match.
+                </p>
               </div>
 
-              {/* Step 2 */}
-              <div className="relative">
-                <div className="bg-white rounded-lg p-6 shadow-md border-2 border-orange-300 relative">
-                  {/* Number Badge */}
-                  <div className="absolute -top-5 -left-5 w-12 h-12 bg-gradient-to-br from-orange-600 to-orange-700 rounded-full flex items-center justify-center shadow-lg z-10">
-                    <span className="text-white text-xl font-bold">2</span>
-                  </div>
+              {/* Arrow Indicator (Desktop) */}
+              <div className="hidden md:block absolute -right-6 top-12">
+                <svg className="w-12 h-12 text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </div>
+            </div>
 
-                  <div className="flex flex-col items-center text-center pt-4">
-                    <Lock className="h-14 w-14 text-orange-600 mb-4" />
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Book Securely</h3>
-                    <p className="text-gray-600 text-sm">
-                      Select your dates and complete your booking with our secure payment system.
-                    </p>
-                  </div>
+            {/* Step 2 */}
+            <div className="relative">
+              <div className="flex flex-col items-center text-center">
+                {/* Large Number */}
+                <div className="text-7xl font-bold text-orange-600 mb-6 opacity-90">02</div>
+
+                {/* Icon */}
+                <div className="mb-4">
+                  <Lock className="h-10 w-10 text-orange-600 mx-auto" />
                 </div>
 
-                {/* Arrow (Desktop) */}
-                <div className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-20">
-                  <svg className="w-8 h-8 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </div>
+                {/* Content */}
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Book Securely</h3>
+                <p className="text-gray-600">
+                  Select your dates and complete your booking with our secure payment system.
+                </p>
               </div>
 
-              {/* Step 3 */}
-              <div className="relative">
-                <div className="bg-white rounded-lg p-6 shadow-md border-2 border-orange-400 relative">
-                  {/* Number Badge */}
-                  <div className="absolute -top-5 -left-5 w-12 h-12 bg-gradient-to-br from-orange-700 to-orange-800 rounded-full flex items-center justify-center shadow-lg z-10">
-                    <span className="text-white text-xl font-bold">3</span>
-                  </div>
+              {/* Arrow Indicator (Desktop) */}
+              <div className="hidden md:block absolute -right-6 top-12">
+                <svg className="w-12 h-12 text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </div>
+            </div>
 
-                  <div className="flex flex-col items-center text-center pt-4">
-                    <Key className="h-14 w-14 text-orange-700 mb-4" />
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Check-in & Enjoy</h3>
-                    <p className="text-gray-600 text-sm">
-                      Receive confirmation and enjoy a comfortable stay at Brooklyn Hills.
-                    </p>
-                  </div>
+            {/* Step 3 */}
+            <div className="relative">
+              <div className="flex flex-col items-center text-center">
+                {/* Large Number */}
+                <div className="text-7xl font-bold text-orange-700 mb-6 opacity-90">03</div>
+
+                {/* Icon */}
+                <div className="mb-4">
+                  <Key className="h-10 w-10 text-orange-600 mx-auto" />
                 </div>
+
+                {/* Content */}
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Check-in & Enjoy</h3>
+                <p className="text-gray-600">
+                  Receive confirmation and enjoy a comfortable stay at Brooklyn Hills.
+                </p>
               </div>
             </div>
           </div>
 
           {/* CTA Message */}
-          <div className="text-center">
-            <p className="text-2xl font-semibold text-gray-900 mb-4">It's that simple!</p>
+          <div className="text-center pt-8 border-t border-gray-200">
+            <p className="text-xl text-gray-700 mb-6">Simple, fast, and secure — start your booking now</p>
             <Link href="/properties">
               <Button size="lg" className="px-8 shadow-lg hover:shadow-xl transition-shadow">
-                Start Your Search
+                View Properties
               </Button>
             </Link>
           </div>
@@ -256,7 +254,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 px-4 md:px-8 bg-white">
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-orange-50 to-blue-50">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
