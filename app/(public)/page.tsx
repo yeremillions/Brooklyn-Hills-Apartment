@@ -185,7 +185,7 @@ export default function HomePage() {
                     <Search className="h-14 w-14 text-orange-500 mb-4" />
                     <h3 className="text-xl font-bold text-gray-900 mb-3">Search & Compare</h3>
                     <p className="text-gray-600 text-sm">
-                      Browse our premium properties and compare amenities to find your perfect match.
+                      Browse our premium apartments to find your perfect match.
                     </p>
                   </div>
                 </div>
