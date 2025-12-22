@@ -156,7 +156,7 @@ export default function HomePage() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 px-4 md:px-8 bg-white">
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-indigo-50">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -254,7 +254,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-orange-50 to-blue-50">
+      <section className="py-16 px-4 md:px-8 bg-white">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
