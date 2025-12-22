@@ -315,7 +315,7 @@ export default function HomePage() {
       <FAQSection />
 
       {/* CTA Section */}
-      <section className="py-16 px-4 md:px-8 bg-gradient-to-br from-sky-100 to-blue-200">
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-br from-orange-100 to-orange-200">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
             Ready to Book Your Stay?
