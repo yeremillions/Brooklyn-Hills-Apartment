@@ -50,11 +50,18 @@ export function PublicHeader() {
             >
               Contact
             </Link>
-            <Link href="/admin/dashboard">
-              <Button variant="outline" size="sm">
-                Admin
-              </Button>
-            </Link>
+            <div className="flex items-center gap-3 ml-4">
+              <Link href="/login">
+                <Button variant="ghost" size="sm">
+                  Login
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button size="sm">
+                  Sign Up
+                </Button>
+              </Link>
+            </div>
           </nav>
 
           <div className="md:hidden">

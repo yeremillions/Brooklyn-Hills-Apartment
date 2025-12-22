@@ -34,6 +34,11 @@ export function PublicFooter() {
                   Contact
                 </Link>
               </li>
+              <li>
+                <Link href="/admin/dashboard" className="hover:text-white">
+                  Admin
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
