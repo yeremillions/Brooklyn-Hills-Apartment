@@ -147,7 +147,7 @@ export default function CalendarPage() {
       .reduce((sum, booking) => sum + booking.totalAmount, 0)
   }
 
-  const selectedProperty Data = MOCK_PROPERTIES.find((p) => p.id === selectedProperty)
+  const selectedPropertyData = MOCK_PROPERTIES.find((p) => p.id === selectedProperty)
 
   return (
     <div className="space-y-6">
