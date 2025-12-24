@@ -128,7 +128,70 @@ export default function ContactPage() {
       <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto max-w-6xl">
           <div className="grid lg:grid-cols-3 gap-12">
-            {/* Left: Contact Form - Takes 2 columns */}
+            {/* Left: Business Hours & Additional Info - Takes 1 column */}
+            <div className="space-y-6">
+              {/* Business Hours */}
+              <Card className="border-none shadow-lg bg-gradient-to-br from-slate-100 to-slate-200">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-gradient-to-br from-amber-100 to-amber-200 rounded-full p-3">
+                      <Clock className="h-6 w-6 text-amber-600" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900">Business Hours</h3>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center py-2 border-b border-gray-300">
+                      <span className="text-gray-700 font-medium">Check-in</span>
+                      <span className="text-gray-900 font-semibold">2:00 PM</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-gray-300">
+                      <span className="text-gray-700 font-medium">Check-out</span>
+                      <span className="text-gray-900 font-semibold">12:00 PM</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2">
+                      <span className="text-gray-700 font-medium">Support</span>
+                      <span className="text-orange-600 font-semibold">24/7</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Why Contact Us */}
+              <Card className="border-none shadow-lg bg-gradient-to-br from-orange-50 to-orange-100">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Why Contact Us?</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <div className="bg-orange-200 rounded-full p-1 mt-1">
+                        <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                      </div>
+                      <span className="text-gray-700 text-sm">Personalized booking assistance</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="bg-orange-200 rounded-full p-1 mt-1">
+                        <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                      </div>
+                      <span className="text-gray-700 text-sm">Special requests & packages</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="bg-orange-200 rounded-full p-1 mt-1">
+                        <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                      </div>
+                      <span className="text-gray-700 text-sm">Corporate & group bookings</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="bg-orange-200 rounded-full p-1 mt-1">
+                        <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                      </div>
+                      <span className="text-gray-700 text-sm">Property inquiries & tours</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Right: Contact Form - Takes 2 columns */}
             <div className="lg:col-span-2">
               <Card className="border-none shadow-xl">
                 <CardContent className="p-8 md:p-10">
@@ -213,69 +276,6 @@ export default function ContactPage() {
                       Send Message
                     </Button>
                   </form>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Right: Business Hours & Additional Info - Takes 1 column */}
-            <div className="space-y-6">
-              {/* Business Hours */}
-              <Card className="border-none shadow-lg bg-gradient-to-br from-slate-100 to-slate-200">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="bg-gradient-to-br from-amber-100 to-amber-200 rounded-full p-3">
-                      <Clock className="h-6 w-6 text-amber-600" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900">Business Hours</h3>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center py-2 border-b border-gray-300">
-                      <span className="text-gray-700 font-medium">Check-in</span>
-                      <span className="text-gray-900 font-semibold">2:00 PM</span>
-                    </div>
-                    <div className="flex justify-between items-center py-2 border-b border-gray-300">
-                      <span className="text-gray-700 font-medium">Check-out</span>
-                      <span className="text-gray-900 font-semibold">12:00 PM</span>
-                    </div>
-                    <div className="flex justify-between items-center py-2">
-                      <span className="text-gray-700 font-medium">Support</span>
-                      <span className="text-orange-600 font-semibold">24/7</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Why Contact Us */}
-              <Card className="border-none shadow-lg bg-gradient-to-br from-orange-50 to-orange-100">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Why Contact Us?</h3>
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3">
-                      <div className="bg-orange-200 rounded-full p-1 mt-1">
-                        <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-                      </div>
-                      <span className="text-gray-700 text-sm">Personalized booking assistance</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="bg-orange-200 rounded-full p-1 mt-1">
-                        <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-                      </div>
-                      <span className="text-gray-700 text-sm">Special requests & packages</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="bg-orange-200 rounded-full p-1 mt-1">
-                        <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-                      </div>
-                      <span className="text-gray-700 text-sm">Corporate & group bookings</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="bg-orange-200 rounded-full p-1 mt-1">
-                        <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-                      </div>
-                      <span className="text-gray-700 text-sm">Property inquiries & tours</span>
-                    </li>
-                  </ul>
                 </CardContent>
               </Card>
             </div>
