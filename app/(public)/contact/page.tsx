@@ -30,7 +30,7 @@ export default function ContactPage() {
     setFormData({ name: '', email: '', phone: '', message: '' })
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: any) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -319,7 +319,6 @@ export default function ContactPage() {
               </Button>
             </div>
           </div>
-        </div>
       </section>
 
       {/* CTA Section */}
