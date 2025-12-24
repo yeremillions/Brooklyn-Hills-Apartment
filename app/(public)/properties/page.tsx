@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { addDays } from 'date-fns'
+import Image from 'next/image'
 import { FeaturedPropertyCard } from '@/components/public/featured-property-card'
 import { AvailabilityCalendar } from '@/components/public/availability-calendar'
 import { Input } from '@/components/ui/input'
@@ -122,17 +123,29 @@ export default function PropertiesPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-orange-50 to-orange-100 py-12 px-4 md:px-8">
-        <div className="container mx-auto max-w-7xl">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&q=80"
+            alt="Brooklyn Hills Properties"
+            fill
+            className="object-cover scale-105"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60"></div>
+        </div>
+
+        <div className="container mx-auto max-w-7xl px-4 md:px-8 relative z-10 py-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center">
             Find Your Perfect Stay
           </h1>
-          <p className="text-lg text-gray-700 mb-6">
+          <p className="text-lg md:text-xl text-gray-100 mb-8 text-center max-w-2xl mx-auto">
             Browse our collection of premium apartments across Nigeria
           </p>
 
           {/* Search Bar */}
-          <div className="flex gap-2">
+          <div className="flex gap-2 max-w-3xl mx-auto">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
               <Input
@@ -146,7 +159,7 @@ export default function PropertiesPage() {
               variant="outline"
               size="lg"
               onClick={() => setShowFilters(!showFilters)}
-              className="bg-white"
+              className="bg-white hover:bg-gray-50"
             >
               <SlidersHorizontal className="h-5 w-5 mr-2" />
               Filters
@@ -165,17 +178,17 @@ export default function PropertiesPage() {
           </div>
 
           {/* Calendar Toggle Link */}
-          <div className="mt-4 text-center">
+          <div className="mt-6 text-center">
             <button
               onClick={() => setShowCalendar(!showCalendar)}
-              className="text-sm text-orange-600 hover:text-orange-700 underline flex items-center gap-2 mx-auto"
+              className="text-sm text-orange-300 hover:text-orange-200 underline flex items-center gap-2 mx-auto font-medium"
             >
               <Calendar className="h-4 w-4" />
               Or try our availability calendar
             </button>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Availability Calendar - Slides down */}
       <div
