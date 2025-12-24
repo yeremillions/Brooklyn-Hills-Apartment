@@ -264,13 +264,13 @@ export default function AboutPage() {
       </section>
 
       {/* Apartment Gallery Carousel */}
-      <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-16 px-4 md:px-8 bg-black/50">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Experience Brooklyn Hills
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-200 max-w-2xl mx-auto">
               Take a visual tour of our premium apartments and amenities
             </p>
           </div>
