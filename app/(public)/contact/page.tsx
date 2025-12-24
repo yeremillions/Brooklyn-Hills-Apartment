@@ -43,7 +43,7 @@ export default function ContactPage() {
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
+            src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1920&q=80"
             alt="Contact Brooklyn Hills"
             fill
             className="object-cover scale-105"
@@ -284,13 +284,21 @@ export default function ContactPage() {
       </section>
 
       {/* Full-Width Map Section */}
-      <section className="relative h-[500px] md:h-[600px] w-full">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-100 via-blue-100 to-purple-100">
-          {/* Map Placeholder */}
-          <div className="w-full h-full flex flex-col items-center justify-center">
-            <MapPin className="h-20 w-20 text-orange-600 mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Find Us in Uyo</h2>
-            <p className="text-lg text-gray-700 mb-6 text-center max-w-xl px-4">
+      <section className="relative h-[500px] md:h-[600px] w-full overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1920&q=80"
+            alt="Brooklyn Hills Apartments"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/70"></div>
+        </div>
+        <div className="relative z-10 w-full h-full flex flex-col items-center justify-center">
+          <MapPin className="h-20 w-20 text-orange-400 mb-6" />
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Find Us in Uyo</h2>
+            <p className="text-lg text-gray-100 mb-6 text-center max-w-xl px-4">
               Brooklyn Hills Estate, located in the heart of Uyo<br />
               Just 15 minutes from city center
             </p>
