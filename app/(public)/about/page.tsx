@@ -271,31 +271,6 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
-
-          {/* Bottom quote section */}
-          <div className="relative">
-            <Card className="border-none shadow-2xl bg-gradient-to-br from-orange-500 to-orange-600 overflow-hidden">
-              <CardContent className="p-8 md:p-12 relative">
-                {/* Decorative quote mark */}
-                <div className="absolute top-4 left-4 text-white/10 text-[120px] font-serif leading-none">"</div>
-
-                <div className="relative z-10 text-center">
-                  <p className="text-xl md:text-2xl font-semibold text-white mb-4 leading-relaxed">
-                    Brooklyn Hills Apartment Uyo is more than just a place to stay — it is where holidays feel like home, and every guest leaves feeling refreshed, valued, and eager to return.
-                  </p>
-
-                  <div className="w-16 h-1 bg-white/50 mx-auto my-6"></div>
-
-                  <p className="text-2xl md:text-3xl font-bold text-white">
-                    Welcome to your safe haven in Uyo.
-                  </p>
-                  <p className="text-xl md:text-2xl font-semibold text-orange-100 mt-2">
-                    Welcome to Brooklyn Hills.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </section>
 
