@@ -123,7 +123,7 @@ export default function PropertiesPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&q=80"
@@ -136,7 +136,7 @@ export default function PropertiesPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60"></div>
         </div>
 
-        <div className="container mx-auto max-w-7xl px-4 md:px-8 relative z-10 py-12">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8 relative z-10 py-16">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center">
             Find Your Perfect Stay
           </h1>
