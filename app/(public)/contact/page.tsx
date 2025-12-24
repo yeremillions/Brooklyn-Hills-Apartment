@@ -55,8 +55,7 @@ export default function ContactPage() {
 
         <div className="container mx-auto max-w-6xl px-4 md:px-8 relative z-10 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Contact Us
-            <span className="block text-orange-400 mt-2">We'd Love to Hear From You</span>
+            We'd Love to Hear From You
           </h1>
           <p className="text-lg md:text-xl text-gray-100 max-w-2xl mx-auto">
             Questions about our apartments? Ready to book? Contact us today
