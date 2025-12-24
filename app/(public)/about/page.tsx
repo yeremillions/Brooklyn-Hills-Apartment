@@ -221,94 +221,49 @@ export default function AboutPage() {
       </section>
 
       {/* Mission Statement Section */}
-      <section className="py-16 px-4 md:px-8 bg-white">
-        <div className="container mx-auto max-w-7xl">
+      <section className="py-20 px-4 md:px-8 bg-white">
+        <div className="container mx-auto max-w-6xl">
           {/* Section Header */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
               Our Mission
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Delivering serene, secure, and luxurious experiences for every guest
+            <div className="w-16 h-1 bg-orange-500 mx-auto mb-8"></div>
+            <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
+              To provide a serene, secure, and luxurious home-away-from-home where every guest can truly unwind, recharge, and create unforgettable memories.
             </p>
           </div>
 
-          {/* Main Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Left: Image with overlay card */}
-            <div className="relative">
-              <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-xl">
-                <Image
-                  src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80"
-                  alt="Brooklyn Hills Luxury Interior"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-
-                {/* Floating stats card */}
-                <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-xl">
-                  <div className="grid grid-cols-3 gap-4 text-center">
-                    <div>
-                      <div className="text-3xl font-bold text-orange-600">24/7</div>
-                      <div className="text-xs text-gray-600 mt-1">Security</div>
-                    </div>
-                    <div>
-                      <div className="text-3xl font-bold text-blue-600">4.8★</div>
-                      <div className="text-xs text-gray-600 mt-1">Guest Rating</div>
-                    </div>
-                    <div>
-                      <div className="text-3xl font-bold text-green-600">100%</div>
-                      <div className="text-xs text-gray-600 mt-1">Safe</div>
-                    </div>
-                  </div>
-                </div>
+          {/* Key Pillars - Minimalist Cards */}
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12 mt-16">
+            <div className="text-center space-y-4">
+              <div className="w-16 h-16 mx-auto flex items-center justify-center border-2 border-gray-900 rounded-full">
+                <Shield className="h-8 w-8 text-gray-900" />
               </div>
+              <h3 className="text-xl font-bold text-gray-900">Safety First</h3>
+              <p className="text-gray-600 leading-relaxed">
+                24/7 security, gated premises, and well-lit surroundings ensure complete peace of mind.
+              </p>
             </div>
 
-            {/* Right: Mission Content */}
-            <div className="space-y-6">
-              <p className="text-lg text-gray-700 leading-relaxed">
-                At <span className="font-bold text-orange-600">Brooklyn Hills Apartment Uyo</span>, nestled in the heart of Akwa Ibom State, our mission is to provide a <span className="font-semibold text-gray-900">serene, secure, and luxurious home-away-from-home</span> where every guest can truly unwind, recharge, and create unforgettable holiday memories.
-              </p>
-
-              <p className="text-base text-gray-600 leading-relaxed">
-                We are committed to delivering exceptional hospitality with warmth and authenticity, blending modern comfort with the rich cultural essence of Uyo.
-              </p>
-
-              {/* Key pillars */}
-              <div className="grid grid-cols-1 gap-4 mt-8">
-                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl">
-                  <div className="bg-gradient-to-br from-orange-100 to-orange-200 rounded-full p-3 shadow-sm flex-shrink-0">
-                    <Shield className="h-6 w-6 text-orange-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 mb-1">Safety First</h3>
-                    <p className="text-sm text-gray-600">24/7 security, gated premises, and well-lit surroundings ensure complete peace of mind.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
-                  <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-full p-3 shadow-sm flex-shrink-0">
-                    <Home className="h-6 w-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 mb-1">Home Away From Home</h3>
-                    <p className="text-sm text-gray-600">Luxurious comfort combined with authentic Akwa Ibom hospitality.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
-                  <div className="bg-gradient-to-br from-green-100 to-green-200 rounded-full p-3 shadow-sm flex-shrink-0">
-                    <Heart className="h-6 w-6 text-green-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 mb-1">Genuine Care</h3>
-                    <p className="text-sm text-gray-600">Professional staff trained to anticipate your needs and exceed expectations.</p>
-                  </div>
-                </div>
+            <div className="text-center space-y-4">
+              <div className="w-16 h-16 mx-auto flex items-center justify-center border-2 border-gray-900 rounded-full">
+                <Home className="h-8 w-8 text-gray-900" />
               </div>
+              <h3 className="text-xl font-bold text-gray-900">Comfort & Care</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Luxurious comfort combined with authentic Akwa Ibom hospitality.
+              </p>
+            </div>
+
+            <div className="text-center space-y-4">
+              <div className="w-16 h-16 mx-auto flex items-center justify-center border-2 border-gray-900 rounded-full">
+                <Heart className="h-8 w-8 text-gray-900" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900">Genuine Service</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Professional staff trained to anticipate your needs and exceed expectations.
+              </p>
             </div>
           </div>
         </div>
