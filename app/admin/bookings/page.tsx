@@ -26,7 +26,6 @@ import {
   Calendar,
   Search,
   Filter,
-  Eye,
   CheckCircle,
   XCircle,
   Clock,
@@ -317,7 +316,7 @@ export default function BookingsPage() {
                   <TableHead>Booking ID</TableHead>
                   <TableHead>Guest</TableHead>
                   <TableHead>Property</TableHead>
-                  <TableHead>Check-in / Check-out</TableHead>
+                  <TableHead className="min-w-[180px]">Check-in / Check-out</TableHead>
                   <TableHead>Guests</TableHead>
                   <TableHead>Amount</TableHead>
                   <TableHead>Status</TableHead>
@@ -347,7 +346,7 @@ export default function BookingsPage() {
                       <TableCell>
                         <span className="text-sm">{booking.property}</span>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="min-w-[180px]">
                         <div className="text-sm space-y-1.5">
                           <div className="flex items-center gap-1.5">
                             <span className="text-xs font-medium text-gray-500">In:</span>
@@ -368,10 +367,7 @@ export default function BookingsPage() {
                       <TableCell>{getStatusBadge(booking.status)}</TableCell>
                       <TableCell>{getPaymentBadge(booking.paymentStatus)}</TableCell>
                       <TableCell>
-                        <div className="flex items-center justify-end gap-2">
-                          <Button variant="ghost" size="sm">
-                            <Eye className="h-4 w-4" />
-                          </Button>
+                        <div className="flex items-center justify-end">
                           <Button variant="ghost" size="sm">
                             <MoreVertical className="h-4 w-4" />
                           </Button>
