@@ -66,111 +66,105 @@ const carouselImages = [
   },
 ]
 
-const advantages = [
+const advantageCategories = [
   {
-    icon: MapPin,
-    title: 'Prime Location',
-    description: 'Only 15 minutes from Uyo city center and major attractions, offering convenience without the noise and congestion of downtown.',
-    color: 'text-orange-600',
-    bgColor: 'bg-orange-50',
+    category: 'Security & Safety',
+    description: 'Your peace of mind is our priority',
+    items: [
+      {
+        icon: Shield,
+        title: 'Uncompromising Safety',
+        description: '24/7 armed security, CCTV surveillance, gated premises, and well-lit surroundings.',
+      },
+      {
+        icon: Car,
+        title: 'Secure Parking',
+        description: 'Free, well-secured parking space within the gated compound.',
+      },
+      {
+        icon: MapPin,
+        title: 'Serene Environment',
+        description: 'Calm, upscale residential area away from road noise – ideal for rest.',
+      },
+    ],
   },
   {
-    icon: Shield,
-    title: 'Uncompromising Safety',
-    description: '24/7 armed security personnel, CCTV surveillance, gated premises, and well-lit surroundings for total peace of mind.',
-    color: 'text-blue-600',
-    bgColor: 'bg-blue-50',
+    category: 'Power & Connectivity',
+    description: 'Stay connected and powered 24/7',
+    items: [
+      {
+        icon: Zap,
+        title: 'Constant Power Supply',
+        description: '24-hour electricity with backup generators and inverters.',
+      },
+      {
+        icon: Clock,
+        title: 'Generator & Solar Backup',
+        description: 'Double assurance of uninterrupted power at all times.',
+      },
+      {
+        icon: Wifi,
+        title: 'Ultra-Fast Wi-Fi',
+        description: 'High-speed internet throughout – perfect for work and streaming.',
+      },
+    ],
   },
   {
-    icon: Zap,
-    title: 'Constant Power Supply',
-    description: '24-hour electricity with backup generators and inverters; no interruptions, even during public power outages.',
-    color: 'text-yellow-600',
-    bgColor: 'bg-yellow-50',
+    category: 'Accommodation & Amenities',
+    description: 'Everything you need for a comfortable stay',
+    items: [
+      {
+        icon: Home,
+        title: 'Modern Apartments',
+        description: 'King-sized beds, quality linens, and stylish interiors.',
+      },
+      {
+        icon: UtensilsCrossed,
+        title: 'Fully Equipped Kitchens',
+        description: 'Refrigerator, microwave, gas cooker, and cooking utensils.',
+      },
+      {
+        icon: Tv,
+        title: 'Smart Entertainment',
+        description: 'Smart TVs with Netflix, YouTube, and cable channels.',
+      },
+      {
+        icon: Wine,
+        title: 'Private Bar & Lounge',
+        description: 'Exclusive outdoor space with barbecue area.',
+      },
+      {
+        icon: Sparkles,
+        title: 'Daily Housekeeping',
+        description: 'Professional cleaning service to keep your space spotless.',
+      },
+    ],
   },
   {
-    icon: Wifi,
-    title: 'Ultra-Fast Wi-Fi',
-    description: 'High-speed, reliable internet in every room and common area – perfect for remote work, streaming, or staying connected.',
-    color: 'text-purple-600',
-    bgColor: 'bg-purple-50',
-  },
-  {
-    icon: Tv,
-    title: 'Smart Entertainment',
-    description: 'Smart TVs with Netflix, YouTube, and cable channels in all rooms for unlimited relaxation and entertainment.',
-    color: 'text-pink-600',
-    bgColor: 'bg-pink-50',
-  },
-  {
-    icon: UtensilsCrossed,
-    title: 'Fully Equipped Kitchens',
-    description: 'Each apartment features a refrigerator, microwave, gas cooker, and cooking utensils for complete self-catering convenience.',
-    color: 'text-green-600',
-    bgColor: 'bg-green-50',
-  },
-  {
-    icon: Wine,
-    title: 'Private Outdoor Bar & Lounge',
-    description: 'Exclusive chill-out bar and barbecue area for guests to relax, entertain, or enjoy evening drinks in a secure, private setting.',
-    color: 'text-red-600',
-    bgColor: 'bg-red-50',
-  },
-  {
-    icon: Home,
-    title: 'Spacious & Modern Apartments',
-    description: 'Modern, airy rooms with king-sized beds, quality linens, and stylish interiors for maximum comfort.',
-    color: 'text-indigo-600',
-    bgColor: 'bg-indigo-50',
-  },
-  {
-    icon: Sparkles,
-    title: 'Daily Housekeeping',
-    description: 'Professional cleaning service every day to keep your space spotless and refreshing.',
-    color: 'text-cyan-600',
-    bgColor: 'bg-cyan-50',
-  },
-  {
-    icon: Clock,
-    title: 'Standby Generator & Solar',
-    description: 'Double assurance of uninterrupted power and lighting at all times.',
-    color: 'text-amber-600',
-    bgColor: 'bg-amber-50',
-  },
-  {
-    icon: Car,
-    title: 'Ample Secure Parking',
-    description: 'Free, well-secured parking space within the gated compound.',
-    color: 'text-gray-600',
-    bgColor: 'bg-gray-50',
-  },
-  {
-    icon: MapPin,
-    title: 'Quiet & Serene Environment',
-    description: 'Located in a calm, upscale residential area away from road noise – ideal for rest and recovery.',
-    color: 'text-teal-600',
-    bgColor: 'bg-teal-50',
-  },
-  {
-    icon: Users,
-    title: 'Friendly & Attentive Staff',
-    description: 'Warm, professional team available around the clock to cater to your needs with genuine Akwa Ibom hospitality.',
-    color: 'text-violet-600',
-    bgColor: 'bg-violet-50',
-  },
-  {
-    icon: DollarSign,
-    title: 'Affordable Luxury',
-    description: 'Premium vacation experience at competitive rates with no hidden charges.',
-    color: 'text-emerald-600',
-    bgColor: 'bg-emerald-50',
-  },
-  {
-    icon: Heart,
-    title: 'Family-Friendly & Couple-Ready',
-    description: 'Safe, spacious, and romantic environment perfect for families, couples, or solo travelers.',
-    color: 'text-rose-600',
-    bgColor: 'bg-rose-50',
+    category: 'Location & Service',
+    description: 'Prime location with exceptional hospitality',
+    items: [
+      {
+        icon: MapPin,
+        title: 'Prime Location',
+        description: '15 minutes from Uyo city center – convenient yet peaceful.',
+      },
+      {
+        icon: Users,
+        title: 'Attentive Staff',
+        description: '24/7 professional team with genuine Akwa Ibom hospitality.',
+      },
+      {
+        icon: DollarSign,
+        title: 'Affordable Luxury',
+        description: 'Premium experience at competitive rates, no hidden charges.',
+      },
+      {
+        icon: Heart,
+        title: 'For Everyone',
+        description: 'Perfect for families, couples, or solo travelers.',
+      },
+    ],
   },
 ]
 
@@ -347,42 +341,62 @@ export default function AboutPage() {
       </section>
 
       {/* Competitive Advantages Section */}
-      <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-slate-100 via-gray-100 to-slate-200">
+      <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
               Why Choose Brooklyn Hills?
             </h2>
+            <div className="w-16 h-1 bg-orange-500 mx-auto mb-6"></div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Discover what sets us apart as the preferred choice for vacation and holiday stays in Akwa Ibom State
+              Everything you need for an exceptional stay, organized for your convenience
             </p>
           </div>
 
-          {/* Advantages Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {advantages.map((advantage, index) => {
-              const Icon = advantage.icon
-              return (
-                <Card
-                  key={index}
-                  className="bg-white hover:shadow-xl transition-all duration-300 border-none"
-                >
-                  <CardContent className="p-6">
-                    <div className="mb-4">
-                      <Icon className={`h-10 w-10 ${advantage.color}`} />
-                    </div>
+          {/* Categories */}
+          <div className="space-y-16">
+            {advantageCategories.map((category, categoryIndex) => (
+              <div key={categoryIndex}>
+                {/* Category Header */}
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                    {category.category}
+                  </h3>
+                  <p className="text-gray-600">{category.description}</p>
+                </div>
 
-                    <h3 className="text-xl font-bold mb-3 text-gray-900">
-                      {advantage.title}
-                    </h3>
-
-                    <p className="text-gray-600 leading-relaxed">
-                      {advantage.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              )
-            })}
+                {/* Category Items Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {category.items.map((item, itemIndex) => {
+                    const Icon = item.icon
+                    return (
+                      <Card
+                        key={itemIndex}
+                        className="bg-white hover:shadow-lg transition-all duration-300 border border-gray-200"
+                      >
+                        <CardContent className="p-6">
+                          <div className="flex items-start gap-4">
+                            <div className="flex-shrink-0">
+                              <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-orange-100">
+                                <Icon className="h-6 w-6 text-orange-600" />
+                              </div>
+                            </div>
+                            <div className="flex-1">
+                              <h4 className="text-lg font-bold text-gray-900 mb-2">
+                                {item.title}
+                              </h4>
+                              <p className="text-sm text-gray-600 leading-relaxed">
+                                {item.description}
+                              </p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
