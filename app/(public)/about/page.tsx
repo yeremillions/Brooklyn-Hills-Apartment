@@ -50,7 +50,7 @@ const carouselImages = [
     description: 'Comfortable king-sized beds with premium linens'
   },
   {
-    url: 'https://images.unsplash.com/photo-1556912167-f556f1f39faa?w=1920&q=80',
+    url: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1920&q=80',
     caption: 'Fully Equipped Kitchen',
     description: 'Everything you need for self-catering convenience'
   },
