@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import {
   Shield,
   Zap,
@@ -142,60 +143,50 @@ const advantages = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1920&q=80"
             alt="Brooklyn Hills Apartment Uyo"
             fill
-            className="object-cover"
+            className="object-cover scale-105"
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/50"></div>
         </div>
 
-        <div className="container mx-auto max-w-4xl px-4 md:px-8 relative z-10 text-center">
-          <Badge className="mb-4 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 text-sm">
-            Premium Vacation Experience
-          </Badge>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+        <div className="container mx-auto max-w-6xl px-4 md:px-8 relative z-10 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             About Brooklyn Hills
+            <span className="block text-orange-400 mt-2">Your Safe Haven in Uyo</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto">
-            Your Safe Haven in Uyo
+          <p className="text-lg md:text-xl text-gray-100 max-w-2xl mx-auto">
+            Where exceptional hospitality meets modern comfort in the heart of Akwa Ibom State
           </p>
         </div>
       </section>
 
-      {/* Mission Statement Section - Redesigned */}
-      <section className="py-16 md:py-24 px-4 md:px-8 relative overflow-hidden">
-        {/* Decorative background elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 via-white to-blue-50/30"></div>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-orange-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl"></div>
-
-        <div className="container mx-auto max-w-7xl relative z-10">
+      {/* Mission Statement Section */}
+      <section className="py-16 px-4 md:px-8 bg-white">
+        <div className="container mx-auto max-w-7xl">
           {/* Section Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center justify-center mb-4">
-              <div className="bg-gradient-to-br from-orange-400 to-orange-600 rounded-full p-3 shadow-lg">
-                <Heart className="h-8 w-8 text-white" />
-              </div>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Our Mission
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-orange-400 to-orange-600 mx-auto rounded-full"></div>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Delivering serene, secure, and luxurious experiences for every guest
+            </p>
           </div>
 
           {/* Main Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left: Image with overlay card */}
             <div className="relative">
-              <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-xl">
                 <Image
                   src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80"
                   alt="Brooklyn Hills Luxury Interior"
@@ -227,20 +218,18 @@ export default function AboutPage() {
 
             {/* Right: Mission Content */}
             <div className="space-y-6">
-              <div className="prose prose-lg max-w-none">
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  At <span className="font-bold text-orange-600">Brooklyn Hills Apartment Uyo</span>, nestled in the heart of Akwa Ibom State, our mission is to provide a <span className="font-semibold text-gray-900">serene, secure, and luxurious home-away-from-home</span> where every guest can truly unwind, recharge, and create unforgettable holiday memories.
-                </p>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                At <span className="font-bold text-orange-600">Brooklyn Hills Apartment Uyo</span>, nestled in the heart of Akwa Ibom State, our mission is to provide a <span className="font-semibold text-gray-900">serene, secure, and luxurious home-away-from-home</span> where every guest can truly unwind, recharge, and create unforgettable holiday memories.
+              </p>
 
-                <p className="text-base text-gray-600 leading-relaxed">
-                  We are committed to delivering exceptional hospitality with warmth and authenticity, blending modern comfort with the rich cultural essence of Uyo.
-                </p>
-              </div>
+              <p className="text-base text-gray-600 leading-relaxed">
+                We are committed to delivering exceptional hospitality with warmth and authenticity, blending modern comfort with the rich cultural essence of Uyo.
+              </p>
 
               {/* Key pillars */}
               <div className="grid grid-cols-1 gap-4 mt-8">
-                <div className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-md border-l-4 border-orange-500">
-                  <div className="bg-orange-100 rounded-lg p-3 flex-shrink-0">
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl">
+                  <div className="bg-gradient-to-br from-orange-100 to-orange-200 rounded-full p-3 shadow-sm flex-shrink-0">
                     <Shield className="h-6 w-6 text-orange-600" />
                   </div>
                   <div>
@@ -249,8 +238,8 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-md border-l-4 border-blue-500">
-                  <div className="bg-blue-100 rounded-lg p-3 flex-shrink-0">
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
+                  <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-full p-3 shadow-sm flex-shrink-0">
                     <Home className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
@@ -259,8 +248,8 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-md border-l-4 border-green-500">
-                  <div className="bg-green-100 rounded-lg p-3 flex-shrink-0">
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
+                  <div className="bg-gradient-to-br from-green-100 to-green-200 rounded-full p-3 shadow-sm flex-shrink-0">
                     <Heart className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
@@ -275,17 +264,14 @@ export default function AboutPage() {
       </section>
 
       {/* Competitive Advantages Section */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-slate-100 via-gray-100 to-slate-200">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2">
-              Why Choose Us
-            </Badge>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900">
-              Our Competitive Advantages
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Why Choose Brooklyn Hills?
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              Discover what sets Brooklyn Hills Apartment Uyo apart as the preferred choice for vacation and holiday stays in Akwa Ibom State
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover what sets us apart as the preferred choice for vacation and holiday stays in Akwa Ibom State
             </p>
           </div>
 
@@ -296,11 +282,11 @@ export default function AboutPage() {
               return (
                 <Card
                   key={index}
-                  className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-orange-200"
+                  className="bg-white hover:shadow-xl transition-all duration-300 border-none"
                 >
                   <CardContent className="p-6">
-                    <div className={`${advantage.bgColor} rounded-full w-14 h-14 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                      <Icon className={`h-7 w-7 ${advantage.color}`} />
+                    <div className="mb-4">
+                      <Icon className={`h-10 w-10 ${advantage.color}`} />
                     </div>
 
                     <h3 className="text-xl font-bold mb-3 text-gray-900">
@@ -319,28 +305,19 @@ export default function AboutPage() {
       </section>
 
       {/* Bottom CTA Section */}
-      <section className="py-16 md:py-20 px-4 md:px-8 bg-gradient-to-br from-orange-500 to-orange-600">
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-br from-orange-100 to-orange-200">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Experience the Ultimate Holiday
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Ready to Book Your Stay?
           </h2>
-          <p className="text-xl text-orange-50 mb-8">
-            Where safety, comfort, and convenience meet to deliver the ultimate holiday experience
+          <p className="text-lg text-gray-700 mb-8">
+            Experience luxury, safety, and comfort at Brooklyn Hills Apartment Uyo
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/properties"
-              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-orange-600 bg-white rounded-lg hover:bg-gray-50 transition-colors shadow-lg"
-            >
-              View Our Properties
-            </a>
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition-colors border-2 border-white"
-            >
-              Contact Us
-            </a>
-          </div>
+          <Link href="/properties">
+            <Button size="lg" className="px-8 shadow-xl hover:shadow-2xl transition-all hover:scale-105">
+              View All Properties
+            </Button>
+          </Link>
         </div>
       </section>
     </div>
