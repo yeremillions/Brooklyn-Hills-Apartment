@@ -213,7 +213,6 @@ export default function AboutPage() {
         <div className="container mx-auto max-w-6xl px-4 md:px-8 relative z-10 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             About Brooklyn Hills
-            <span className="block text-orange-400 mt-2">Your Safe Haven in Uyo</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-100 max-w-2xl mx-auto">
             Where exceptional hospitality meets modern comfort in the heart of Akwa Ibom State
