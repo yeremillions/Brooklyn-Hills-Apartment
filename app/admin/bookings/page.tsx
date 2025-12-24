@@ -348,11 +348,15 @@ export default function BookingsPage() {
                         <span className="text-sm">{booking.property}</span>
                       </TableCell>
                       <TableCell>
-                        <div className="text-sm">
-                          <p>{format(new Date(booking.checkIn), 'MMM dd, yyyy')}</p>
-                          <p className="text-gray-500">
-                            {format(new Date(booking.checkOut), 'MMM dd, yyyy')}
-                          </p>
+                        <div className="text-sm space-y-1.5">
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xs font-medium text-gray-500">In:</span>
+                            <span className="font-medium">{format(new Date(booking.checkIn), 'MMM dd, yyyy')}</span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xs font-medium text-gray-500">Out:</span>
+                            <span className="text-gray-600">{format(new Date(booking.checkOut), 'MMM dd, yyyy')}</span>
+                          </div>
                         </div>
                       </TableCell>
                       <TableCell>
