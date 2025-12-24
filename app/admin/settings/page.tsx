@@ -28,6 +28,7 @@ import {
 } from 'lucide-react'
 
 export default function SettingsPage() {
+  const [activeSection, setActiveSection] = useState('business-info')
   const [businessSettings, setBusinessSettings] = useState({
     name: 'Brooklyn Hills Apartments',
     email: 'info@brooklynhills.ng',
@@ -78,6 +79,14 @@ export default function SettingsPage() {
     })
   }
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      setActiveSection(sectionId)
+    }
+  }
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -100,23 +109,58 @@ export default function SettingsPage() {
           <Card>
             <CardContent className="p-4">
               <nav className="space-y-1">
-                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium">
+                <button
+                  onClick={() => scrollToSection('business-info')}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition-colors ${
+                    activeSection === 'business-info'
+                      ? 'bg-primary/10 text-primary'
+                      : 'hover:bg-gray-100 text-gray-700'
+                  }`}
+                >
                   <Building2 className="h-4 w-4" />
                   Business Info
                 </button>
-                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                <button
+                  onClick={() => scrollToSection('notifications')}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition-colors ${
+                    activeSection === 'notifications'
+                      ? 'bg-primary/10 text-primary'
+                      : 'hover:bg-gray-100 text-gray-700'
+                  }`}
+                >
                   <Bell className="h-4 w-4" />
                   Notifications
                 </button>
-                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                <button
+                  onClick={() => scrollToSection('payment')}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition-colors ${
+                    activeSection === 'payment'
+                      ? 'bg-primary/10 text-primary'
+                      : 'hover:bg-gray-100 text-gray-700'
+                  }`}
+                >
                   <CreditCard className="h-4 w-4" />
                   Payment
                 </button>
-                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                <button
+                  onClick={() => scrollToSection('user-management')}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition-colors ${
+                    activeSection === 'user-management'
+                      ? 'bg-primary/10 text-primary'
+                      : 'hover:bg-gray-100 text-gray-700'
+                  }`}
+                >
                   <Users className="h-4 w-4" />
                   User Management
                 </button>
-                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                <button
+                  onClick={() => scrollToSection('security')}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition-colors ${
+                    activeSection === 'security'
+                      ? 'bg-primary/10 text-primary'
+                      : 'hover:bg-gray-100 text-gray-700'
+                  }`}
+                >
                   <Shield className="h-4 w-4" />
                   Security
                 </button>
@@ -128,7 +172,7 @@ export default function SettingsPage() {
         {/* Main Settings Content */}
         <div className="lg:col-span-2 space-y-6">
           {/* Business Information */}
-          <Card>
+          <Card id="business-info">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Building2 className="h-5 w-5" />
@@ -226,7 +270,7 @@ export default function SettingsPage() {
           </Card>
 
           {/* Notification Settings */}
-          <Card>
+          <Card id="notifications">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Bell className="h-5 w-5" />
@@ -431,7 +475,7 @@ export default function SettingsPage() {
           </Card>
 
           {/* Payment Settings */}
-          <Card>
+          <Card id="payment">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CreditCard className="h-5 w-5" />
@@ -505,6 +549,75 @@ export default function SettingsPage() {
                     />
                   </div>
                 </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* User Management */}
+          <Card id="user-management">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-5 w-5" />
+                User Management
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label>Admin Users</Label>
+                <p className="text-sm text-gray-500 mb-3">
+                  Manage staff access and permissions
+                </p>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between p-3 border rounded-lg">
+                    <div>
+                      <p className="font-medium">Admin User</p>
+                      <p className="text-sm text-gray-500">admin@brooklynhills.ng</p>
+                    </div>
+                    <Badge>Owner</Badge>
+                  </div>
+                </div>
+              </div>
+              <Button variant="outline" className="w-full">
+                <Users className="h-4 w-4 mr-2" />
+                Invite Team Member
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Security Settings */}
+          <Card id="security">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Shield className="h-5 w-5" />
+                Security Settings
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="currentPassword">Current Password</Label>
+                <Input id="currentPassword" type="password" placeholder="Enter current password" />
+              </div>
+              <div>
+                <Label htmlFor="newPassword">New Password</Label>
+                <Input id="newPassword" type="password" placeholder="Enter new password" />
+              </div>
+              <div>
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Input id="confirmPassword" type="password" placeholder="Confirm new password" />
+              </div>
+              <Button className="w-full">Update Password</Button>
+
+              <div className="pt-4 border-t">
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <Label>Two-Factor Authentication</Label>
+                    <p className="text-sm text-gray-500">Add an extra layer of security</p>
+                  </div>
+                  <Badge variant="default">Disabled</Badge>
+                </div>
+                <Button variant="outline" className="w-full mt-3">
+                  Enable 2FA
+                </Button>
               </div>
             </CardContent>
           </Card>
