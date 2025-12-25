@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { AuthProvider } from '@/components/providers/auth-provider'
 
 export const metadata: Metadata = {
   title: 'Brooklyn Hills Apartments - Premium Shortlet Apartments in Nigeria',
@@ -23,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen antialiased font-sans">
-        <AuthProvider>{children}</AuthProvider>
+        {children}
       </body>
     </html>
   )
