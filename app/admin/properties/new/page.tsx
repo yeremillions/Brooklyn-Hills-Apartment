@@ -61,7 +61,7 @@ export default function NewPropertyPage() {
 
     try {
       // Create new property with proper structure
-      const newProperty = addProperty({
+      const newProperty = await addProperty({
         name: formData.name,
         description: formData.description,
         location: formData.location,
@@ -82,10 +82,11 @@ export default function NewPropertyPage() {
         cleaningTimeMinutes: parseInt(formData.cleaningTimeMinutes),
       })
 
-      console.log('Property created successfully:', newProperty)
+      if (!newProperty) {
+        throw new Error('Failed to create property')
+      }
 
-      // Small delay for better UX
-      await new Promise((resolve) => setTimeout(resolve, 500))
+      console.log('Property created successfully:', newProperty)
 
       // Redirect to properties list
       router.push('/admin/properties')

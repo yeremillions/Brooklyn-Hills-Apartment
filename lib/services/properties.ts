@@ -1,96 +1,117 @@
 import { Property } from '@/types'
-import { MOCK_PROPERTIES } from '@/lib/constants/mock-data'
 
-const STORAGE_KEY = 'brooklyn_hills_properties'
-
-// Initialize localStorage with mock data if empty
-function initializeProperties(): Property[] {
-  if (typeof window === 'undefined') return MOCK_PROPERTIES
-
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (!stored) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(MOCK_PROPERTIES))
-    return MOCK_PROPERTIES
-  }
-  return JSON.parse(stored)
-}
+const API_BASE = '/api/properties'
 
 // Get all properties
-export function getAllProperties(): Property[] {
-  if (typeof window === 'undefined') return MOCK_PROPERTIES
+export async function getAllProperties(): Promise<Property[]> {
+  try {
+    const response = await fetch(API_BASE, {
+      cache: 'no-store', // Always get fresh data
+    })
 
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (!stored) {
-    return initializeProperties()
+    if (!response.ok) {
+      throw new Error('Failed to fetch properties')
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching properties:', error)
+    return []
   }
-  return JSON.parse(stored)
 }
 
 // Get property by ID
-export function getPropertyById(id: string): Property | undefined {
-  const properties = getAllProperties()
-  return properties.find((p) => p.id === id)
+export async function getPropertyById(id: string): Promise<Property | null> {
+  try {
+    const response = await fetch(`${API_BASE}/${id}`, {
+      cache: 'no-store',
+    })
+
+    if (!response.ok) {
+      if (response.status === 404) return null
+      throw new Error('Failed to fetch property')
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching property:', error)
+    return null
+  }
 }
 
 // Add new property
-export function addProperty(property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>): Property {
-  const properties = getAllProperties()
+export async function addProperty(
+  property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>
+): Promise<Property | null> {
+  try {
+    const response = await fetch(API_BASE, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(property),
+    })
 
-  const newProperty: Property = {
-    ...property,
-    id: generateId(),
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    if (!response.ok) {
+      throw new Error('Failed to create property')
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error('Error creating property:', error)
+    return null
   }
-
-  properties.push(newProperty)
-  saveProperties(properties)
-
-  return newProperty
 }
 
 // Update existing property
-export function updateProperty(id: string, updates: Partial<Property>): Property | null {
-  const properties = getAllProperties()
-  const index = properties.findIndex((p) => p.id === id)
+export async function updateProperty(
+  id: string,
+  updates: Partial<Omit<Property, 'id' | 'createdAt' | 'updatedAt'>>
+): Promise<Property | null> {
+  try {
+    // First get the existing property
+    const existing = await getPropertyById(id)
+    if (!existing) return null
 
-  if (index === -1) return null
+    // Merge updates with existing property
+    const updatedProperty = {
+      ...existing,
+      ...updates,
+    }
 
-  properties[index] = {
-    ...properties[index],
-    ...updates,
-    id, // Ensure ID doesn't change
-    updatedAt: new Date().toISOString(),
+    const response = await fetch(`${API_BASE}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedProperty),
+    })
+
+    if (!response.ok) {
+      throw new Error('Failed to update property')
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error('Error updating property:', error)
+    return null
   }
-
-  saveProperties(properties)
-  return properties[index]
 }
 
 // Delete property
-export function deleteProperty(id: string): boolean {
-  const properties = getAllProperties()
-  const filtered = properties.filter((p) => p.id !== id)
+export async function deleteProperty(id: string): Promise<boolean> {
+  try {
+    const response = await fetch(`${API_BASE}/${id}`, {
+      method: 'DELETE',
+    })
 
-  if (filtered.length === properties.length) return false
+    if (!response.ok) {
+      throw new Error('Failed to delete property')
+    }
 
-  saveProperties(filtered)
-  return true
-}
-
-// Save properties to localStorage
-function saveProperties(properties: Property[]): void {
-  if (typeof window === 'undefined') return
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(properties))
-}
-
-// Generate unique ID
-function generateId(): string {
-  return `prop_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-}
-
-// Reset to mock data (useful for testing)
-export function resetProperties(): void {
-  if (typeof window === 'undefined') return
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(MOCK_PROPERTIES))
+    return true
+  } catch (error) {
+    console.error('Error deleting property:', error)
+    return false
+  }
 }

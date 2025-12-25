@@ -23,10 +23,17 @@ import { Building2, Plus, Search, Edit, Trash2, Eye, MapPin } from 'lucide-react
 export default function PropertiesPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [properties, setProperties] = useState<Property[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
-  // Load properties from localStorage on mount
+  // Load properties from API on mount
   useEffect(() => {
-    setProperties(getAllProperties())
+    async function fetchProperties() {
+      setIsLoading(true)
+      const data = await getAllProperties()
+      setProperties(data)
+      setIsLoading(false)
+    }
+    fetchProperties()
   }, [])
 
   const filteredProperties = properties.filter((property) =>

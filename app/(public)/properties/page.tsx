@@ -16,6 +16,7 @@ import { Search, SlidersHorizontal, X, Calendar } from 'lucide-react'
 
 export default function PropertiesPage() {
   const [properties, setProperties] = useState<Property[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedLocation, setSelectedLocation] = useState<string>('')
   const [minPrice, setMinPrice] = useState<string>('')
@@ -25,9 +26,15 @@ export default function PropertiesPage() {
   const [showFilters, setShowFilters] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
 
-  // Load properties from localStorage on mount
+  // Load properties from API on mount
   useEffect(() => {
-    setProperties(getAllProperties())
+    async function fetchProperties() {
+      setIsLoading(true)
+      const data = await getAllProperties()
+      setProperties(data)
+      setIsLoading(false)
+    }
+    fetchProperties()
   }, [])
 
   // Mock booked dates for demonstration
