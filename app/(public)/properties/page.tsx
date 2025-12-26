@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { addDays } from 'date-fns'
 import Image from 'next/image'
 import { FeaturedPropertyCard } from '@/components/public/featured-property-card'
@@ -9,11 +9,14 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { MOCK_PROPERTIES, AMENITY_LABELS } from '@/lib/constants/mock-data'
-import { Amenity } from '@/types'
+import { AMENITY_LABELS } from '@/lib/constants/mock-data'
+import { getAllProperties } from '@/lib/services/properties'
+import { Property, Amenity } from '@/types'
 import { Search, SlidersHorizontal, X, Calendar } from 'lucide-react'
 
 export default function PropertiesPage() {
+  const [properties, setProperties] = useState<Property[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedLocation, setSelectedLocation] = useState<string>('')
   const [minPrice, setMinPrice] = useState<string>('')
@@ -22,6 +25,17 @@ export default function PropertiesPage() {
   const [selectedAmenities, setSelectedAmenities] = useState<Amenity[]>([])
   const [showFilters, setShowFilters] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
+
+  // Load properties from API on mount
+  useEffect(() => {
+    async function fetchProperties() {
+      setIsLoading(true)
+      const data = await getAllProperties()
+      setProperties(data)
+      setIsLoading(false)
+    }
+    fetchProperties()
+  }, [])
 
   // Mock booked dates for demonstration
   const today = new Date()
@@ -40,14 +54,14 @@ export default function PropertiesPage() {
   // Extract unique locations
   const locations = useMemo(() => {
     const uniqueLocations = new Set(
-      MOCK_PROPERTIES.map((p) => p.location)
+      properties.map((p) => p.location)
     )
     return Array.from(uniqueLocations)
-  }, [])
+  }, [properties])
 
   // Filter properties
   const filteredProperties = useMemo(() => {
-    return MOCK_PROPERTIES.filter((property) => {
+    return properties.filter((property) => {
       // Search query
       if (
         searchQuery &&
@@ -88,6 +102,7 @@ export default function PropertiesPage() {
       return true
     })
   }, [
+    properties,
     searchQuery,
     selectedLocation,
     minPrice,

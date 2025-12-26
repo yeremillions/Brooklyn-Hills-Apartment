@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -16,12 +16,25 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { formatNaira } from '@/lib/utils/currency'
-import { MOCK_PROPERTIES } from '@/lib/constants/mock-data'
+import { getAllProperties } from '@/lib/services/properties'
+import { Property } from '@/types'
 import { Building2, Plus, Search, Edit, Trash2, Eye, MapPin } from 'lucide-react'
 
 export default function PropertiesPage() {
   const [searchQuery, setSearchQuery] = useState('')
-  const [properties] = useState(MOCK_PROPERTIES)
+  const [properties, setProperties] = useState<Property[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Load properties from API on mount
+  useEffect(() => {
+    async function fetchProperties() {
+      setIsLoading(true)
+      const data = await getAllProperties()
+      setProperties(data)
+      setIsLoading(false)
+    }
+    fetchProperties()
+  }, [])
 
   const filteredProperties = properties.filter((property) =>
     property.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

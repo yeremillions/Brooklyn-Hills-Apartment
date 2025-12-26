@@ -18,6 +18,7 @@ import {
 import { Checkbox } from '@/components/ui/checkbox'
 import { ArrowLeft, Upload, X } from 'lucide-react'
 import { Amenity } from '@/types'
+import { addProperty } from '@/lib/services/properties'
 
 const AMENITIES: { value: Amenity; label: string }[] = [
   { value: 'wifi', label: 'WiFi' },
@@ -50,7 +51,7 @@ export default function NewPropertyPage() {
     amenities: [] as Amenity[],
     hasBarAccess: false,
     cleaningTimeMinutes: '120',
-    status: 'active' as 'active' | 'inactive' | 'maintenance',
+    status: 'active' as 'active' | 'inactive' | 'under_maintenance',
     images: [] as string[],
   })
 
@@ -58,14 +59,44 @@ export default function NewPropertyPage() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // TODO: Implement API call to create property
-    console.log('Creating property:', formData)
+    try {
+      // Create new property with proper structure
+      const newProperty = await addProperty({
+        name: formData.name,
+        description: formData.description,
+        location: formData.location,
+        nightlyRate: parseInt(formData.nightlyRate),
+        cleaningFee: parseInt(formData.cleaningFee),
+        serviceChargePercent: parseInt(formData.serviceChargePercent),
+        capacity: {
+          guests: parseInt(formData.guests),
+          bedrooms: parseInt(formData.bedrooms),
+          bathrooms: parseInt(formData.bathrooms),
+        },
+        amenities: formData.amenities,
+        hasBarAccess: formData.hasBarAccess,
+        images: formData.images.length > 0 ? formData.images : [
+          'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80'
+        ],
+        status: formData.status,
+        cleaningTimeMinutes: parseInt(formData.cleaningTimeMinutes),
+      })
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+      if (!newProperty) {
+        throw new Error('Failed to create property')
+      }
 
-    setIsSubmitting(false)
-    router.push('/admin/properties')
+      console.log('Property created successfully:', newProperty)
+
+      // Redirect to properties list
+      router.push('/admin/properties')
+      router.refresh()
+    } catch (error) {
+      console.error('Error creating property:', error)
+      alert('Failed to create property. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleAmenityToggle = (amenity: Amenity) => {
@@ -364,7 +395,7 @@ export default function NewPropertyPage() {
                   <Label htmlFor="status">Property Status</Label>
                   <Select
                     value={formData.status}
-                    onValueChange={(value: 'active' | 'inactive' | 'maintenance') =>
+                    onValueChange={(value: 'active' | 'inactive' | 'under_maintenance') =>
                       setFormData((prev) => ({ ...prev, status: value }))
                     }
                   >
@@ -374,7 +405,7 @@ export default function NewPropertyPage() {
                     <SelectContent>
                       <SelectItem value="active">Active</SelectItem>
                       <SelectItem value="inactive">Inactive</SelectItem>
-                      <SelectItem value="maintenance">Under Maintenance</SelectItem>
+                      <SelectItem value="under_maintenance">Under Maintenance</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
