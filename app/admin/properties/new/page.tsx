@@ -93,7 +93,8 @@ export default function NewPropertyPage() {
       router.refresh()
     } catch (error) {
       console.error('Error creating property:', error)
-      alert('Failed to create property. Please try again.')
+      const errorMessage = error instanceof Error ? error.message : 'Failed to create property. Please try again.'
+      alert(errorMessage)
     } finally {
       setIsSubmitting(false)
     }

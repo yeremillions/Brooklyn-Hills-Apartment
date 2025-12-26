@@ -1,10 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { Property } from '@/types'
+import { MOCK_PROPERTIES } from '@/lib/constants/mock-data'
+
+// Check if Supabase is configured
+function isSupabaseConfigured() {
+  return (
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.NEXT_PUBLIC_SUPABASE_URL !== 'https://placeholder.supabase.co' &&
+    process.env.SUPABASE_SERVICE_ROLE_KEY &&
+    process.env.SUPABASE_SERVICE_ROLE_KEY !== 'placeholder-service-role-key'
+  )
+}
 
 // GET /api/properties - Get all properties
 export async function GET(request: NextRequest) {
   try {
+    // If Supabase is not configured, return mock data
+    if (!isSupabaseConfigured()) {
+      console.log('Supabase not configured, returning mock data')
+      return NextResponse.json(MOCK_PROPERTIES)
+    }
+
     const supabase = createServerSupabaseClient()
 
     const { data, error } = await supabase
@@ -53,6 +70,17 @@ export async function GET(request: NextRequest) {
 // POST /api/properties - Create new property
 export async function POST(request: NextRequest) {
   try {
+    // If Supabase is not configured, return error
+    if (!isSupabaseConfigured()) {
+      return NextResponse.json(
+        {
+          error: 'Supabase is not configured. Please set up your database credentials in .env.local to add properties.',
+          instructions: 'See SUPABASE_SETUP.md for setup instructions.'
+        },
+        { status: 503 }
+      )
+    }
+
     const body = await request.json()
     const supabase = createServerSupabaseClient()
 
