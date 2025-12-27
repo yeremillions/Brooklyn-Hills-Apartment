@@ -1,3 +1,6 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
@@ -6,10 +9,25 @@ import { FeaturedPropertyCard } from '@/components/public/featured-property-card
 import { TestimonialCard } from '@/components/public/testimonial-card'
 import { FAQSection } from '@/components/public/faq-section'
 import { StickyCTABar } from '@/components/public/sticky-cta-bar'
-import { MOCK_PROPERTIES, MOCK_TESTIMONIALS } from '@/lib/constants/mock-data'
+import { MOCK_TESTIMONIALS } from '@/lib/constants/mock-data'
+import { getAllProperties } from '@/lib/services/properties'
+import { Property } from '@/types'
 import { Building2, Calendar, Shield, Wifi, RefreshCw, Zap, BadgePercent, Search, Lock, Key } from 'lucide-react'
 
 export default function HomePage() {
+  const [properties, setProperties] = useState<Property[]>([])
+  const [isLoadingProperties, setIsLoadingProperties] = useState(true)
+
+  // Load properties from API
+  useEffect(() => {
+    async function fetchProperties() {
+      setIsLoadingProperties(true)
+      const data = await getAllProperties()
+      setProperties(data)
+      setIsLoadingProperties(false)
+    }
+    fetchProperties()
+  }, [])
   return (
     <>
       <StickyCTABar />
@@ -139,9 +157,23 @@ export default function HomePage() {
 
           {/* Properties Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-            {MOCK_PROPERTIES.slice(0, 3).map((property) => (
-              <FeaturedPropertyCard key={property.id} property={property} />
-            ))}
+            {isLoadingProperties ? (
+              // Loading skeleton
+              <>
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="bg-gray-200 rounded-lg h-96 animate-pulse"></div>
+                ))}
+              </>
+            ) : properties.length > 0 ? (
+              properties.slice(0, 3).map((property) => (
+                <FeaturedPropertyCard key={property.id} property={property} />
+              ))
+            ) : (
+              <div className="col-span-3 text-center py-12">
+                <p className="text-gray-600 text-lg mb-4">No properties available at the moment</p>
+                <p className="text-gray-500 text-sm">Please check back later</p>
+              </div>
+            )}
           </div>
 
           {/* View All Button */}
