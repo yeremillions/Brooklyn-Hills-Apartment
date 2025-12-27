@@ -19,6 +19,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { ArrowLeft, Upload, X } from 'lucide-react'
 import { Amenity } from '@/types'
 import { addProperty } from '@/lib/services/properties'
+import { uploadMultipleImages } from '@/lib/supabase/storage'
 
 const AMENITIES: { value: Amenity; label: string }[] = [
   { value: 'wifi', label: 'WiFi' },
@@ -38,6 +39,7 @@ const AMENITIES: { value: Amenity; label: string }[] = [
 export default function NewPropertyPage() {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isUploadingImages, setIsUploadingImages] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -109,19 +111,32 @@ export default function NewPropertyPage() {
     }))
   }
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
-    if (!files) return
+    if (!files || files.length === 0) return
 
-    // TODO: Implement actual image upload to cloud storage
-    // For now, just add placeholder URLs
-    const newImages = Array.from(files).map(
-      (file) => URL.createObjectURL(file)
-    )
-    setFormData((prev) => ({
-      ...prev,
-      images: [...prev.images, ...newImages],
-    }))
+    setIsUploadingImages(true)
+    try {
+      const filesArray = Array.from(files)
+
+      // Upload images to Supabase Storage
+      const uploadedUrls = await uploadMultipleImages(filesArray)
+
+      // Add uploaded URLs to form data
+      setFormData((prev) => ({
+        ...prev,
+        images: [...prev.images, ...uploadedUrls],
+      }))
+
+      alert(`Successfully uploaded ${uploadedUrls.length} image(s)`)
+    } catch (error) {
+      console.error('Error uploading images:', error)
+      alert('Failed to upload images. Please ensure Supabase Storage is set up correctly.')
+    } finally {
+      setIsUploadingImages(false)
+      // Reset file input
+      e.target.value = ''
+    }
   }
 
   const removeImage = (index: number) => {
@@ -342,11 +357,18 @@ export default function NewPropertyPage() {
                   <div className="mt-2">
                     <label
                       htmlFor="images"
-                      className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+                      className={`flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg ${
+                        isUploadingImages ? 'cursor-not-allowed opacity-60' : 'cursor-pointer hover:bg-gray-100'
+                      } bg-gray-50`}
                     >
                       <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        <Upload className="w-8 h-8 mb-2 text-gray-500" />
-                        <p className="text-sm text-gray-500">Click to upload images</p>
+                        <Upload className={`w-8 h-8 mb-2 text-gray-500 ${isUploadingImages ? 'animate-pulse' : ''}`} />
+                        <p className="text-sm text-gray-500">
+                          {isUploadingImages ? 'Uploading images...' : 'Click to upload images'}
+                        </p>
+                        {isUploadingImages && (
+                          <p className="text-xs text-gray-400 mt-1">Please wait</p>
+                        )}
                       </div>
                       <input
                         id="images"
@@ -355,6 +377,7 @@ export default function NewPropertyPage() {
                         multiple
                         accept="image/*"
                         onChange={handleImageUpload}
+                        disabled={isUploadingImages}
                       />
                     </label>
                   </div>
