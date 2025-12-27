@@ -2,6 +2,7 @@
 export interface Property {
   id: string
   name: string
+  slug: string
   description: string
   location: string
   nightlyRate: number

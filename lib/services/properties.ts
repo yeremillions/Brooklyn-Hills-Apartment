@@ -20,10 +20,10 @@ export async function getAllProperties(): Promise<Property[]> {
   }
 }
 
-// Get property by ID
-export async function getPropertyById(id: string): Promise<Property | null> {
+// Get property by slug
+export async function getPropertyBySlug(slug: string): Promise<Property | null> {
   try {
-    const response = await fetch(`${API_BASE}/${id}`, {
+    const response = await fetch(`${API_BASE}/${slug}`, {
       cache: 'no-store',
     })
 
@@ -39,9 +39,12 @@ export async function getPropertyById(id: string): Promise<Property | null> {
   }
 }
 
+// Alias for backward compatibility (deprecated - use getPropertyBySlug)
+export const getPropertyById = getPropertyBySlug
+
 // Add new property
 export async function addProperty(
-  property: Omit<Property, 'id' | 'createdAt' | 'updatedAt'>
+  property: Omit<Property, 'id' | 'slug' | 'createdAt' | 'updatedAt'>
 ): Promise<Property | null> {
   try {
     const response = await fetch(API_BASE, {
@@ -68,12 +71,12 @@ export async function addProperty(
 
 // Update existing property
 export async function updateProperty(
-  id: string,
-  updates: Partial<Omit<Property, 'id' | 'createdAt' | 'updatedAt'>>
+  slug: string,
+  updates: Partial<Omit<Property, 'id' | 'slug' | 'createdAt' | 'updatedAt'>>
 ): Promise<Property | null> {
   try {
     // First get the existing property
-    const existing = await getPropertyById(id)
+    const existing = await getPropertyBySlug(slug)
     if (!existing) return null
 
     // Merge updates with existing property
@@ -82,7 +85,7 @@ export async function updateProperty(
       ...updates,
     }
 
-    const response = await fetch(`${API_BASE}/${id}`, {
+    const response = await fetch(`${API_BASE}/${slug}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -102,9 +105,9 @@ export async function updateProperty(
 }
 
 // Delete property
-export async function deleteProperty(id: string): Promise<boolean> {
+export async function deleteProperty(slug: string): Promise<boolean> {
   try {
-    const response = await fetch(`${API_BASE}/${id}`, {
+    const response = await fetch(`${API_BASE}/${slug}`, {
       method: 'DELETE',
     })
 

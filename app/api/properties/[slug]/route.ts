@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { Property } from '@/types'
 
-// GET /api/properties/[id] - Get single property
+// GET /api/properties/[slug] - Get single property by slug
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { slug: string } }
 ) {
   try {
     const supabase = createServerSupabaseClient()
@@ -13,7 +13,7 @@ export async function GET(
     const { data, error } = await supabase
       .from('properties')
       .select('*')
-      .eq('id', params.id)
+      .eq('slug', params.slug)
       .single()
 
     if (error) {
@@ -28,6 +28,7 @@ export async function GET(
     const property: Property = {
       id: data.id,
       name: data.name,
+      slug: data.slug,
       description: data.description,
       location: data.location,
       nightlyRate: data.nightly_rate,
@@ -57,10 +58,10 @@ export async function GET(
   }
 }
 
-// PUT /api/properties/[id] - Update property
+// PUT /api/properties/[slug] - Update property by slug
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { slug: string } }
 ) {
   try {
     const body = await request.json()
@@ -87,7 +88,7 @@ export async function PUT(
     const { data, error } = await supabase
       .from('properties')
       .update(propertyData)
-      .eq('id', params.id)
+      .eq('slug', params.slug)
       .select()
       .single()
 
@@ -100,6 +101,7 @@ export async function PUT(
     const property: Property = {
       id: data.id,
       name: data.name,
+      slug: data.slug,
       description: data.description,
       location: data.location,
       nightlyRate: data.nightly_rate,
@@ -129,10 +131,10 @@ export async function PUT(
   }
 }
 
-// DELETE /api/properties/[id] - Delete property
+// DELETE /api/properties/[slug] - Delete property by slug
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { slug: string } }
 ) {
   try {
     const supabase = createServerSupabaseClient()
@@ -140,7 +142,7 @@ export async function DELETE(
     const { error } = await supabase
       .from('properties')
       .delete()
-      .eq('id', params.id)
+      .eq('slug', params.slug)
 
     if (error) {
       console.error('Error deleting property:', error)

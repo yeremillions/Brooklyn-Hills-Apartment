@@ -8,6 +8,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE IF NOT EXISTS properties (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   name TEXT NOT NULL,
+  slug TEXT UNIQUE NOT NULL,
   description TEXT NOT NULL,
   location TEXT NOT NULL,
   nightly_rate INTEGER NOT NULL,
@@ -122,6 +123,7 @@ CREATE TABLE IF NOT EXISTS maintenance_tasks (
 
 -- Create indexes for better query performance
 CREATE INDEX IF NOT EXISTS idx_properties_status ON properties(status);
+CREATE INDEX IF NOT EXISTS idx_properties_slug ON properties(slug);
 CREATE INDEX IF NOT EXISTS idx_bookings_property_id ON bookings(property_id);
 CREATE INDEX IF NOT EXISTS idx_bookings_dates ON bookings(check_in, check_out);
 CREATE INDEX IF NOT EXISTS idx_bookings_status ON bookings(status);
@@ -154,6 +156,46 @@ CREATE TRIGGER update_housekeeping_tasks_updated_at BEFORE UPDATE ON housekeepin
 
 CREATE TRIGGER update_maintenance_tasks_updated_at BEFORE UPDATE ON maintenance_tasks
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Create function to generate slug from property name
+CREATE OR REPLACE FUNCTION generate_slug(name TEXT)
+RETURNS TEXT AS $$
+DECLARE
+  slug TEXT;
+  counter INTEGER := 0;
+  final_slug TEXT;
+BEGIN
+  -- Convert to lowercase, replace spaces and special chars with hyphens
+  slug := lower(regexp_replace(name, '[^a-zA-Z0-9]+', '-', 'g'));
+  -- Remove leading/trailing hyphens
+  slug := trim(both '-' from slug);
+
+  -- Ensure uniqueness by adding counter if needed
+  final_slug := slug;
+  WHILE EXISTS (SELECT 1 FROM properties WHERE properties.slug = final_slug) LOOP
+    counter := counter + 1;
+    final_slug := slug || '-' || counter;
+  END LOOP;
+
+  RETURN final_slug;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create function to auto-generate slug before insert/update
+CREATE OR REPLACE FUNCTION set_property_slug()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Only generate slug if it's not provided or if name changed
+  IF NEW.slug IS NULL OR NEW.slug = '' OR (TG_OP = 'UPDATE' AND NEW.name != OLD.name) THEN
+    NEW.slug := generate_slug(NEW.name);
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create trigger to auto-generate slug
+CREATE TRIGGER set_properties_slug BEFORE INSERT OR UPDATE ON properties
+  FOR EACH ROW EXECUTE FUNCTION set_property_slug();
 
 -- Insert sample properties (optional - remove if not needed)
 INSERT INTO properties (name, description, location, nightly_rate, cleaning_fee, service_charge_percent, guests, bedrooms, bathrooms, amenities, has_bar_access, images, status, cleaning_time_minutes)

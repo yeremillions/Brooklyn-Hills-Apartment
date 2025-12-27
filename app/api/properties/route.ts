@@ -21,6 +21,7 @@ export async function GET(request: NextRequest) {
     const properties: Property[] = data.map((prop: any) => ({
       id: prop.id,
       name: prop.name,
+      slug: prop.slug,
       description: prop.description,
       location: prop.location,
       nightlyRate: prop.nightly_rate,
@@ -89,6 +90,7 @@ export async function POST(request: NextRequest) {
     const property: Property = {
       id: data.id,
       name: data.name,
+      slug: data.slug,
       description: data.description,
       location: data.location,
       nightlyRate: data.nightly_rate,
