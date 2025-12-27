@@ -16,7 +16,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { formatNaira } from '@/lib/utils/currency'
-import { getAllProperties } from '@/lib/services/properties'
+import { getAllProperties, deleteProperty } from '@/lib/services/properties'
 import { Property } from '@/types'
 import { Building2, Plus, Search, Edit, Trash2, Eye, MapPin } from 'lucide-react'
 
@@ -24,6 +24,7 @@ export default function PropertiesPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [properties, setProperties] = useState<Property[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
 
   // Load properties from API on mount
   useEffect(() => {
@@ -35,6 +36,33 @@ export default function PropertiesPage() {
     }
     fetchProperties()
   }, [])
+
+  // Handle property deletion
+  const handleDelete = async (propertyId: string, propertyName: string) => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete "${propertyName}"?\n\nThis action cannot be undone.`
+    )
+
+    if (!confirmed) return
+
+    setDeletingId(propertyId)
+    try {
+      const success = await deleteProperty(propertyId)
+
+      if (success) {
+        // Remove from local state
+        setProperties((prev) => prev.filter((p) => p.id !== propertyId))
+        alert('Property deleted successfully')
+      } else {
+        alert('Failed to delete property. Please try again.')
+      }
+    } catch (error) {
+      console.error('Error deleting property:', error)
+      alert('Failed to delete property. Please try again.')
+    } finally {
+      setDeletingId(null)
+    }
+  }
 
   const filteredProperties = properties.filter((property) =>
     property.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -210,6 +238,8 @@ export default function PropertiesPage() {
                             variant="ghost"
                             size="sm"
                             className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                            onClick={() => handleDelete(property.id, property.name)}
+                            disabled={deletingId === property.id}
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>

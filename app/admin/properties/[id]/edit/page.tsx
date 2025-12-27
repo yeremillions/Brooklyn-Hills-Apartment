@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -18,7 +18,7 @@ import {
 import { Checkbox } from '@/components/ui/checkbox'
 import { ArrowLeft, Upload, X } from 'lucide-react'
 import { Amenity } from '@/types'
-import { addProperty } from '@/lib/services/properties'
+import { getPropertyById, updateProperty } from '@/lib/services/properties'
 
 const AMENITIES: { value: Amenity; label: string }[] = [
   { value: 'wifi', label: 'WiFi' },
@@ -35,8 +35,12 @@ const AMENITIES: { value: Amenity; label: string }[] = [
   { value: 'balcony', label: 'Balcony' },
 ]
 
-export default function NewPropertyPage() {
+export default function EditPropertyPage() {
   const router = useRouter()
+  const params = useParams()
+  const propertyId = params.id as string
+
+  const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
@@ -44,24 +48,58 @@ export default function NewPropertyPage() {
     location: '',
     nightlyRate: '',
     cleaningFee: '',
-    serviceChargePercent: '10',
+    serviceChargePercent: '',
     guests: '',
     bedrooms: '',
     bathrooms: '',
     amenities: [] as Amenity[],
     hasBarAccess: false,
-    cleaningTimeMinutes: '120',
+    cleaningTimeMinutes: '',
     status: 'active' as 'active' | 'inactive' | 'under_maintenance',
     images: [] as string[],
   })
+
+  // Load property data
+  useEffect(() => {
+    async function loadProperty() {
+      setIsLoading(true)
+      const property = await getPropertyById(propertyId)
+
+      if (!property) {
+        alert('Property not found')
+        router.push('/admin/properties')
+        return
+      }
+
+      // Populate form with existing data
+      setFormData({
+        name: property.name,
+        description: property.description,
+        location: property.location,
+        nightlyRate: property.nightlyRate.toString(),
+        cleaningFee: property.cleaningFee.toString(),
+        serviceChargePercent: property.serviceChargePercent.toString(),
+        guests: property.capacity.guests.toString(),
+        bedrooms: property.capacity.bedrooms.toString(),
+        bathrooms: property.capacity.bathrooms.toString(),
+        amenities: property.amenities,
+        hasBarAccess: property.hasBarAccess,
+        cleaningTimeMinutes: property.cleaningTimeMinutes.toString(),
+        status: property.status,
+        images: property.images,
+      })
+      setIsLoading(false)
+    }
+
+    loadProperty()
+  }, [propertyId, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
     try {
-      // Create new property with proper structure
-      const newProperty = await addProperty({
+      const updatedProperty = await updateProperty(propertyId, {
         name: formData.name,
         description: formData.description,
         location: formData.location,
@@ -75,25 +113,23 @@ export default function NewPropertyPage() {
         },
         amenities: formData.amenities,
         hasBarAccess: formData.hasBarAccess,
-        images: formData.images.length > 0 ? formData.images : [
-          'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80'
-        ],
+        images: formData.images,
         status: formData.status,
         cleaningTimeMinutes: parseInt(formData.cleaningTimeMinutes),
       })
 
-      if (!newProperty) {
-        throw new Error('Failed to create property')
+      if (!updatedProperty) {
+        throw new Error('Failed to update property')
       }
 
-      console.log('Property created successfully:', newProperty)
+      console.log('Property updated successfully:', updatedProperty)
 
       // Redirect to properties list
       router.push('/admin/properties')
       router.refresh()
     } catch (error) {
-      console.error('Error creating property:', error)
-      const errorMessage = error instanceof Error ? error.message : 'Failed to create property. Please try again.'
+      console.error('Error updating property:', error)
+      const errorMessage = error instanceof Error ? error.message : 'Failed to update property. Please try again.'
       alert(errorMessage)
     } finally {
       setIsSubmitting(false)
@@ -131,6 +167,17 @@ export default function NewPropertyPage() {
     }))
   }
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="text-lg font-semibold mb-2">Loading property...</div>
+          <div className="text-sm text-gray-500">Please wait</div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -142,8 +189,8 @@ export default function NewPropertyPage() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Add New Property</h1>
-          <p className="mt-1 text-gray-600">Create a new shortlet apartment listing</p>
+          <h1 className="text-3xl font-bold text-gray-900">Edit Property</h1>
+          <p className="mt-1 text-gray-600">Update property information and settings</p>
         </div>
       </div>
 
@@ -452,7 +499,7 @@ export default function NewPropertyPage() {
             <Card>
               <CardContent className="pt-6 space-y-3">
                 <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? 'Creating...' : 'Create Property'}
+                  {isSubmitting ? 'Saving...' : 'Save Changes'}
                 </Button>
                 <Link href="/admin/properties" className="block">
                   <Button type="button" variant="outline" className="w-full">

@@ -53,13 +53,16 @@ export async function addProperty(
     })
 
     if (!response.ok) {
-      throw new Error('Failed to create property')
+      const errorData = await response.json().catch(() => ({}))
+      const errorMessage = errorData.error || 'Failed to create property'
+      throw new Error(errorMessage)
     }
 
     return await response.json()
   } catch (error) {
     console.error('Error creating property:', error)
-    return null
+    // Re-throw with better message
+    throw error
   }
 }
 
