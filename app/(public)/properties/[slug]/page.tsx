@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { AMENITY_LABELS } from '@/lib/constants/mock-data'
-import { getPropertyById } from '@/lib/services/properties'
+import { getPropertyBySlug } from '@/lib/services/properties'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -54,12 +54,12 @@ export default function PropertyDetailPage() {
   useEffect(() => {
     async function fetchProperty() {
       setIsLoading(true)
-      const data = await getPropertyById(params.id as string)
+      const data = await getPropertyBySlug(params.slug as string)
       setProperty(data)
       setIsLoading(false)
     }
     fetchProperty()
-  }, [params.id])
+  }, [params.slug])
 
   if (isLoading) {
     return (
