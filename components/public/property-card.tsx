@@ -12,23 +12,22 @@ interface PropertyCardProps {
 }
 
 export function PropertyCard({ property }: PropertyCardProps) {
+  // Fallback image if property has no images or empty array
+  const defaultImage = 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80'
+  const imageUrl = property.images && property.images.length > 0 ? property.images[0] : defaultImage
+
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       <div className="relative h-48 bg-gray-200">
-        {property.images[0] ? (
-          <Image
-            src={property.images[0]}
-            alt={property.name}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority={false}
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-gray-400">
-            No image available
-          </div>
-        )}
+        <Image
+          src={imageUrl}
+          alt={property.name}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={false}
+          unoptimized={imageUrl === defaultImage}
+        />
         {property.hasBarAccess && (
           <Badge className="absolute top-3 right-3 bg-purple-600">
             <Wine className="h-3 w-3 mr-1" />
