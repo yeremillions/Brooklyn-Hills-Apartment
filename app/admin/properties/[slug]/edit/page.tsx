@@ -18,7 +18,7 @@ import {
 import { Checkbox } from '@/components/ui/checkbox'
 import { ArrowLeft, Upload, X } from 'lucide-react'
 import { Amenity } from '@/types'
-import { getPropertyById, updateProperty } from '@/lib/services/properties'
+import { getPropertyBySlug, updateProperty } from '@/lib/services/properties'
 
 const AMENITIES: { value: Amenity; label: string }[] = [
   { value: 'wifi', label: 'WiFi' },
@@ -38,7 +38,7 @@ const AMENITIES: { value: Amenity; label: string }[] = [
 export default function EditPropertyPage() {
   const router = useRouter()
   const params = useParams()
-  const propertyId = params.id as string
+  const propertySlug = params.slug as string
 
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -63,7 +63,7 @@ export default function EditPropertyPage() {
   useEffect(() => {
     async function loadProperty() {
       setIsLoading(true)
-      const property = await getPropertyById(propertyId)
+      const property = await getPropertyBySlug(propertySlug)
 
       if (!property) {
         alert('Property not found')
@@ -92,14 +92,14 @@ export default function EditPropertyPage() {
     }
 
     loadProperty()
-  }, [propertyId, router])
+  }, [propertySlug, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
     try {
-      const updatedProperty = await updateProperty(propertyId, {
+      const updatedProperty = await updateProperty(propertySlug, {
         name: formData.name,
         description: formData.description,
         location: formData.location,
