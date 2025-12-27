@@ -103,7 +103,7 @@ export function FeaturedPropertyCard({ property }: FeaturedPropertyCardProps) {
         </div>
 
         {/* CTA Button */}
-        <Link href={`/properties/${property.id}`} className="block">
+        <Link href={`/properties/${property.slug}`} className="block">
           <Button className="w-full" size="lg">
             View Details & Book
           </Button>
