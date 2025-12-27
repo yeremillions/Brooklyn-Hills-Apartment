@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { MOCK_PROPERTIES, AMENITY_LABELS } from '@/lib/constants/mock-data'
+import { AMENITY_LABELS } from '@/lib/constants/mock-data'
+import { getPropertyById } from '@/lib/services/properties'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -25,7 +26,7 @@ import {
   Wind,
   Home,
 } from 'lucide-react'
-import { Amenity } from '@/types'
+import { Amenity, Property } from '@/types'
 
 const AMENITY_ICONS: Record<Amenity, React.ReactNode> = {
   wifi: <Wifi className="h-5 w-5" />,
@@ -46,8 +47,28 @@ export default function PropertyDetailPage() {
   const params = useParams()
   const router = useRouter()
   const [selectedImage, setSelectedImage] = useState(0)
+  const [property, setProperty] = useState<Property | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
-  const property = MOCK_PROPERTIES.find((p) => p.id === params.id)
+  // Load property data from API
+  useEffect(() => {
+    async function fetchProperty() {
+      setIsLoading(true)
+      const data = await getPropertyById(params.id as string)
+      setProperty(data)
+      setIsLoading(false)
+    }
+    fetchProperty()
+  }, [params.id])
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto max-w-7xl px-4 py-16 text-center">
+        <div className="text-lg font-semibold mb-2">Loading property...</div>
+        <div className="text-sm text-gray-500">Please wait</div>
+      </div>
+    )
+  }
 
   if (!property) {
     return (
