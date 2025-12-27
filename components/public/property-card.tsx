@@ -88,7 +88,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
           </div>
           <div className="text-xs text-gray-600">per night</div>
         </div>
-        <Link href={`/properties/${property.id}`}>
+        <Link href={`/properties/${property.slug}`}>
           <Button>View Details</Button>
         </Link>
       </CardFooter>
