@@ -134,11 +134,13 @@ export default function PropertiesPage() {
               <span className="text-xs text-primary">₦</span>
             </div>
             <div className="text-2xl font-bold">
-              {formatNaira(
-                Math.round(
-                  properties.reduce((sum, p) => sum + p.nightlyRate, 0) / properties.length
-                )
-              )}
+              {properties.length > 0
+                ? formatNaira(
+                    Math.round(
+                      properties.reduce((sum, p) => sum + p.nightlyRate, 0) / properties.length
+                    )
+                  )
+                : formatNaira(0)}
             </div>
             <p className="text-xs text-gray-600 mt-1">Across all properties</p>
           </CardContent>
