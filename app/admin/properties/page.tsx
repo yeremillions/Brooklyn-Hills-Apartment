@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { toast } from 'sonner'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -15,6 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { DeleteConfirmationDialog } from '@/components/ui/delete-confirmation-dialog'
 import { formatNaira } from '@/lib/utils/currency'
 import { getAllProperties, deleteProperty } from '@/lib/services/properties'
 import { Property } from '@/types'
@@ -25,6 +27,8 @@ export default function PropertiesPage() {
   const [properties, setProperties] = useState<Property[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
+  const [propertyToDelete, setPropertyToDelete] = useState<{ id: string; name: string } | null>(null)
 
   // Load properties from API on mount
   useEffect(() => {
@@ -37,30 +41,40 @@ export default function PropertiesPage() {
     fetchProperties()
   }, [])
 
-  // Handle property deletion
-  const handleDelete = async (propertyId: string, propertyName: string) => {
-    const confirmed = window.confirm(
-      `Are you sure you want to delete "${propertyName}"?\n\nThis action cannot be undone.`
-    )
+  // Open delete confirmation dialog
+  const openDeleteDialog = (propertyId: string, propertyName: string) => {
+    setPropertyToDelete({ id: propertyId, name: propertyName })
+    setDeleteDialogOpen(true)
+  }
 
-    if (!confirmed) return
+  // Handle confirmed deletion
+  const handleConfirmDelete = async () => {
+    if (!propertyToDelete) return
 
-    setDeletingId(propertyId)
+    setDeletingId(propertyToDelete.id)
     try {
-      const success = await deleteProperty(propertyId)
+      const success = await deleteProperty(propertyToDelete.id)
 
       if (success) {
         // Remove from local state
-        setProperties((prev) => prev.filter((p) => p.id !== propertyId))
-        alert('Property deleted successfully')
+        setProperties((prev) => prev.filter((p) => p.slug !== propertyToDelete.id))
+        toast.success('Property deleted successfully', {
+          description: `"${propertyToDelete.name}" has been removed from your listings.`
+        })
+        setDeleteDialogOpen(false)
       } else {
-        alert('Failed to delete property. Please try again.')
+        toast.error('Failed to delete property', {
+          description: 'Please try again or contact support if the issue persists.'
+        })
       }
     } catch (error) {
       console.error('Error deleting property:', error)
-      alert('Failed to delete property. Please try again.')
+      toast.error('Failed to delete property', {
+        description: 'An unexpected error occurred. Please try again.'
+      })
     } finally {
       setDeletingId(null)
+      setPropertyToDelete(null)
     }
   }
 
@@ -238,7 +252,7 @@ export default function PropertiesPage() {
                             variant="ghost"
                             size="sm"
                             className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                            onClick={() => handleDelete(property.slug, property.name)}
+                            onClick={() => openDeleteDialog(property.slug, property.name)}
                             disabled={deletingId === property.slug}
                           >
                             <Trash2 className="h-4 w-4" />
@@ -259,6 +273,17 @@ export default function PropertiesPage() {
           )}
         </CardContent>
       </Card>
+
+      {/* Delete Confirmation Dialog */}
+      <DeleteConfirmationDialog
+        open={deleteDialogOpen}
+        onOpenChange={setDeleteDialogOpen}
+        onConfirm={handleConfirmDelete}
+        title="Delete Property"
+        description="Are you sure you want to delete this property?"
+        itemName={propertyToDelete?.name}
+        isDeleting={deletingId !== null}
+      />
     </div>
   )
 }

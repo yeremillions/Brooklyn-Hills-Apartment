@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
+import { toast } from 'sonner'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -66,7 +67,9 @@ export default function EditPropertyPage() {
       const property = await getPropertyBySlug(propertySlug)
 
       if (!property) {
-        alert('Property not found')
+        toast.error('Property not found', {
+          description: 'Redirecting to properties list...'
+        })
         router.push('/admin/properties')
         return
       }
@@ -124,13 +127,19 @@ export default function EditPropertyPage() {
 
       console.log('Property updated successfully:', updatedProperty)
 
+      toast.success('Property updated successfully', {
+        description: `"${formData.name}" has been updated.`
+      })
+
       // Redirect to properties list
       router.push('/admin/properties')
       router.refresh()
     } catch (error) {
       console.error('Error updating property:', error)
       const errorMessage = error instanceof Error ? error.message : 'Failed to update property. Please try again.'
-      alert(errorMessage)
+      toast.error('Failed to update property', {
+        description: errorMessage
+      })
     } finally {
       setIsSubmitting(false)
     }
