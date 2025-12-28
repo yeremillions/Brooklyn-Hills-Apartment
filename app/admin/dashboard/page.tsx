@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { TrendChart } from '@/components/ui/trend-chart'
 import { formatNaira } from '@/lib/utils/currency'
 import {
   TrendingUp,
@@ -58,6 +59,14 @@ export default function DashboardPage() {
     pendingInquiries: 5,
     barSalesToday: 25000,
     barSalesWeek: 105000,
+  }
+
+  // Trend data for sparkline charts (last 7 days)
+  const trendData = {
+    bookings: [2, 3, 4, 2, 5, 4, 3],
+    revenue: [120000, 135000, 150000, 128000, 165000, 145000, 135000],
+    occupancy: [72, 75, 78, 76, 80, 79, 78],
+    barSales: [20000, 22000, 25000, 23000, 28000, 26000, 25000],
   }
 
   const upcomingCheckIns = [
@@ -114,6 +123,8 @@ export default function DashboardPage() {
             icon={<BookOpen className="h-5 w-5" />}
             subtitle={`${metrics.weekBookings} this week`}
             trend="+12%"
+            trendData={trendData.bookings}
+            trendColor="#3b82f6"
           />
         </motion.div>
         <motion.div variants={itemVariants}>
@@ -123,6 +134,8 @@ export default function DashboardPage() {
             icon={<DollarSign className="h-5 w-5" />}
             subtitle={formatNaira(metrics.weekRevenue) + ' this week'}
             trend="+8%"
+            trendData={trendData.revenue}
+            trendColor="#10b981"
           />
         </motion.div>
         <motion.div variants={itemVariants}>
@@ -132,6 +145,8 @@ export default function DashboardPage() {
             icon={<TrendingUp className="h-5 w-5" />}
             subtitle="This month"
             trend="+5%"
+            trendData={trendData.occupancy}
+            trendColor="#8b5cf6"
           />
         </motion.div>
         <motion.div variants={itemVariants}>
@@ -141,6 +156,8 @@ export default function DashboardPage() {
             icon={<Wine className="h-5 w-5" />}
             subtitle={formatNaira(metrics.barSalesWeek) + ' this week'}
             trend="+15%"
+            trendData={trendData.barSales}
+            trendColor="#f59e0b"
           />
         </motion.div>
       </motion.div>
@@ -402,19 +419,23 @@ function MetricCard({
   icon,
   subtitle,
   trend,
+  trendData,
+  trendColor,
 }: {
   title: string
   value: string | number
   icon: React.ReactNode
   subtitle: string
   trend?: string
+  trendData?: number[]
+  trendColor?: string
 }) {
   return (
     <motion.div
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="h-full"
     >
-      <Card className="h-full hover:shadow-lg transition-shadow duration-200 cursor-pointer">
+      <Card className="h-full hover:shadow-lg transition-shadow duration-200 cursor-pointer overflow-hidden">
         <CardContent className="p-6">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-gray-600">{title}</span>
@@ -426,7 +447,7 @@ function MetricCard({
               {icon}
             </motion.div>
           </div>
-          <div className="space-y-1">
+          <div className="space-y-3">
             <div className="text-2xl font-bold">{value}</div>
             <div className="flex items-center gap-2">
               <p className="text-xs text-gray-600">{subtitle}</p>
@@ -436,6 +457,11 @@ function MetricCard({
                 </Badge>
               )}
             </div>
+            {trendData && trendData.length > 0 && (
+              <div className="mt-4 -mb-2">
+                <TrendChart data={trendData} color={trendColor} height={32} />
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
