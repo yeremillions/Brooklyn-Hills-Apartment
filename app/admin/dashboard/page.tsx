@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { TrendChart } from '@/components/ui/trend-chart'
 import { formatNaira } from '@/lib/utils/currency'
 import {
   TrendingUp,
@@ -58,6 +59,14 @@ export default function DashboardPage() {
     pendingInquiries: 5,
     barSalesToday: 25000,
     barSalesWeek: 105000,
+  }
+
+  // Trend data for sparkline charts (last 7 days)
+  const trendData = {
+    bookings: [2, 3, 4, 2, 5, 4, 3],
+    revenue: [120000, 135000, 150000, 128000, 165000, 145000, 135000],
+    occupancy: [72, 75, 78, 76, 80, 79, 78],
+    barSales: [20000, 22000, 25000, 23000, 28000, 26000, 25000],
   }
 
   const upcomingCheckIns = [
@@ -114,6 +123,8 @@ export default function DashboardPage() {
             icon={<BookOpen className="h-5 w-5" />}
             subtitle={`${metrics.weekBookings} this week`}
             trend="+12%"
+            trendData={trendData.bookings}
+            trendColor="#3b82f6"
           />
         </motion.div>
         <motion.div variants={itemVariants}>
@@ -123,6 +134,8 @@ export default function DashboardPage() {
             icon={<DollarSign className="h-5 w-5" />}
             subtitle={formatNaira(metrics.weekRevenue) + ' this week'}
             trend="+8%"
+            trendData={trendData.revenue}
+            trendColor="#10b981"
           />
         </motion.div>
         <motion.div variants={itemVariants}>
@@ -132,6 +145,8 @@ export default function DashboardPage() {
             icon={<TrendingUp className="h-5 w-5" />}
             subtitle="This month"
             trend="+5%"
+            trendData={trendData.occupancy}
+            trendColor="#8b5cf6"
           />
         </motion.div>
         <motion.div variants={itemVariants}>
@@ -141,6 +156,8 @@ export default function DashboardPage() {
             icon={<Wine className="h-5 w-5" />}
             subtitle={formatNaira(metrics.barSalesWeek) + ' this week'}
             trend="+15%"
+            trendData={trendData.barSales}
+            trendColor="#f59e0b"
           />
         </motion.div>
       </motion.div>
@@ -402,20 +419,41 @@ function MetricCard({
   icon,
   subtitle,
   trend,
+  trendData,
+  trendColor,
 }: {
   title: string
   value: string | number
   icon: React.ReactNode
   subtitle: string
   trend?: string
+  trendData?: number[]
+  trendColor?: string
 }) {
+  // Gradient backgrounds for each metric type
+  const gradients = {
+    bookings: 'from-blue-50 via-white to-blue-50/50',
+    revenue: 'from-green-50 via-white to-green-50/50',
+    occupancy: 'from-purple-50 via-white to-purple-50/50',
+    barSales: 'from-amber-50 via-white to-amber-50/50',
+  }
+
+  const getGradient = () => {
+    if (trendColor === '#3b82f6') return gradients.bookings
+    if (trendColor === '#10b981') return gradients.revenue
+    if (trendColor === '#8b5cf6') return gradients.occupancy
+    if (trendColor === '#f59e0b') return gradients.barSales
+    return 'from-gray-50 via-white to-gray-50/50'
+  }
+
   return (
     <motion.div
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="h-full"
     >
-      <Card className="h-full hover:shadow-lg transition-shadow duration-200 cursor-pointer">
-        <CardContent className="p-6">
+      <Card className={`h-full hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden border-0 bg-gradient-to-br ${getGradient()} backdrop-blur-sm relative`}>
+        <div className="absolute inset-0 bg-white/60 backdrop-blur-sm"></div>
+        <CardContent className="p-6 relative z-10">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-gray-600">{title}</span>
             <motion.div
@@ -426,7 +464,7 @@ function MetricCard({
               {icon}
             </motion.div>
           </div>
-          <div className="space-y-1">
+          <div className="space-y-3">
             <div className="text-2xl font-bold">{value}</div>
             <div className="flex items-center gap-2">
               <p className="text-xs text-gray-600">{subtitle}</p>
@@ -436,6 +474,11 @@ function MetricCard({
                 </Badge>
               )}
             </div>
+            {trendData && trendData.length > 0 && (
+              <div className="mt-4 -mb-2">
+                <TrendChart data={trendData} color={trendColor} height={32} />
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
