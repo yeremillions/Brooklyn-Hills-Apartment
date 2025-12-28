@@ -21,10 +21,11 @@ import { DeleteConfirmationDialog } from '@/components/ui/delete-confirmation-di
 import { formatNaira } from '@/lib/utils/currency'
 import { getAllProperties, deleteProperty } from '@/lib/services/properties'
 import { Property } from '@/types'
-import { Building2, Plus, Search, Edit, Trash2, Eye, MapPin, Grid3x3, List } from 'lucide-react'
+import { Building2, Plus, Search, Edit, Trash2, Eye, MapPin, Grid3x3, List, Home } from 'lucide-react'
 import { MetricCardSkeleton } from '@/components/ui/metric-card-skeleton'
 import { PropertyCardSkeleton } from '@/components/ui/property-card-skeleton'
 import { Skeleton } from '@/components/ui/skeleton'
+import { EmptyState } from '@/components/ui/empty-state'
 
 // Animation variants
 const containerVariants = {
@@ -283,8 +284,18 @@ export default function PropertiesPage() {
                   <PropertyCardSkeleton />
                 </>
               ) : filteredProperties.length === 0 ? (
-                <div className="col-span-full text-center py-12 text-gray-500">
-                  No properties found
+                <div className="col-span-full">
+                  <EmptyState
+                    icon={searchQuery ? Search : Building2}
+                    title={searchQuery ? 'No properties found' : 'No properties yet'}
+                    description={
+                      searchQuery
+                        ? `We couldn't find any properties matching "${searchQuery}". Try adjusting your search.`
+                        : 'Get started by adding your first property to the system.'
+                    }
+                    actionLabel={searchQuery ? undefined : 'Add Property'}
+                    actionHref={searchQuery ? undefined : '/admin/properties/new'}
+                  />
                 </div>
               ) : (
                 filteredProperties.map((property, index) => (
@@ -410,8 +421,18 @@ export default function PropertiesPage() {
                     </>
                   ) : filteredProperties.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center py-8 text-gray-500">
-                        No properties found
+                      <TableCell colSpan={6} className="p-0">
+                        <EmptyState
+                          icon={searchQuery ? Search : Building2}
+                          title={searchQuery ? 'No properties found' : 'No properties yet'}
+                          description={
+                            searchQuery
+                              ? `We couldn't find any properties matching "${searchQuery}". Try adjusting your search.`
+                              : 'Get started by adding your first property to the system.'
+                          }
+                          actionLabel={searchQuery ? undefined : 'Add Property'}
+                          actionHref={searchQuery ? undefined : '/admin/properties/new'}
+                        />
                       </TableCell>
                     </TableRow>
                   ) : (
