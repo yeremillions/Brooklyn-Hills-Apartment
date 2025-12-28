@@ -139,11 +139,12 @@ export default function PropertiesPage() {
         className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
       >
         <motion.div variants={itemVariants} whileHover={{ y: -4 }} className="h-full">
-          <Card className="h-full hover:shadow-lg transition-shadow duration-200">
-            <CardContent className="p-6">
+          <Card className="h-full hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-blue-50 via-white to-blue-50/50 relative overflow-hidden">
+            <div className="absolute inset-0 bg-white/60 backdrop-blur-sm"></div>
+            <CardContent className="p-6 relative z-10">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-medium text-gray-600">Total Properties</span>
-                <Building2 className="h-5 w-5 text-gray-400" />
+                <Building2 className="h-5 w-5 text-blue-500" />
               </div>
               <div className="text-2xl font-bold">{properties.length}</div>
               <p className="text-xs text-gray-600 mt-1">Across all locations</p>
@@ -152,12 +153,13 @@ export default function PropertiesPage() {
         </motion.div>
 
         <motion.div variants={itemVariants} whileHover={{ y: -4 }} className="h-full">
-          <Card className="h-full hover:shadow-lg transition-shadow duration-200">
-            <CardContent className="p-6">
+          <Card className="h-full hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-green-50 via-white to-green-50/50 relative overflow-hidden">
+            <div className="absolute inset-0 bg-white/60 backdrop-blur-sm"></div>
+            <CardContent className="p-6 relative z-10">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-medium text-gray-600">Active</span>
                 <motion.div
-                  className="h-2 w-2 rounded-full bg-green-500"
+                  className="h-2 w-2 rounded-full bg-green-500 shadow-lg shadow-green-500/50"
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ repeat: Infinity, duration: 2 }}
                 />
@@ -171,11 +173,12 @@ export default function PropertiesPage() {
         </motion.div>
 
         <motion.div variants={itemVariants} whileHover={{ y: -4 }} className="h-full">
-          <Card className="h-full hover:shadow-lg transition-shadow duration-200">
-            <CardContent className="p-6">
+          <Card className="h-full hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-purple-50 via-white to-purple-50/50 relative overflow-hidden">
+            <div className="absolute inset-0 bg-white/60 backdrop-blur-sm"></div>
+            <CardContent className="p-6 relative z-10">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-medium text-gray-600">Avg. Nightly Rate</span>
-                <span className="text-xs text-primary">₦</span>
+                <span className="text-xs text-primary font-bold">₦</span>
               </div>
               <div className="text-2xl font-bold">
                 {properties.length > 0
@@ -192,11 +195,12 @@ export default function PropertiesPage() {
         </motion.div>
 
         <motion.div variants={itemVariants} whileHover={{ y: -4 }} className="h-full">
-          <Card className="h-full hover:shadow-lg transition-shadow duration-200">
-            <CardContent className="p-6">
+          <Card className="h-full hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-amber-50 via-white to-amber-50/50 relative overflow-hidden">
+            <div className="absolute inset-0 bg-white/60 backdrop-blur-sm"></div>
+            <CardContent className="p-6 relative z-10">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-medium text-gray-600">Total Capacity</span>
-                <span className="text-xs text-gray-400">Guests</span>
+                <span className="text-xs text-amber-600">Guests</span>
               </div>
               <div className="text-2xl font-bold">
                 {properties.reduce((sum, p) => sum + p.capacity.guests, 0)}
@@ -267,7 +271,8 @@ export default function PropertiesPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05 }}
                   >
-                    <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                    <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 group border-0 bg-gradient-to-br from-gray-50 via-white to-white relative">
+                      <div className="absolute inset-0 bg-white/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       <div className="relative h-48 overflow-hidden">
                         <Image
                           src={property.images[0] || '/placeholder.jpg'}
@@ -275,8 +280,9 @@ export default function PropertiesPage() {
                           fill
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
                         />
-                        <div className="absolute top-3 right-3">
-                          <Badge variant={property.status === 'active' ? 'success' : 'default'}>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        <div className="absolute top-3 right-3 z-10">
+                          <Badge variant={property.status === 'active' ? 'success' : 'default'} className="shadow-lg">
                             {property.status}
                           </Badge>
                         </div>
