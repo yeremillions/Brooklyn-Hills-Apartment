@@ -21,7 +21,7 @@ import { DeleteConfirmationDialog } from '@/components/ui/delete-confirmation-di
 import { formatNaira } from '@/lib/utils/currency'
 import { getAllProperties, deleteProperty } from '@/lib/services/properties'
 import { Property } from '@/types'
-import { Building2, Plus, Search, Edit, Trash2, Eye, MapPin } from 'lucide-react'
+import { Building2, Plus, Search, Edit, Trash2, Eye, MapPin, Grid3x3, List } from 'lucide-react'
 
 // Animation variants
 const containerVariants = {
@@ -53,6 +53,7 @@ export default function PropertiesPage() {
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const [propertyToDelete, setPropertyToDelete] = useState<{ id: string; name: string } | null>(null)
+  const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid')
 
   // Load properties from API on mount
   useEffect(() => {
@@ -210,7 +211,29 @@ export default function PropertiesPage() {
       <motion.div variants={itemVariants}>
         <Card>
         <CardHeader>
-          <CardTitle>All Properties</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle>All Properties</CardTitle>
+            <div className="flex items-center gap-2">
+              <Button
+                variant={viewMode === 'grid' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setViewMode('grid')}
+                className="gap-2"
+              >
+                <Grid3x3 className="h-4 w-4" />
+                Grid
+              </Button>
+              <Button
+                variant={viewMode === 'table' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setViewMode('table')}
+                className="gap-2"
+              >
+                <List className="h-4 w-4" />
+                Table
+              </Button>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="mb-6">
@@ -225,80 +248,75 @@ export default function PropertiesPage() {
             </div>
           </div>
 
-          {/* Properties Table */}
-          <div className="border rounded-lg overflow-hidden">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Property</TableHead>
-                  <TableHead>Location</TableHead>
-                  <TableHead>Capacity</TableHead>
-                  <TableHead>Nightly Rate</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredProperties.length === 0 ? (
-                  <TableRow>
-                    <TableCell colSpan={6} className="text-center py-8 text-gray-500">
-                      No properties found
-                    </TableCell>
-                  </TableRow>
-                ) : (
-                  filteredProperties.map((property) => (
-                    <TableRow key={property.id}>
-                      <TableCell>
-                        <div className="flex items-center gap-3">
-                          <div className="relative h-12 w-16 rounded overflow-hidden flex-shrink-0">
-                            <Image
-                              src={property.images[0]}
-                              alt={property.name}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
+          {/* Grid View */}
+          {viewMode === 'grid' && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              {filteredProperties.length === 0 ? (
+                <div className="col-span-full text-center py-12 text-gray-500">
+                  No properties found
+                </div>
+              ) : (
+                filteredProperties.map((property, index) => (
+                  <motion.div
+                    key={property.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                      <div className="relative h-48 overflow-hidden">
+                        <Image
+                          src={property.images[0] || '/placeholder.jpg'}
+                          alt={property.name}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute top-3 right-3">
+                          <Badge variant={property.status === 'active' ? 'success' : 'default'}>
+                            {property.status}
+                          </Badge>
+                        </div>
+                      </div>
+                      <CardContent className="p-4">
+                        <h3 className="font-semibold text-lg mb-2 line-clamp-1">{property.name}</h3>
+                        <div className="flex items-center gap-1 text-sm text-gray-600 mb-3">
+                          <MapPin className="h-4 w-4" />
+                          <span className="line-clamp-1">{property.location}</span>
+                        </div>
+                        <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+                          <span>{property.capacity.bedrooms} bed</span>
+                          <span>·</span>
+                          <span>{property.capacity.bathrooms} bath</span>
+                          <span>·</span>
+                          <span>{property.capacity.guests} guests</span>
+                        </div>
+                        <div className="flex items-center justify-between mb-4">
                           <div>
-                            <p className="font-medium text-sm">{property.name}</p>
-                            <p className="text-xs text-gray-500">
-                              {property.capacity.bedrooms} bed · {property.capacity.bathrooms} bath
+                            <p className="text-2xl font-bold text-primary">
+                              {formatNaira(property.nightlyRate)}
                             </p>
+                            <p className="text-xs text-gray-500">per night</p>
                           </div>
                         </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-1 text-sm text-gray-600">
-                          <MapPin className="h-3 w-3" />
-                          <span>{property.location}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <span className="text-sm">{property.capacity.guests} guests</span>
-                      </TableCell>
-                      <TableCell>
-                        <span className="font-semibold">{formatNaira(property.nightlyRate)}</span>
-                      </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={property.status === 'active' ? 'success' : 'default'}
-                        >
-                          {property.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center justify-end gap-2">
-                          <Link href={`/properties/${property.slug}`} target="_blank">
-                            <Button variant="ghost" size="sm">
+                        <div className="flex items-center gap-2">
+                          <Link href={`/properties/${property.slug}`} target="_blank" className="flex-1">
+                            <Button variant="outline" size="sm" className="w-full gap-2">
                               <Eye className="h-4 w-4" />
+                              View
                             </Button>
                           </Link>
-                          <Link href={`/admin/properties/${property.slug}/edit`}>
-                            <Button variant="ghost" size="sm">
+                          <Link href={`/admin/properties/${property.slug}/edit`} className="flex-1">
+                            <Button variant="default" size="sm" className="w-full gap-2">
                               <Edit className="h-4 w-4" />
+                              Edit
                             </Button>
                           </Link>
                           <Button
-                            variant="ghost"
+                            variant="outline"
                             size="sm"
                             className="text-red-600 hover:text-red-700 hover:bg-red-50"
                             onClick={() => openDeleteDialog(property.slug, property.name)}
@@ -307,13 +325,109 @@ export default function PropertiesPage() {
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))
+              )}
+            </motion.div>
+          )}
+
+          {/* Table View */}
+          {viewMode === 'table' && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="border rounded-lg overflow-hidden"
+            >
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Property</TableHead>
+                    <TableHead>Location</TableHead>
+                    <TableHead>Capacity</TableHead>
+                    <TableHead>Nightly Rate</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredProperties.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={6} className="text-center py-8 text-gray-500">
+                        No properties found
                       </TableCell>
                     </TableRow>
-                  ))
-                )}
-              </TableBody>
-            </Table>
-          </div>
+                  ) : (
+                    filteredProperties.map((property) => (
+                      <TableRow key={property.id}>
+                        <TableCell>
+                          <div className="flex items-center gap-3">
+                            <div className="relative h-12 w-16 rounded overflow-hidden flex-shrink-0">
+                              <Image
+                                src={property.images[0]}
+                                alt={property.name}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                            <div>
+                              <p className="font-medium text-sm">{property.name}</p>
+                              <p className="text-xs text-gray-500">
+                                {property.capacity.bedrooms} bed · {property.capacity.bathrooms} bath
+                              </p>
+                            </div>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1 text-sm text-gray-600">
+                            <MapPin className="h-3 w-3" />
+                            <span>{property.location}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <span className="text-sm">{property.capacity.guests} guests</span>
+                        </TableCell>
+                        <TableCell>
+                          <span className="font-semibold">{formatNaira(property.nightlyRate)}</span>
+                        </TableCell>
+                        <TableCell>
+                          <Badge
+                            variant={property.status === 'active' ? 'success' : 'default'}
+                          >
+                            {property.status}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center justify-end gap-2">
+                            <Link href={`/properties/${property.slug}`} target="_blank">
+                              <Button variant="ghost" size="sm">
+                                <Eye className="h-4 w-4" />
+                              </Button>
+                            </Link>
+                            <Link href={`/admin/properties/${property.slug}/edit`}>
+                              <Button variant="ghost" size="sm">
+                                <Edit className="h-4 w-4" />
+                              </Button>
+                            </Link>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                              onClick={() => openDeleteDialog(property.slug, property.name)}
+                              disabled={deletingId === property.slug}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </TableBody>
+              </Table>
+            </motion.div>
+          )}
 
           {filteredProperties.length > 0 && (
             <div className="mt-4 text-sm text-gray-600">
