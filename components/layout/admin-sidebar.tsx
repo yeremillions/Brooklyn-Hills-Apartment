@@ -109,7 +109,7 @@ export function AdminSidebar({ mobileOpen = false, onMobileClose }: AdminSidebar
         "hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col transition-all duration-300",
         isCollapsed ? "lg:w-20" : "lg:w-64"
       )}>
-      <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r bg-white pb-4 relative">
+      <div className="flex grow flex-col gap-y-2 overflow-y-auto border-r bg-white pb-4 relative">
         <div className={cn(
           "flex h-16 shrink-0 items-center border-b justify-between transition-all",
           isCollapsed ? "px-3" : "px-6"
@@ -143,10 +143,10 @@ export function AdminSidebar({ mobileOpen = false, onMobileClose }: AdminSidebar
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>
-        <nav className="flex flex-1 flex-col">
-          <ul role="list" className="flex flex-1 flex-col gap-y-7">
+        <nav className="flex flex-1 flex-col px-3">
+          <ul role="list" className="flex flex-1 flex-col gap-y-3">
             <li>
-              <ul role="list" className="-mx-2 space-y-1">
+              <ul role="list" className="space-y-0.5">
                 {navigation.map((item, index) => {
                   const isActive = pathname === item.href || pathname?.startsWith(item.href + '/')
                   return (
@@ -163,7 +163,7 @@ export function AdminSidebar({ mobileOpen = false, onMobileClose }: AdminSidebar
                           isActive
                             ? 'bg-primary/10 text-primary'
                             : 'text-gray-700 hover:bg-gray-50 hover:text-primary',
-                          'group flex rounded-md p-2 text-sm font-medium leading-6 relative overflow-hidden transition-all duration-200',
+                          'group flex rounded-md px-2 py-1.5 text-sm font-medium leading-6 relative overflow-hidden transition-all duration-200',
                           isCollapsed ? 'justify-center' : 'gap-x-3'
                         )}
                       >
@@ -199,12 +199,12 @@ export function AdminSidebar({ mobileOpen = false, onMobileClose }: AdminSidebar
                 })}
               </ul>
             </li>
-            <li className={cn("mt-auto", isCollapsed ? "px-2" : "-mx-2")}>
+            <li className="mt-auto">
               <Link
                 href="/"
                 title={isCollapsed ? "Back to Website" : undefined}
                 className={cn(
-                  "group flex rounded-md p-2 text-sm font-medium leading-6 text-gray-700 hover:bg-gray-50 hover:text-primary",
+                  "group flex rounded-md px-2 py-1.5 text-sm font-medium leading-6 text-gray-700 hover:bg-gray-50 hover:text-primary",
                   isCollapsed ? 'justify-center' : 'gap-x-3'
                 )}
               >
@@ -249,7 +249,7 @@ export function AdminSidebar({ mobileOpen = false, onMobileClose }: AdminSidebar
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
               className="fixed inset-y-0 left-0 z-50 w-64 lg:hidden"
             >
-              <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r bg-white px-6 pb-4 h-full">
+              <div className="flex grow flex-col gap-y-2 overflow-y-auto border-r bg-white px-6 pb-4 h-full">
                 <div className="flex h-16 shrink-0 items-center border-b -mx-6 px-6 justify-between">
                   <Link href="/" className="flex items-center gap-2">
                     <Building2 className="h-6 w-6 text-primary" />
@@ -264,10 +264,10 @@ export function AdminSidebar({ mobileOpen = false, onMobileClose }: AdminSidebar
                     <X className="h-5 w-5" />
                   </Button>
                 </div>
-                <nav className="flex flex-1 flex-col">
-                  <ul role="list" className="flex flex-1 flex-col gap-y-7">
+                <nav className="flex flex-1 flex-col px-3">
+                  <ul role="list" className="flex flex-1 flex-col gap-y-3">
                     <li>
-                      <ul role="list" className="-mx-2 space-y-1">
+                      <ul role="list" className="space-y-0.5">
                         {navigation.map((item) => {
                           const isActive = pathname === item.href || pathname?.startsWith(item.href + '/')
                           return (
@@ -279,7 +279,7 @@ export function AdminSidebar({ mobileOpen = false, onMobileClose }: AdminSidebar
                                   isActive
                                     ? 'bg-primary/10 text-primary'
                                     : 'text-gray-700 hover:bg-gray-50 hover:text-primary',
-                                  'group flex gap-x-3 rounded-md p-2 text-sm font-medium leading-6'
+                                  'group flex gap-x-3 rounded-md px-2 py-1.5 text-sm font-medium leading-6'
                                 )}
                               >
                                 <item.icon
@@ -295,11 +295,11 @@ export function AdminSidebar({ mobileOpen = false, onMobileClose }: AdminSidebar
                         })}
                       </ul>
                     </li>
-                    <li className="mt-auto -mx-2">
+                    <li className="mt-auto">
                       <Link
                         href="/"
                         onClick={onMobileClose}
-                        className="group flex gap-x-3 rounded-md p-2 text-sm font-medium leading-6 text-gray-700 hover:bg-gray-50 hover:text-primary"
+                        className="group flex gap-x-3 rounded-md px-2 py-1.5 text-sm font-medium leading-6 text-gray-700 hover:bg-gray-50 hover:text-primary"
                       >
                         <Home className="h-5 w-5 shrink-0 text-gray-400 group-hover:text-primary" />
                         Back to Website
