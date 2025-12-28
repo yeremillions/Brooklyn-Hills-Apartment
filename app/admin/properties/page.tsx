@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import { toast } from 'sonner'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -21,6 +22,29 @@ import { formatNaira } from '@/lib/utils/currency'
 import { getAllProperties, deleteProperty } from '@/lib/services/properties'
 import { Property } from '@/types'
 import { Building2, Plus, Search, Edit, Trash2, Eye, MapPin } from 'lucide-react'
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+    },
+  },
+}
 
 export default function PropertiesPage() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -84,9 +108,14 @@ export default function PropertiesPage() {
   )
 
   return (
-    <div className="space-y-6">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="space-y-6"
+    >
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <motion.div variants={itemVariants} className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Properties</h1>
           <p className="mt-1 text-gray-600">
@@ -94,74 +123,92 @@ export default function PropertiesPage() {
           </p>
         </div>
         <Link href="/admin/properties/new">
-          <Button className="flex items-center gap-2">
-            <Plus className="h-4 w-4" />
-            Add Property
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button className="flex items-center gap-2">
+              <Plus className="h-4 w-4" />
+              Add Property
+            </Button>
+          </motion.div>
         </Link>
-      </div>
+      </motion.div>
 
       {/* Stats Cards */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-600">Total Properties</span>
-              <Building2 className="h-5 w-5 text-gray-400" />
-            </div>
-            <div className="text-2xl font-bold">{properties.length}</div>
-            <p className="text-xs text-gray-600 mt-1">Across all locations</p>
-          </CardContent>
-        </Card>
+      <motion.div
+        variants={containerVariants}
+        className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+      >
+        <motion.div variants={itemVariants} whileHover={{ y: -4 }} className="h-full">
+          <Card className="h-full hover:shadow-lg transition-shadow duration-200">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-600">Total Properties</span>
+                <Building2 className="h-5 w-5 text-gray-400" />
+              </div>
+              <div className="text-2xl font-bold">{properties.length}</div>
+              <p className="text-xs text-gray-600 mt-1">Across all locations</p>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-600">Active</span>
-              <div className="h-2 w-2 rounded-full bg-green-500"></div>
-            </div>
-            <div className="text-2xl font-bold">
-              {properties.filter((p) => p.status === 'active').length}
-            </div>
-            <p className="text-xs text-gray-600 mt-1">Available for booking</p>
-          </CardContent>
-        </Card>
+        <motion.div variants={itemVariants} whileHover={{ y: -4 }} className="h-full">
+          <Card className="h-full hover:shadow-lg transition-shadow duration-200">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-600">Active</span>
+                <motion.div
+                  className="h-2 w-2 rounded-full bg-green-500"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ repeat: Infinity, duration: 2 }}
+                />
+              </div>
+              <div className="text-2xl font-bold">
+                {properties.filter((p) => p.status === 'active').length}
+              </div>
+              <p className="text-xs text-gray-600 mt-1">Available for booking</p>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-600">Avg. Nightly Rate</span>
-              <span className="text-xs text-primary">₦</span>
-            </div>
-            <div className="text-2xl font-bold">
-              {properties.length > 0
-                ? formatNaira(
-                    Math.round(
-                      properties.reduce((sum, p) => sum + p.nightlyRate, 0) / properties.length
+        <motion.div variants={itemVariants} whileHover={{ y: -4 }} className="h-full">
+          <Card className="h-full hover:shadow-lg transition-shadow duration-200">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-600">Avg. Nightly Rate</span>
+                <span className="text-xs text-primary">₦</span>
+              </div>
+              <div className="text-2xl font-bold">
+                {properties.length > 0
+                  ? formatNaira(
+                      Math.round(
+                        properties.reduce((sum, p) => sum + p.nightlyRate, 0) / properties.length
+                      )
                     )
-                  )
-                : formatNaira(0)}
-            </div>
-            <p className="text-xs text-gray-600 mt-1">Across all properties</p>
-          </CardContent>
-        </Card>
+                  : formatNaira(0)}
+              </div>
+              <p className="text-xs text-gray-600 mt-1">Across all properties</p>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-600">Total Capacity</span>
-              <span className="text-xs text-gray-400">Guests</span>
-            </div>
-            <div className="text-2xl font-bold">
-              {properties.reduce((sum, p) => sum + p.capacity.guests, 0)}
-            </div>
-            <p className="text-xs text-gray-600 mt-1">Maximum guests</p>
-          </CardContent>
-        </Card>
-      </div>
+        <motion.div variants={itemVariants} whileHover={{ y: -4 }} className="h-full">
+          <Card className="h-full hover:shadow-lg transition-shadow duration-200">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-600">Total Capacity</span>
+                <span className="text-xs text-gray-400">Guests</span>
+              </div>
+              <div className="text-2xl font-bold">
+                {properties.reduce((sum, p) => sum + p.capacity.guests, 0)}
+              </div>
+              <p className="text-xs text-gray-600 mt-1">Maximum guests</p>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </motion.div>
 
       {/* Search and Filters */}
-      <Card>
+      <motion.div variants={itemVariants}>
+        <Card>
         <CardHeader>
           <CardTitle>All Properties</CardTitle>
         </CardHeader>
@@ -275,6 +322,7 @@ export default function PropertiesPage() {
           )}
         </CardContent>
       </Card>
+      </motion.div>
 
       {/* Delete Confirmation Dialog */}
       <DeleteConfirmationDialog
@@ -286,6 +334,6 @@ export default function PropertiesPage() {
         itemName={propertyToDelete?.name}
         isDeleting={deletingId !== null}
       />
-    </div>
+    </motion.div>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -20,6 +21,29 @@ import {
   Clock,
   Plus,
 } from 'lucide-react'
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+    },
+  },
+}
 
 export default function DashboardPage() {
   // Mock data - replace with real data from API
@@ -64,93 +88,115 @@ export default function DashboardPage() {
   ]
 
   return (
-    <div className="space-y-8">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="space-y-8"
+    >
       {/* Page Header */}
-      <div>
+      <motion.div variants={itemVariants}>
         <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
         <p className="mt-1 text-gray-600">
           Welcome back! Here&apos;s what&apos;s happening today.
         </p>
-      </div>
+      </motion.div>
 
       {/* Metrics Grid */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <MetricCard
-          title="Today's Bookings"
-          value={metrics.todayBookings}
-          icon={<BookOpen className="h-5 w-5" />}
-          subtitle={`${metrics.weekBookings} this week`}
-          trend="+12%"
-        />
-        <MetricCard
-          title="Today's Revenue"
-          value={formatNaira(metrics.todayRevenue)}
-          icon={<DollarSign className="h-5 w-5" />}
-          subtitle={formatNaira(metrics.weekRevenue) + ' this week'}
-          trend="+8%"
-        />
-        <MetricCard
-          title="Occupancy Rate"
-          value={`${metrics.occupancyRate}%`}
-          icon={<TrendingUp className="h-5 w-5" />}
-          subtitle="This month"
-          trend="+5%"
-        />
-        <MetricCard
-          title="Bar Sales Today"
-          value={formatNaira(metrics.barSalesToday)}
-          icon={<Wine className="h-5 w-5" />}
-          subtitle={formatNaira(metrics.barSalesWeek) + ' this week'}
-          trend="+15%"
-        />
-      </div>
+      <motion.div
+        variants={containerVariants}
+        className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+      >
+        <motion.div variants={itemVariants}>
+          <MetricCard
+            title="Today's Bookings"
+            value={metrics.todayBookings}
+            icon={<BookOpen className="h-5 w-5" />}
+            subtitle={`${metrics.weekBookings} this week`}
+            trend="+12%"
+          />
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <MetricCard
+            title="Today's Revenue"
+            value={formatNaira(metrics.todayRevenue)}
+            icon={<DollarSign className="h-5 w-5" />}
+            subtitle={formatNaira(metrics.weekRevenue) + ' this week'}
+            trend="+8%"
+          />
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <MetricCard
+            title="Occupancy Rate"
+            value={`${metrics.occupancyRate}%`}
+            icon={<TrendingUp className="h-5 w-5" />}
+            subtitle="This month"
+            trend="+5%"
+          />
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <MetricCard
+            title="Bar Sales Today"
+            value={formatNaira(metrics.barSalesToday)}
+            icon={<Wine className="h-5 w-5" />}
+            subtitle={formatNaira(metrics.barSalesWeek) + ' this week'}
+            trend="+15%"
+          />
+        </motion.div>
+      </motion.div>
 
       {/* Alerts */}
       {alerts.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-orange-500" />
-              Alerts & Notifications
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {alerts.map((alert) => (
-                <div
-                  key={alert.id}
-                  className={`flex items-start gap-3 p-3 rounded-lg ${
-                    alert.severity === 'error'
-                      ? 'bg-red-50 border border-red-200'
-                      : 'bg-yellow-50 border border-yellow-200'
-                  }`}
-                >
-                  <AlertTriangle
-                    className={`h-5 w-5 mt-0.5 ${
-                      alert.severity === 'error' ? 'text-red-600' : 'text-yellow-600'
+        <motion.div variants={itemVariants}>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <AlertTriangle className="h-5 w-5 text-orange-500" />
+                Alerts & Notifications
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {alerts.map((alert, index) => (
+                  <motion.div
+                    key={alert.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`flex items-start gap-3 p-3 rounded-lg ${
+                      alert.severity === 'error'
+                        ? 'bg-red-50 border border-red-200'
+                        : 'bg-yellow-50 border border-yellow-200'
                     }`}
-                  />
-                  <div className="flex-1">
-                    <p
-                      className={`text-sm font-medium ${
-                        alert.severity === 'error' ? 'text-red-900' : 'text-yellow-900'
+                  >
+                    <AlertTriangle
+                      className={`h-5 w-5 mt-0.5 ${
+                        alert.severity === 'error' ? 'text-red-600' : 'text-yellow-600'
                       }`}
-                    >
-                      {alert.message}
-                    </p>
-                  </div>
-                  <Button size="sm" variant="ghost">
-                    View
-                  </Button>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                    />
+                    <div className="flex-1">
+                      <p
+                        className={`text-sm font-medium ${
+                          alert.severity === 'error' ? 'text-red-900' : 'text-yellow-900'
+                        }`}
+                      >
+                        {alert.message}
+                      </p>
+                    </div>
+                    <Button size="sm" variant="ghost">
+                      View
+                    </Button>
+                  </motion.div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       )}
 
       {/* Quick Actions */}
-      <Card>
+      <motion.div variants={itemVariants}>
+        <Card>
         <CardHeader>
           <CardTitle>Quick Actions</CardTitle>
         </CardHeader>
@@ -189,8 +235,9 @@ export default function DashboardPage() {
           </div>
         </CardContent>
       </Card>
+      </motion.div>
 
-      <div className="grid lg:grid-cols-2 gap-6">
+      <motion.div variants={itemVariants} className="grid lg:grid-cols-2 gap-6">
         {/* Upcoming Check-ins/Check-outs */}
         <Card>
           <CardHeader>
@@ -344,8 +391,8 @@ export default function DashboardPage() {
             </div>
           </CardContent>
         </Card>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }
 
@@ -363,25 +410,36 @@ function MetricCard({
   trend?: string
 }) {
   return (
-    <Card>
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-600">{title}</span>
-          <div className="text-gray-400">{icon}</div>
-        </div>
-        <div className="space-y-1">
-          <div className="text-2xl font-bold">{value}</div>
-          <div className="flex items-center gap-2">
-            <p className="text-xs text-gray-600">{subtitle}</p>
-            {trend && (
-              <Badge variant="success" className="text-xs">
-                {trend}
-              </Badge>
-            )}
+    <motion.div
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      className="h-full"
+    >
+      <Card className="h-full hover:shadow-lg transition-shadow duration-200 cursor-pointer">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium text-gray-600">{title}</span>
+            <motion.div
+              className="text-gray-400"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              {icon}
+            </motion.div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+          <div className="space-y-1">
+            <div className="text-2xl font-bold">{value}</div>
+            <div className="flex items-center gap-2">
+              <p className="text-xs text-gray-600">{subtitle}</p>
+              {trend && (
+                <Badge variant="success" className="text-xs">
+                  {trend}
+                </Badge>
+              )}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
   )
 }
 
@@ -396,13 +454,15 @@ function QuickActionButton({
 }) {
   return (
     <Link href={href}>
-      <Button
-        variant="outline"
-        className="h-auto flex-col gap-2 p-4 hover:bg-primary/5 hover:border-primary"
-      >
-        {icon}
-        <span className="text-xs text-center">{label}</span>
-      </Button>
+      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <Button
+          variant="outline"
+          className="h-auto flex-col gap-2 p-4 hover:bg-primary/5 hover:border-primary w-full"
+        >
+          {icon}
+          <span className="text-xs text-center">{label}</span>
+        </Button>
+      </motion.div>
     </Link>
   )
 }
