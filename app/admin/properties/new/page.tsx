@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { toast } from 'sonner'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -90,13 +91,19 @@ export default function NewPropertyPage() {
 
       console.log('Property created successfully:', newProperty)
 
+      toast.success('Property created successfully', {
+        description: `"${formData.name}" has been added to your listings.`
+      })
+
       // Redirect to properties list
       router.push('/admin/properties')
       router.refresh()
     } catch (error) {
       console.error('Error creating property:', error)
       const errorMessage = error instanceof Error ? error.message : 'Failed to create property. Please try again.'
-      alert(errorMessage)
+      toast.error('Failed to create property', {
+        description: errorMessage
+      })
     } finally {
       setIsSubmitting(false)
     }
@@ -128,10 +135,14 @@ export default function NewPropertyPage() {
         images: [...prev.images, ...uploadedUrls],
       }))
 
-      alert(`Successfully uploaded ${uploadedUrls.length} image(s)`)
+      toast.success(`Successfully uploaded ${uploadedUrls.length} image(s)`, {
+        description: 'Images have been added to the property.'
+      })
     } catch (error) {
       console.error('Error uploading images:', error)
-      alert('Failed to upload images. Please ensure Supabase Storage is set up correctly.')
+      toast.error('Failed to upload images', {
+        description: 'Please ensure Supabase Storage is set up correctly.'
+      })
     } finally {
       setIsUploadingImages(false)
       // Reset file input
