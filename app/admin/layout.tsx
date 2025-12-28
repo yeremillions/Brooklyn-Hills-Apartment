@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { AdminSidebar } from '@/components/layout/admin-sidebar'
 import { AdminHeader } from '@/components/layout/admin-header'
+import { CommandPalette } from '@/components/ui/command-palette'
 
 export default function AdminLayout({
   children,
@@ -37,6 +38,7 @@ export default function AdminLayout({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/20">
+      <CommandPalette />
       <AdminSidebar mobileOpen={mobileOpen} onMobileClose={() => setMobileOpen(false)} />
       <div className={`transition-all duration-300 ${sidebarCollapsed ? 'lg:pl-20' : 'lg:pl-64'}`}>
         <AdminHeader onMenuClick={() => setMobileOpen(true)} />

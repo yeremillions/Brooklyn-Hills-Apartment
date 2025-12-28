@@ -21,10 +21,19 @@ import { DeleteConfirmationDialog } from '@/components/ui/delete-confirmation-di
 import { formatNaira } from '@/lib/utils/currency'
 import { getAllProperties, deleteProperty } from '@/lib/services/properties'
 import { Property } from '@/types'
-import { Building2, Plus, Search, Edit, Trash2, Eye, MapPin, Grid3x3, List } from 'lucide-react'
+import { Building2, Plus, Search, Edit, Trash2, Eye, MapPin, Grid3x3, List, Home, SlidersHorizontal } from 'lucide-react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { MetricCardSkeleton } from '@/components/ui/metric-card-skeleton'
 import { PropertyCardSkeleton } from '@/components/ui/property-card-skeleton'
 import { Skeleton } from '@/components/ui/skeleton'
+import { EmptyState } from '@/components/ui/empty-state'
 
 // Animation variants
 const containerVariants = {
@@ -57,6 +66,8 @@ export default function PropertiesPage() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const [propertyToDelete, setPropertyToDelete] = useState<{ id: string; name: string } | null>(null)
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid')
+  const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive'>('all')
+  const [sortBy, setSortBy] = useState<'name' | 'rate' | 'capacity'>('name')
 
   // Load properties from API on mount
   useEffect(() => {
@@ -106,10 +117,31 @@ export default function PropertiesPage() {
     }
   }
 
-  const filteredProperties = properties.filter((property) =>
-    property.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    property.location.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+  const filteredProperties = properties
+    .filter((property) => {
+      // Search filter
+      const matchesSearch =
+        property.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        property.location.toLowerCase().includes(searchQuery.toLowerCase())
+
+      // Status filter
+      const matchesStatus =
+        statusFilter === 'all' ||
+        property.status === statusFilter
+
+      return matchesSearch && matchesStatus
+    })
+    .sort((a, b) => {
+      // Sorting
+      if (sortBy === 'name') {
+        return a.name.localeCompare(b.name)
+      } else if (sortBy === 'rate') {
+        return b.nightlyRate - a.nightlyRate // Descending
+      } else if (sortBy === 'capacity') {
+        return b.capacity.guests - a.capacity.guests // Descending
+      }
+      return 0
+    })
 
   return (
     <motion.div
@@ -254,7 +286,7 @@ export default function PropertiesPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="mb-6">
+          <div className="mb-6 space-y-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
@@ -263,6 +295,59 @@ export default function PropertiesPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-9"
               />
+            </div>
+
+            {/* Filters and Sort */}
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-sm text-gray-600">Filter:</span>
+              <div className="flex gap-2">
+                <Button
+                  variant={statusFilter === 'all' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setStatusFilter('all')}
+                >
+                  All
+                </Button>
+                <Button
+                  variant={statusFilter === 'active' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setStatusFilter('active')}
+                >
+                  Active
+                </Button>
+                <Button
+                  variant={statusFilter === 'inactive' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setStatusFilter('inactive')}
+                >
+                  Inactive
+                </Button>
+              </div>
+
+              <div className="h-4 w-px bg-gray-300" />
+
+              <span className="text-sm text-gray-600">Sort by:</span>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className="gap-2">
+                    <SlidersHorizontal className="h-4 w-4" />
+                    {sortBy === 'name' ? 'Name' : sortBy === 'rate' ? 'Price' : 'Capacity'}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>Sort by</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => setSortBy('name')}>
+                    Name (A-Z)
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSortBy('rate')}>
+                    Price (High to Low)
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSortBy('capacity')}>
+                    Capacity (High to Low)
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 
@@ -283,8 +368,18 @@ export default function PropertiesPage() {
                   <PropertyCardSkeleton />
                 </>
               ) : filteredProperties.length === 0 ? (
-                <div className="col-span-full text-center py-12 text-gray-500">
-                  No properties found
+                <div className="col-span-full">
+                  <EmptyState
+                    icon={searchQuery ? Search : Building2}
+                    title={searchQuery ? 'No properties found' : 'No properties yet'}
+                    description={
+                      searchQuery
+                        ? `We couldn't find any properties matching "${searchQuery}". Try adjusting your search.`
+                        : 'Get started by adding your first property to the system.'
+                    }
+                    actionLabel={searchQuery ? undefined : 'Add Property'}
+                    actionHref={searchQuery ? undefined : '/admin/properties/new'}
+                  />
                 </div>
               ) : (
                 filteredProperties.map((property, index) => (
@@ -410,8 +505,18 @@ export default function PropertiesPage() {
                     </>
                   ) : filteredProperties.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center py-8 text-gray-500">
-                        No properties found
+                      <TableCell colSpan={6} className="p-0">
+                        <EmptyState
+                          icon={searchQuery ? Search : Building2}
+                          title={searchQuery ? 'No properties found' : 'No properties yet'}
+                          description={
+                            searchQuery
+                              ? `We couldn't find any properties matching "${searchQuery}". Try adjusting your search.`
+                              : 'Get started by adding your first property to the system.'
+                          }
+                          actionLabel={searchQuery ? undefined : 'Add Property'}
+                          actionHref={searchQuery ? undefined : '/admin/properties/new'}
+                        />
                       </TableCell>
                     </TableRow>
                   ) : (
