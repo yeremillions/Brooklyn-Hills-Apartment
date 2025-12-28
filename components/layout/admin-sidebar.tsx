@@ -137,8 +137,8 @@ export function AdminSidebar({ mobileOpen = false, onMobileClose }: AdminSidebar
           size="sm"
           onClick={toggleCollapse}
           className={cn(
-            "absolute top-20 -right-3 h-6 w-6 rounded-full border bg-white shadow-md hover:shadow-lg z-10 p-0",
-            isCollapsed && "rotate-180"
+            "absolute top-20 h-6 w-6 rounded-full border bg-white shadow-md hover:shadow-lg z-50 p-0 transition-all duration-300",
+            isCollapsed ? "-right-3 rotate-180" : "-right-3"
           )}
         >
           <ChevronLeft className="h-4 w-4" />
