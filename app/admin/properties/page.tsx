@@ -22,6 +22,9 @@ import { formatNaira } from '@/lib/utils/currency'
 import { getAllProperties, deleteProperty } from '@/lib/services/properties'
 import { Property } from '@/types'
 import { Building2, Plus, Search, Edit, Trash2, Eye, MapPin, Grid3x3, List } from 'lucide-react'
+import { MetricCardSkeleton } from '@/components/ui/metric-card-skeleton'
+import { PropertyCardSkeleton } from '@/components/ui/property-card-skeleton'
+import { Skeleton } from '@/components/ui/skeleton'
 
 // Animation variants
 const containerVariants = {
@@ -138,6 +141,15 @@ export default function PropertiesPage() {
         variants={containerVariants}
         className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
       >
+        {isLoading ? (
+          <>
+            <MetricCardSkeleton />
+            <MetricCardSkeleton />
+            <MetricCardSkeleton />
+            <MetricCardSkeleton />
+          </>
+        ) : (
+          <>
         <motion.div variants={itemVariants} whileHover={{ y: -4 }} className="h-full">
           <Card className="h-full hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-blue-50 via-white to-blue-50/50 relative overflow-hidden">
             <div className="absolute inset-0 bg-white/60 backdrop-blur-sm"></div>
@@ -209,6 +221,8 @@ export default function PropertiesPage() {
             </CardContent>
           </Card>
         </motion.div>
+          </>
+        )}
       </motion.div>
 
       {/* Search and Filters */}
@@ -259,7 +273,16 @@ export default function PropertiesPage() {
               animate={{ opacity: 1 }}
               className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
             >
-              {filteredProperties.length === 0 ? (
+              {isLoading ? (
+                <>
+                  <PropertyCardSkeleton />
+                  <PropertyCardSkeleton />
+                  <PropertyCardSkeleton />
+                  <PropertyCardSkeleton />
+                  <PropertyCardSkeleton />
+                  <PropertyCardSkeleton />
+                </>
+              ) : filteredProperties.length === 0 ? (
                 <div className="col-span-full text-center py-12 text-gray-500">
                   No properties found
                 </div>
@@ -358,7 +381,34 @@ export default function PropertiesPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredProperties.length === 0 ? (
+                  {isLoading ? (
+                    <>
+                      {[...Array(5)].map((_, i) => (
+                        <TableRow key={i}>
+                          <TableCell>
+                            <div className="flex items-center gap-3">
+                              <Skeleton className="h-12 w-16 rounded" />
+                              <div className="space-y-2">
+                                <Skeleton className="h-4 w-32" />
+                                <Skeleton className="h-3 w-24" />
+                              </div>
+                            </div>
+                          </TableCell>
+                          <TableCell><Skeleton className="h-4 w-28" /></TableCell>
+                          <TableCell><Skeleton className="h-4 w-20" /></TableCell>
+                          <TableCell><Skeleton className="h-4 w-24" /></TableCell>
+                          <TableCell><Skeleton className="h-6 w-16 rounded-full" /></TableCell>
+                          <TableCell>
+                            <div className="flex items-center justify-end gap-2">
+                              <Skeleton className="h-8 w-8 rounded" />
+                              <Skeleton className="h-8 w-8 rounded" />
+                              <Skeleton className="h-8 w-8 rounded" />
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </>
+                  ) : filteredProperties.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={6} className="text-center py-8 text-gray-500">
                         No properties found
