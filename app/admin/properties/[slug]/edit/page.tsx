@@ -88,7 +88,9 @@ export default function EditPropertyPage() {
         amenities: property.amenities,
         hasBarAccess: property.hasBarAccess,
         cleaningTimeMinutes: property.cleaningTimeMinutes.toString(),
-        status: property.status,
+        status: ['active', 'inactive', 'under_maintenance'].includes(property.status)
+          ? (property.status as 'active' | 'inactive' | 'under_maintenance')
+          : 'active',
         images: property.images,
       })
       setIsLoading(false)
