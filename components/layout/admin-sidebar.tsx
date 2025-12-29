@@ -171,7 +171,7 @@ export function AdminSidebar({ mobileOpen = false, onMobileClose }: AdminSidebar
                           <motion.div
                             layoutId="activeTab"
                             className="absolute inset-0 bg-primary/10 rounded-md"
-                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                            transition={{ type: 'spring' as const, stiffness: 300, damping: 30 }}
                           />
                         )}
                         <item.icon
@@ -246,7 +246,7 @@ export function AdminSidebar({ mobileOpen = false, onMobileClose }: AdminSidebar
               initial={{ x: -280 }}
               animate={{ x: 0 }}
               exit={{ x: -280 }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              transition={{ type: 'spring' as const, damping: 30, stiffness: 300 }}
               className="fixed inset-y-0 left-0 z-50 w-64 lg:hidden"
             >
               <div className="flex grow flex-col gap-y-2 overflow-y-auto border-r bg-white px-6 pb-4 h-full">

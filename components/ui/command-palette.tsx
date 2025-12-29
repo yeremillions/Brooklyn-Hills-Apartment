@@ -84,7 +84,7 @@ export function CommandPalette() {
               initial={{ opacity: 0, scale: 0.95, y: -20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
-              transition={{ type: 'spring', duration: 0.3 }}
+              transition={{ type: 'spring' as const, duration: 0.3 }}
               className="w-full max-w-2xl"
             >
               <Command className="rounded-lg border shadow-2xl bg-white overflow-hidden">

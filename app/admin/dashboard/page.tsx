@@ -40,7 +40,7 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       stiffness: 100,
     },
   },
@@ -459,7 +459,7 @@ function MetricCard({
             <motion.div
               className="text-gray-400"
               whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={{ type: 'spring', stiffness: 300 }}
+              transition={{ type: 'spring' as const, stiffness: 300 }}
             >
               {icon}
             </motion.div>
