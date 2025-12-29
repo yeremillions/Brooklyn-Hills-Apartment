@@ -143,7 +143,7 @@ export function NotificationCenter({ open, onClose }: NotificationCenterProps) {
             initial={{ x: 400 }}
             animate={{ x: 0 }}
             exit={{ x: 400 }}
-            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            transition={{ type: 'spring' as const, damping: 30, stiffness: 300 }}
             className="fixed inset-y-0 right-0 z-50 w-full sm:w-96 bg-white shadow-2xl flex flex-col"
           >
             {/* Header */}
