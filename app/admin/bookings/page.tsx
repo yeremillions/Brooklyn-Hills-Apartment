@@ -309,19 +309,19 @@ export default function BookingsPage() {
           <CardTitle>All Bookings</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="border rounded-lg overflow-hidden">
+          <div className="border rounded-lg overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Booking ID</TableHead>
-                  <TableHead>Guest</TableHead>
-                  <TableHead>Property</TableHead>
-                  <TableHead className="min-w-[180px]">Check-in / Check-out</TableHead>
-                  <TableHead>Guests</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Payment</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead className="w-[90px]">ID</TableHead>
+                  <TableHead className="w-[160px]">Guest</TableHead>
+                  <TableHead className="w-[140px]">Property</TableHead>
+                  <TableHead className="w-[140px]">Check-in / Out</TableHead>
+                  <TableHead className="w-[60px] text-center">Guests</TableHead>
+                  <TableHead className="w-[110px]">Amount</TableHead>
+                  <TableHead className="w-[100px]">Status</TableHead>
+                  <TableHead className="w-[90px]">Payment</TableHead>
+                  <TableHead className="w-[70px] text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -334,42 +334,42 @@ export default function BookingsPage() {
                 ) : (
                   filteredBookings.map((booking) => (
                     <TableRow key={booking.id}>
-                      <TableCell>
-                        <span className="font-mono font-semibold text-sm">{booking.id}</span>
+                      <TableCell className="py-3">
+                        <span className="font-mono font-semibold text-xs">{booking.id}</span>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="py-3">
                         <div>
-                          <p className="font-medium text-sm">{booking.guestName}</p>
-                          <p className="text-xs text-gray-500">{booking.guestEmail}</p>
+                          <p className="font-medium text-xs leading-tight">{booking.guestName}</p>
+                          <p className="text-[10px] text-gray-500 truncate max-w-[150px]">{booking.guestEmail}</p>
                         </div>
                       </TableCell>
-                      <TableCell>
-                        <span className="text-sm">{booking.property}</span>
+                      <TableCell className="py-3">
+                        <span className="text-xs line-clamp-2 leading-tight">{booking.property}</span>
                       </TableCell>
-                      <TableCell className="min-w-[180px]">
-                        <div className="text-sm space-y-1.5">
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-xs font-medium text-gray-500">In:</span>
-                            <span className="font-medium">{format(new Date(booking.checkIn), 'MMM dd, yyyy')}</span>
+                      <TableCell className="py-3">
+                        <div className="text-[11px] space-y-0.5">
+                          <div className="flex items-center gap-1">
+                            <span className="text-[10px] text-gray-500">In:</span>
+                            <span className="font-medium">{format(new Date(booking.checkIn), 'MMM dd')}</span>
                           </div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-xs font-medium text-gray-500">Out:</span>
-                            <span className="text-gray-600">{format(new Date(booking.checkOut), 'MMM dd, yyyy')}</span>
+                          <div className="flex items-center gap-1">
+                            <span className="text-[10px] text-gray-500">Out:</span>
+                            <span className="text-gray-600">{format(new Date(booking.checkOut), 'MMM dd')}</span>
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell>
-                        <span className="text-sm">{booking.guests}</span>
+                      <TableCell className="py-3 text-center">
+                        <span className="text-xs font-medium">{booking.guests}</span>
                       </TableCell>
-                      <TableCell>
-                        <span className="font-semibold">{formatNaira(booking.totalAmount)}</span>
+                      <TableCell className="py-3">
+                        <span className="font-semibold text-xs">{formatNaira(booking.totalAmount)}</span>
                       </TableCell>
-                      <TableCell>{getStatusBadge(booking.status)}</TableCell>
-                      <TableCell>{getPaymentBadge(booking.paymentStatus)}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center justify-end">
-                          <Button variant="ghost" size="sm">
-                            <MoreVertical className="h-4 w-4" />
+                      <TableCell className="py-3">{getStatusBadge(booking.status)}</TableCell>
+                      <TableCell className="py-3">{getPaymentBadge(booking.paymentStatus)}</TableCell>
+                      <TableCell className="py-3">
+                        <div className="flex items-center justify-center">
+                          <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
+                            <MoreVertical className="h-3.5 w-3.5" />
                           </Button>
                         </div>
                       </TableCell>
