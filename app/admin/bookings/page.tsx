@@ -350,11 +350,11 @@ export default function BookingsPage() {
                         <div className="text-[11px] space-y-0.5">
                           <div className="flex items-center gap-1">
                             <span className="text-[10px] text-gray-500">In:</span>
-                            <span className="font-medium">{format(new Date(booking.checkIn), 'MMM dd')}</span>
+                            <span className="font-medium">{format(new Date(booking.checkIn), 'MMM dd, yyyy')}</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <span className="text-[10px] text-gray-500">Out:</span>
-                            <span className="text-gray-600">{format(new Date(booking.checkOut), 'MMM dd')}</span>
+                            <span className="text-gray-600">{format(new Date(booking.checkOut), 'MMM dd, yyyy')}</span>
                           </div>
                         </div>
                       </TableCell>
