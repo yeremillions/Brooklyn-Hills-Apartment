@@ -314,13 +314,13 @@ export default function BookingsPage() {
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[90px]">ID</TableHead>
-                  <TableHead className="w-[160px]">Guest</TableHead>
-                  <TableHead className="w-[140px]">Property</TableHead>
-                  <TableHead className="w-[140px]">Check-in / Out</TableHead>
-                  <TableHead className="w-[60px] text-center">Guests</TableHead>
-                  <TableHead className="w-[110px]">Amount</TableHead>
-                  <TableHead className="w-[100px]">Status</TableHead>
-                  <TableHead className="w-[90px]">Payment</TableHead>
+                  <TableHead className="min-w-[140px]">Guest</TableHead>
+                  <TableHead className="min-w-[120px] hidden lg:table-cell">Property</TableHead>
+                  <TableHead className="min-w-[130px]">Check-in / Out</TableHead>
+                  <TableHead className="w-[60px] text-center hidden xl:table-cell">Guests</TableHead>
+                  <TableHead className="min-w-[100px]">Amount</TableHead>
+                  <TableHead className="min-w-[90px]">Status</TableHead>
+                  <TableHead className="min-w-[85px] hidden 2xl:table-cell">Payment</TableHead>
                   <TableHead className="w-[70px] text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -340,10 +340,10 @@ export default function BookingsPage() {
                       <TableCell className="py-3">
                         <div>
                           <p className="font-medium text-xs leading-tight">{booking.guestName}</p>
-                          <p className="text-[10px] text-gray-500 truncate max-w-[150px]">{booking.guestEmail}</p>
+                          <p className="text-[10px] text-gray-500 truncate max-w-[130px]">{booking.guestEmail}</p>
                         </div>
                       </TableCell>
-                      <TableCell className="py-3">
+                      <TableCell className="py-3 hidden lg:table-cell">
                         <span className="text-xs line-clamp-2 leading-tight">{booking.property}</span>
                       </TableCell>
                       <TableCell className="py-3">
@@ -358,14 +358,14 @@ export default function BookingsPage() {
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell className="py-3 text-center">
+                      <TableCell className="py-3 text-center hidden xl:table-cell">
                         <span className="text-xs font-medium">{booking.guests}</span>
                       </TableCell>
                       <TableCell className="py-3">
                         <span className="font-semibold text-xs">{formatNaira(booking.totalAmount)}</span>
                       </TableCell>
                       <TableCell className="py-3">{getStatusBadge(booking.status)}</TableCell>
-                      <TableCell className="py-3">{getPaymentBadge(booking.paymentStatus)}</TableCell>
+                      <TableCell className="py-3 hidden 2xl:table-cell">{getPaymentBadge(booking.paymentStatus)}</TableCell>
                       <TableCell className="py-3">
                         <div className="flex items-center justify-center">
                           <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
