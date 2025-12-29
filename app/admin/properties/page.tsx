@@ -462,17 +462,17 @@ export default function PropertiesPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="border rounded-lg overflow-hidden"
+              className="border rounded-lg overflow-x-auto"
             >
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Property</TableHead>
-                    <TableHead>Location</TableHead>
-                    <TableHead>Capacity</TableHead>
-                    <TableHead>Nightly Rate</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
+                    <TableHead className="min-w-[200px]">Property</TableHead>
+                    <TableHead className="min-w-[140px] hidden lg:table-cell">Location</TableHead>
+                    <TableHead className="min-w-[90px] hidden xl:table-cell">Capacity</TableHead>
+                    <TableHead className="min-w-[110px]">Nightly Rate</TableHead>
+                    <TableHead className="min-w-[90px]">Status</TableHead>
+                    <TableHead className="w-[120px] text-center">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -480,7 +480,7 @@ export default function PropertiesPage() {
                     <>
                       {[...Array(5)].map((_, i) => (
                         <TableRow key={i}>
-                          <TableCell>
+                          <TableCell className="py-3">
                             <div className="flex items-center gap-3">
                               <Skeleton className="h-12 w-16 rounded" />
                               <div className="space-y-2">
@@ -489,12 +489,12 @@ export default function PropertiesPage() {
                               </div>
                             </div>
                           </TableCell>
-                          <TableCell><Skeleton className="h-4 w-28" /></TableCell>
-                          <TableCell><Skeleton className="h-4 w-20" /></TableCell>
-                          <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-                          <TableCell><Skeleton className="h-6 w-16 rounded-full" /></TableCell>
-                          <TableCell>
-                            <div className="flex items-center justify-end gap-2">
+                          <TableCell className="py-3 hidden lg:table-cell"><Skeleton className="h-4 w-28" /></TableCell>
+                          <TableCell className="py-3 hidden xl:table-cell"><Skeleton className="h-4 w-20" /></TableCell>
+                          <TableCell className="py-3"><Skeleton className="h-4 w-24" /></TableCell>
+                          <TableCell className="py-3"><Skeleton className="h-6 w-16 rounded-full" /></TableCell>
+                          <TableCell className="py-3">
+                            <div className="flex items-center justify-center gap-2">
                               <Skeleton className="h-8 w-8 rounded" />
                               <Skeleton className="h-8 w-8 rounded" />
                               <Skeleton className="h-8 w-8 rounded" />
@@ -522,7 +522,7 @@ export default function PropertiesPage() {
                   ) : (
                     filteredProperties.map((property) => (
                       <TableRow key={property.id}>
-                        <TableCell>
+                        <TableCell className="py-3">
                           <div className="flex items-center gap-3">
                             <div className="relative h-12 w-16 rounded overflow-hidden flex-shrink-0">
                               <Image
@@ -533,34 +533,34 @@ export default function PropertiesPage() {
                               />
                             </div>
                             <div>
-                              <p className="font-medium text-sm">{property.name}</p>
-                              <p className="text-xs text-gray-500">
+                              <p className="font-medium text-xs leading-tight">{property.name}</p>
+                              <p className="text-[10px] text-gray-500">
                                 {property.capacity.bedrooms} bed · {property.capacity.bathrooms} bath
                               </p>
                             </div>
                           </div>
                         </TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-1 text-sm text-gray-600">
+                        <TableCell className="py-3 hidden lg:table-cell">
+                          <div className="flex items-center gap-1 text-xs text-gray-600">
                             <MapPin className="h-3 w-3" />
                             <span>{property.location}</span>
                           </div>
                         </TableCell>
-                        <TableCell>
-                          <span className="text-sm">{property.capacity.guests} guests</span>
+                        <TableCell className="py-3 hidden xl:table-cell">
+                          <span className="text-xs">{property.capacity.guests} guests</span>
                         </TableCell>
-                        <TableCell>
-                          <span className="font-semibold">{formatNaira(property.nightlyRate)}</span>
+                        <TableCell className="py-3">
+                          <span className="font-semibold text-xs">{formatNaira(property.nightlyRate)}</span>
                         </TableCell>
-                        <TableCell>
+                        <TableCell className="py-3">
                           <Badge
                             variant={property.status === 'active' ? 'success' : 'default'}
                           >
                             {property.status}
                           </Badge>
                         </TableCell>
-                        <TableCell>
-                          <div className="flex items-center justify-end gap-2">
+                        <TableCell className="py-3">
+                          <div className="flex items-center justify-center gap-2">
                             <Link href={`/properties/${property.slug}`} target="_blank">
                               <Button variant="ghost" size="sm">
                                 <Eye className="h-4 w-4" />

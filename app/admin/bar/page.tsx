@@ -330,62 +330,62 @@ export default function BarManagementPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="border rounded-lg overflow-hidden">
+          <div className="border rounded-lg overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Sale ID</TableHead>
-                  <TableHead>Date & Time</TableHead>
-                  <TableHead>Guest</TableHead>
-                  <TableHead>Items</TableHead>
-                  <TableHead>Total</TableHead>
-                  <TableHead>Payment</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead className="w-[90px]">ID</TableHead>
+                  <TableHead className="min-w-[130px]">Date & Time</TableHead>
+                  <TableHead className="min-w-[120px] hidden lg:table-cell">Guest</TableHead>
+                  <TableHead className="min-w-[140px]">Items</TableHead>
+                  <TableHead className="min-w-[100px]">Total</TableHead>
+                  <TableHead className="min-w-[90px] hidden xl:table-cell">Payment</TableHead>
+                  <TableHead className="min-w-[80px]">Status</TableHead>
+                  <TableHead className="w-[80px] text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {BAR_SALES.map((sale) => (
                   <TableRow key={sale.id}>
-                    <TableCell>
-                      <span className="font-mono font-semibold text-sm">{sale.id}</span>
+                    <TableCell className="py-3">
+                      <span className="font-mono font-semibold text-xs">{sale.id}</span>
                     </TableCell>
-                    <TableCell>
-                      <span className="text-sm">
+                    <TableCell className="py-3">
+                      <span className="text-xs">
                         {format(new Date(sale.date), 'MMM d, h:mm a')}
                       </span>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="py-3 hidden lg:table-cell">
                       <div>
-                        <p className="font-medium text-sm">{sale.guestName}</p>
-                        <p className="text-xs text-gray-500">{sale.room}</p>
+                        <p className="font-medium text-xs leading-tight">{sale.guestName}</p>
+                        <p className="text-[10px] text-gray-500">{sale.room}</p>
                       </div>
                     </TableCell>
-                    <TableCell>
-                      <div className="text-sm">
+                    <TableCell className="py-3">
+                      <div className="text-xs">
                         {sale.items.map((item, idx) => (
-                          <div key={idx} className="text-gray-600">
+                          <div key={idx} className="text-gray-600 leading-tight">
                             {item.quantity}x {item.name}
                           </div>
                         ))}
                       </div>
                     </TableCell>
-                    <TableCell>
-                      <span className="font-semibold">{formatNaira(sale.total)}</span>
+                    <TableCell className="py-3">
+                      <span className="font-semibold text-xs">{formatNaira(sale.total)}</span>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="py-3 hidden xl:table-cell">
                       <Badge variant="outline" className="text-xs capitalize">
                         {sale.paymentMethod.replace('_', ' ')}
                       </Badge>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="py-3">
                       <Badge variant={sale.status === 'paid' ? 'success' : 'warning'}>
                         {sale.status}
                       </Badge>
                     </TableCell>
-                    <TableCell>
-                      <div className="flex items-center justify-end gap-2">
-                        <Button variant="ghost" size="sm">
+                    <TableCell className="py-3">
+                      <div className="flex items-center justify-center">
+                        <Button variant="ghost" size="sm" className="h-7 px-2 text-xs">
                           View
                         </Button>
                       </div>
@@ -433,49 +433,49 @@ export default function BarManagementPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="border rounded-lg overflow-hidden">
+          <div className="border rounded-lg overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Item Name</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead>Current Stock</TableHead>
-                  <TableHead>Min Stock</TableHead>
-                  <TableHead>Unit Price</TableHead>
-                  <TableHead>Total Value</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead className="min-w-[150px]">Item Name</TableHead>
+                  <TableHead className="min-w-[90px] hidden lg:table-cell">Category</TableHead>
+                  <TableHead className="w-[90px] text-center">Stock</TableHead>
+                  <TableHead className="w-[80px] text-center hidden xl:table-cell">Min</TableHead>
+                  <TableHead className="min-w-[100px]">Unit Price</TableHead>
+                  <TableHead className="min-w-[110px] hidden 2xl:table-cell">Total Value</TableHead>
+                  <TableHead className="min-w-[90px]">Status</TableHead>
+                  <TableHead className="w-[100px] text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredInventory.map((item) => (
                   <TableRow key={item.id}>
-                    <TableCell>
-                      <span className="font-medium">{item.name}</span>
+                    <TableCell className="py-3">
+                      <span className="font-medium text-xs">{item.name}</span>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="py-3 hidden lg:table-cell">
                       <Badge variant="outline" className="text-xs">
                         {item.category}
                       </Badge>
                     </TableCell>
-                    <TableCell>
-                      <span className="font-semibold">{item.stock}</span>
+                    <TableCell className="py-3 text-center">
+                      <span className="font-semibold text-xs">{item.stock}</span>
                     </TableCell>
-                    <TableCell>
-                      <span className="text-sm text-gray-600">{item.minStock}</span>
+                    <TableCell className="py-3 text-center hidden xl:table-cell">
+                      <span className="text-xs text-gray-600">{item.minStock}</span>
                     </TableCell>
-                    <TableCell>
-                      <span className="text-sm">{formatNaira(item.price)}</span>
+                    <TableCell className="py-3">
+                      <span className="text-xs">{formatNaira(item.price)}</span>
                     </TableCell>
-                    <TableCell>
-                      <span className="font-semibold">
+                    <TableCell className="py-3 hidden 2xl:table-cell">
+                      <span className="font-semibold text-xs">
                         {formatNaira(item.stock * item.price)}
                       </span>
                     </TableCell>
-                    <TableCell>{getStockBadge(item.status)}</TableCell>
-                    <TableCell>
-                      <div className="flex items-center justify-end gap-2">
-                        <Button variant="ghost" size="sm">
+                    <TableCell className="py-3">{getStockBadge(item.status)}</TableCell>
+                    <TableCell className="py-3">
+                      <div className="flex items-center justify-center">
+                        <Button variant="ghost" size="sm" className="h-7 px-2 text-xs">
                           Restock
                         </Button>
                       </div>

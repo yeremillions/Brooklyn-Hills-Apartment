@@ -304,18 +304,18 @@ export default function CustomersPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="border rounded-lg overflow-hidden">
+          <div className="border rounded-lg overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Customer ID</TableHead>
-                  <TableHead>Name & Contact</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Bookings</TableHead>
-                  <TableHead>Total Spent</TableHead>
-                  <TableHead>Rating</TableHead>
-                  <TableHead>Last Booking</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead className="w-[100px]">ID</TableHead>
+                  <TableHead className="min-w-[180px]">Name & Contact</TableHead>
+                  <TableHead className="min-w-[80px]">Status</TableHead>
+                  <TableHead className="w-[80px] text-center hidden xl:table-cell">Bookings</TableHead>
+                  <TableHead className="min-w-[110px]">Total Spent</TableHead>
+                  <TableHead className="w-[80px] text-center hidden lg:table-cell">Rating</TableHead>
+                  <TableHead className="min-w-[120px] hidden 2xl:table-cell">Last Booking</TableHead>
+                  <TableHead className="w-[80px] text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -328,43 +328,43 @@ export default function CustomersPage() {
                 ) : (
                   filteredCustomers.map((customer) => (
                     <TableRow key={customer.id}>
-                      <TableCell>
-                        <span className="font-mono font-semibold text-sm">{customer.id}</span>
+                      <TableCell className="py-3">
+                        <span className="font-mono font-semibold text-xs">{customer.id}</span>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="py-3">
                         <div>
-                          <p className="font-medium">{customer.name}</p>
-                          <div className="flex items-center gap-2 mt-1">
+                          <p className="font-medium text-xs leading-tight">{customer.name}</p>
+                          <div className="flex items-center gap-1 mt-1">
                             <Mail className="h-3 w-3 text-gray-400" />
-                            <span className="text-xs text-gray-600">{customer.email}</span>
+                            <span className="text-[10px] text-gray-600 truncate max-w-[150px]">{customer.email}</span>
                           </div>
-                          <div className="flex items-center gap-2 mt-1">
+                          <div className="flex items-center gap-1 mt-0.5">
                             <Phone className="h-3 w-3 text-gray-400" />
-                            <span className="text-xs text-gray-600">{customer.phone}</span>
+                            <span className="text-[10px] text-gray-600">{customer.phone}</span>
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell>{getStatusBadge(customer.status)}</TableCell>
-                      <TableCell>
-                        <span className="font-semibold">{customer.totalBookings}</span>
+                      <TableCell className="py-3">{getStatusBadge(customer.status)}</TableCell>
+                      <TableCell className="py-3 text-center hidden xl:table-cell">
+                        <span className="font-semibold text-xs">{customer.totalBookings}</span>
                       </TableCell>
-                      <TableCell>
-                        <span className="font-semibold">
+                      <TableCell className="py-3">
+                        <span className="font-semibold text-xs">
                           {formatNaira(customer.totalSpent)}
                         </span>
                       </TableCell>
-                      <TableCell>
-                        <span className="text-sm">{getRatingStars(customer.rating)}</span>
+                      <TableCell className="py-3 text-center hidden lg:table-cell">
+                        <span className="text-xs">{getRatingStars(customer.rating)}</span>
                       </TableCell>
-                      <TableCell>
-                        <span className="text-sm">
-                          {format(new Date(customer.lastBooking), 'MMM d, yyyy')}
+                      <TableCell className="py-3 hidden 2xl:table-cell">
+                        <span className="text-xs">
+                          {format(new Date(customer.lastBooking), 'MMM dd, yyyy')}
                         </span>
                       </TableCell>
-                      <TableCell>
-                        <div className="flex items-center justify-end gap-2">
-                          <Button variant="ghost" size="sm">
-                            <Eye className="h-4 w-4" />
+                      <TableCell className="py-3">
+                        <div className="flex items-center justify-center">
+                          <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
+                            <Eye className="h-3.5 w-3.5" />
                           </Button>
                         </div>
                       </TableCell>
