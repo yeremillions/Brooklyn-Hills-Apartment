@@ -374,19 +374,19 @@ export default function HousekeepingPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="border rounded-lg overflow-hidden">
+          <div className="border rounded-lg overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Task ID</TableHead>
-                  <TableHead>Property</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Priority</TableHead>
-                  <TableHead>Assigned To</TableHead>
-                  <TableHead>Scheduled</TableHead>
-                  <TableHead>Duration</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead className="w-[90px]">ID</TableHead>
+                  <TableHead className="min-w-[120px] hidden lg:table-cell">Property</TableHead>
+                  <TableHead className="min-w-[100px]">Type</TableHead>
+                  <TableHead className="min-w-[90px]">Priority</TableHead>
+                  <TableHead className="min-w-[110px] hidden xl:table-cell">Assigned To</TableHead>
+                  <TableHead className="min-w-[130px]">Scheduled</TableHead>
+                  <TableHead className="w-[80px] text-center hidden 2xl:table-cell">Duration</TableHead>
+                  <TableHead className="min-w-[90px]">Status</TableHead>
+                  <TableHead className="w-[80px] text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -399,38 +399,38 @@ export default function HousekeepingPage() {
                 ) : (
                   filteredTasks.map((task) => (
                     <TableRow key={task.id}>
-                      <TableCell>
-                        <span className="font-mono font-semibold text-sm">{task.id}</span>
+                      <TableCell className="py-3">
+                        <span className="font-mono font-semibold text-xs">{task.id}</span>
                       </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <Home className="h-4 w-4 text-gray-400" />
-                          <span className="text-sm">{task.property}</span>
+                      <TableCell className="py-3 hidden lg:table-cell">
+                        <div className="flex items-center gap-1">
+                          <Home className="h-3 w-3 text-gray-400" />
+                          <span className="text-xs">{task.property}</span>
                         </div>
                       </TableCell>
-                      <TableCell>
-                        <span className="text-sm">{getTaskTypeLabel(task.type)}</span>
+                      <TableCell className="py-3">
+                        <span className="text-xs">{getTaskTypeLabel(task.type)}</span>
                       </TableCell>
-                      <TableCell>{getPriorityBadge(task.priority)}</TableCell>
-                      <TableCell>
-                        <span className="text-sm">
+                      <TableCell className="py-3">{getPriorityBadge(task.priority)}</TableCell>
+                      <TableCell className="py-3 hidden xl:table-cell">
+                        <span className="text-xs">
                           {task.assignedTo || (
                             <span className="text-red-600 font-medium">Unassigned</span>
                           )}
                         </span>
                       </TableCell>
-                      <TableCell>
-                        <span className="text-sm">
+                      <TableCell className="py-3">
+                        <span className="text-xs">
                           {format(new Date(task.scheduledTime), 'MMM d, h:mm a')}
                         </span>
                       </TableCell>
-                      <TableCell>
-                        <span className="text-sm">{task.estimatedDuration} min</span>
+                      <TableCell className="py-3 text-center hidden 2xl:table-cell">
+                        <span className="text-xs">{task.estimatedDuration} min</span>
                       </TableCell>
-                      <TableCell>{getStatusBadge(task.status)}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center justify-end gap-2">
-                          <Button variant="ghost" size="sm">
+                      <TableCell className="py-3">{getStatusBadge(task.status)}</TableCell>
+                      <TableCell className="py-3">
+                        <div className="flex items-center justify-center">
+                          <Button variant="ghost" size="sm" className="h-7 px-2 text-xs">
                             View
                           </Button>
                         </div>

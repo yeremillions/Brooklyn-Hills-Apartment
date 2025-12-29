@@ -394,19 +394,19 @@ export default function MaintenancePage() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="border rounded-lg overflow-hidden">
+          <div className="border rounded-lg overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Issue ID</TableHead>
-                  <TableHead>Property</TableHead>
-                  <TableHead>Issue</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead>Priority</TableHead>
-                  <TableHead>Assigned To</TableHead>
-                  <TableHead>Cost</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead className="w-[90px]">ID</TableHead>
+                  <TableHead className="min-w-[120px] hidden lg:table-cell">Property</TableHead>
+                  <TableHead className="min-w-[180px]">Issue</TableHead>
+                  <TableHead className="min-w-[90px] hidden xl:table-cell">Category</TableHead>
+                  <TableHead className="min-w-[90px]">Priority</TableHead>
+                  <TableHead className="min-w-[110px] hidden 2xl:table-cell">Assigned To</TableHead>
+                  <TableHead className="min-w-[100px]">Cost</TableHead>
+                  <TableHead className="min-w-[90px]">Status</TableHead>
+                  <TableHead className="w-[80px] text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -419,50 +419,50 @@ export default function MaintenancePage() {
                 ) : (
                   filteredIssues.map((issue) => (
                     <TableRow key={issue.id}>
-                      <TableCell>
-                        <span className="font-mono font-semibold text-sm">{issue.id}</span>
+                      <TableCell className="py-3">
+                        <span className="font-mono font-semibold text-xs">{issue.id}</span>
                       </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <Home className="h-4 w-4 text-gray-400" />
-                          <span className="text-sm">{issue.property}</span>
+                      <TableCell className="py-3 hidden lg:table-cell">
+                        <div className="flex items-center gap-1">
+                          <Home className="h-3 w-3 text-gray-400" />
+                          <span className="text-xs">{issue.property}</span>
                         </div>
                       </TableCell>
-                      <TableCell>
-                        <div className="max-w-xs">
-                          <p className="text-sm font-medium">{issue.issue}</p>
-                          <p className="text-xs text-gray-500 mt-1">
-                            Reported by: {issue.reportedBy}
+                      <TableCell className="py-3">
+                        <div>
+                          <p className="text-xs font-medium leading-tight line-clamp-2">{issue.issue}</p>
+                          <p className="text-[10px] text-gray-500 mt-0.5">
+                            By: {issue.reportedBy}
                           </p>
                         </div>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="py-3 hidden xl:table-cell">
                         <Badge variant="outline" className="text-xs">
                           {getCategoryLabel(issue.category)}
                         </Badge>
                       </TableCell>
-                      <TableCell>{getPriorityBadge(issue.priority)}</TableCell>
-                      <TableCell>
-                        <span className="text-sm">
+                      <TableCell className="py-3">{getPriorityBadge(issue.priority)}</TableCell>
+                      <TableCell className="py-3 hidden 2xl:table-cell">
+                        <span className="text-xs">
                           {issue.assignedTo || (
                             <span className="text-red-600 font-medium">Unassigned</span>
                           )}
                         </span>
                       </TableCell>
-                      <TableCell>
-                        <div className="text-sm">
+                      <TableCell className="py-3">
+                        <div className="text-xs">
                           <p className="font-semibold">
                             {formatNaira(issue.actualCost || issue.estimatedCost)}
                           </p>
                           {issue.actualCost && (
-                            <p className="text-xs text-gray-500">Actual cost</p>
+                            <p className="text-[10px] text-gray-500">Actual</p>
                           )}
                         </div>
                       </TableCell>
-                      <TableCell>{getStatusBadge(issue.status)}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center justify-end gap-2">
-                          <Button variant="ghost" size="sm">
+                      <TableCell className="py-3">{getStatusBadge(issue.status)}</TableCell>
+                      <TableCell className="py-3">
+                        <div className="flex items-center justify-center gap-2">
+                          <Button variant="ghost" size="sm" className="h-7 px-2 text-xs">
                             View
                           </Button>
                         </div>
