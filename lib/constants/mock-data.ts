@@ -5,6 +5,7 @@ export const MOCK_PROPERTIES: Property[] = [
   {
     id: '1',
     name: 'Luxury 3-Bedroom Penthouse',
+    slug: 'luxury-3-bedroom-penthouse',
     description:
       'Experience ultimate luxury in this stunning 3-bedroom penthouse with panoramic city views. Features include a modern kitchen, spacious living area, and exclusive access to our premium bar lounge.',
     location: 'Victoria Island, Lagos',
@@ -45,6 +46,7 @@ export const MOCK_PROPERTIES: Property[] = [
   {
     id: '2',
     name: 'Cozy 2-Bedroom Apartment',
+    slug: 'cozy-2-bedroom-apartment',
     description:
       'Perfect for couples or small families. This cozy apartment offers comfort and convenience with modern amenities and easy access to shopping centers and restaurants.',
     location: 'Lekki Phase 1, Lagos',
@@ -81,6 +83,7 @@ export const MOCK_PROPERTIES: Property[] = [
   {
     id: '3',
     name: 'Executive Studio with Bar Access',
+    slug: 'executive-studio-with-bar-access',
     description:
       'Modern studio apartment ideal for business travelers. Features premium furnishings, high-speed internet, and complimentary access to our shared bar facility.',
     location: 'Ikeja GRA, Lagos',
@@ -117,6 +120,7 @@ export const MOCK_PROPERTIES: Property[] = [
   {
     id: '4',
     name: 'Spacious 4-Bedroom Family Home',
+    slug: 'spacious-4-bedroom-family-home',
     description:
       'Perfect for families or groups. This spacious home features 4 bedrooms, a large living area, fully equipped kitchen, and private outdoor space. Includes pool and gym access.',
     location: 'Ikoyi, Lagos',
